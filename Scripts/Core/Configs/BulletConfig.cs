@@ -57,16 +57,18 @@ namespace BH_Engine
             bulletConfig.acceleration.Reset();
             bulletConfig.bulletRotate.Reset();
         }
-    }
 
-
-    [LabelText("子弹运行时属性")]
-    public class BulletRuntimeConfig
-    {
-        public float speed;
-        public float maxDistance;
-        public float acceleration;
-        public float lifeTime;
-        public float bulletRotate;
+        public static BulletConfig CopyConfig(BulletConfig bulletConfig)
+        {
+            return new BulletConfig
+            {
+                speed = bulletConfig.speed.Copy(),
+                prefab = bulletConfig.prefab,
+                lifeTime = bulletConfig.lifeTime.Copy(),
+                maxDistance = bulletConfig.maxDistance.Copy(),
+                acceleration = bulletConfig.acceleration.Copy(),
+                bulletRotate = bulletConfig.bulletRotate.Copy()
+            };
+        }
     }
 }

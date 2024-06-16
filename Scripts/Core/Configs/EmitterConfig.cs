@@ -12,10 +12,18 @@ namespace BH_Engine
     {
         // 发射间隔
         [LabelText("发射间隔")]
-        public float emitInterval = 0.2f;
+        public DynamicFloatValue emitInterval = new DynamicFloatValue() { value = 0.1f };
         // 自动射击
         [LabelText("自动射击")]
         public bool autoEmit;
 
+        public static EmitterConfig CopyConfig(EmitterConfig config)
+        {
+            return new EmitterConfig
+            {
+                emitInterval = config.emitInterval.Copy(),
+                autoEmit = config.autoEmit
+            };
+        }
     }
 }

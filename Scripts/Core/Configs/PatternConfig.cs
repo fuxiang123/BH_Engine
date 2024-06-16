@@ -83,5 +83,20 @@ namespace BH_Engine
             patternConfig.spwanXTanslate.Reset();
             patternConfig.spwanYTanslate.Reset();
         }
+
+        public static PatternConfig CopyConfig(PatternConfig patternConfig)
+        {
+            return new PatternConfig
+            {
+                count = patternConfig.count.Copy(),
+                spreadAnglePerBullet = patternConfig.spreadAnglePerBullet.Copy(),
+                spreadAngleTotal = patternConfig.spreadAngleTotal.Copy(),
+                xSpacingPerBullet = patternConfig.xSpacingPerBullet.Copy(),
+                xSpacingTotal = patternConfig.xSpacingTotal.Copy(),
+                rotateSpeed = patternConfig.rotateSpeed.Copy(),
+                spwanXTanslate = patternConfig.spwanXTanslate.Copy(),
+                spwanYTanslate = patternConfig.spwanYTanslate.Copy()
+            };
+        }
     }
 }

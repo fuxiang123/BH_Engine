@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using BH_Engine;
 using Unity.VisualScripting;
 using UnityEngine;
-
-public class Bullet : MonoBehaviour
+namespace BH_Engine
 {
-    void OnTriggerEnter2D(Collider2D other)
+    public class Bullet : MonoBehaviour
     {
-        if (other.tag == "Enemy")
+        void OnTriggerEnter2D(Collider2D other)
         {
-            BulletPoolManager.instance.RecycleBullet(this.gameObject);
-            other.gameObject.SetActive(false);
+            if (other.tag == "Enemy")
+            {
+                BulletPoolManager.instance.RecycleBullet(this.gameObject);
+                other.gameObject.SetActive(false);
+            }
         }
     }
+
 }

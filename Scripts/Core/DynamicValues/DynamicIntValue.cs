@@ -77,5 +77,16 @@ namespace BH_Engine
                     return 0;
             }
         }
+
+        public DynamicIntValue Copy()
+        {
+            return new DynamicIntValue
+            {
+                valueType = valueType,
+                m_Value = m_Value,
+                curve = curve,
+                CustomValueHandler = CustomValueHandler
+            };
+        }
     }
 }

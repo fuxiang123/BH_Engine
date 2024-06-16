@@ -1,63 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3617010029083860519
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3617010029083860512}
-  - component: {fileID: 3617010029083860513}
-  m_Layer: 0
-  m_Name: Emitter (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3617010029083860512
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3617010029083860519}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3617010029422090418}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3617010029083860513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3617010029083860519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b673f5d49f65cd047b4823e938dc40ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emitterConfig:
-    emitInterval: 0.1
-    autoEmit: 0
-  bulletConfig:
-    speed: 10
-    prefab: {fileID: 1519511878272348693, guid: cf803af3fb1b7d64dbf193f8f6b31709, type: 3}
-    lifeTime: 10
-    maxDistance: 10
-  patternConfig:
-    count: 3
-    spreadAngle: 120
-    xSpacing: 0
-    spwanRotate: -10
-    acceleration: 0
 --- !u!1 &3617010029422090416
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3617010029495896518}
-  - {fileID: 3617010029083860512}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -136,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 30a31140793c496448989fd6d1c32fe7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a775b1b636e92114fbd8d2c17c940ab4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -190,8 +131,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: -0.105000004}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.75}
-    oldSize: {x: 0.15, y: 0.42}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -244,17 +185,168 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b673f5d49f65cd047b4823e938dc40ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emitterConfig:
-    emitInterval: 0.5
-    autoEmit: 1
-  bulletConfig:
-    speed: 5
-    prefab: {fileID: 1519511878272348693, guid: cf803af3fb1b7d64dbf193f8f6b31709, type: 3}
-    lifeTime: 10
-    maxDistance: 5
-  patternConfig:
-    count: 2
-    spreadAngle: 0
-    xSpacing: 0
-    spwanRotate: 0
-    acceleration: 0
+  EmitterConfig:
+    emitInterval:
+      mValueType: 0
+      m_Value: 0.1
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    autoEmit: 0
+  BulletConfig:
+    speed:
+      mValueType: 0
+      m_Value: 5
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    prefab: {fileID: 1519511878272348693, guid: cf803af3fb1b7d64dbf193f8f6b31709,
+      type: 3}
+    lifeTime:
+      mValueType: 0
+      m_Value: 5
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    maxDistance:
+      mValueType: 0
+      m_Value: 10
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    acceleration:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    bulletRotate:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+  PatternConfig:
+    count:
+      mValueType: 0
+      m_Value: 1
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    spreadAnglePerBullet:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    spreadAngleTotal:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    xSpacingPerBullet:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    xSpacingTotal:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    rotateSpeed:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    spwanXTanslate:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    spwanYTanslate:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

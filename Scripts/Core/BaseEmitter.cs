@@ -18,18 +18,18 @@ namespace BH_Engine
         private Quaternion mOriginRotate;
         private Vector3 mOriginTransform;
 
-        private void Awake()
+        protected void Awake()
         {
             mOriginRotate = transform.localRotation;
             mOriginTransform = transform.localPosition;
         }
 
-        private void Update()
+        protected void Update()
         {
             mTimer += Time.deltaTime;
             if (EmitterConfig.autoEmit && !IsStop)
             {
-                if (mTimer >= EmitterConfig.emitInterval)
+                if (mTimer >= EmitterConfig.emitInterval.value)
                 {
                     Emit();
                     mTimer = 0;

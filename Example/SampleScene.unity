@@ -241,375 +241,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!1 &1840824706
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1840824707}
-  - component: {fileID: 1840824708}
-  m_Layer: 0
-  m_Name: ProfileEmitter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1840824707
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840824706}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3617010029173671389}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1840824708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840824706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdf7804dfc104a0418b6c024f1a3523b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EmitterConfig:
-    emitInterval:
-      mValueType: 0
-      m_Value: 0.1
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    autoEmit: 0
-  BulletConfig:
-    speed:
-      mValueType: 0
-      m_Value: 5
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    prefab: {fileID: 0}
-    lifeTime:
-      mValueType: 0
-      m_Value: 5
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    maxDistance:
-      mValueType: 0
-      m_Value: 10
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    acceleration:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    bulletRotate:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-  PatternConfig:
-    count:
-      mValueType: 0
-      m_Value: 1
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    spreadAnglePerBullet:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    spreadAngleTotal:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    xSpacingPerBullet:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    xSpacingTotal:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    rotateSpeed:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    spwanXTanslate:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    spwanYTanslate:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-  EmitterProfileSO: {fileID: 11400000, guid: b2ed8dcc669cd4447b0e3844e8826f7e, type: 2}
-  EmitterProfile: {fileID: 0}
-  EmitterConfig:
-    emitInterval:
-      mValueType: 0
-      m_Value: 0.1
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    autoEmit: 0
-  BulletConfig:
-    speed:
-      mValueType: 0
-      m_Value: 5
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    prefab: {fileID: 0}
-    lifeTime:
-      mValueType: 0
-      m_Value: 5
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    maxDistance:
-      mValueType: 0
-      m_Value: 10
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    acceleration:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    bulletRotate:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-  PatternConfig:
-    count:
-      mValueType: 0
-      m_Value: 1
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    spreadAnglePerBullet:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    spreadAngleTotal:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    xSpacingPerBullet:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    xSpacingTotal:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    rotateSpeed:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    spwanXTanslate:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    spwanYTanslate:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
 --- !u!1001 &1939726912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -718,14 +349,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3617010029422090417, guid: dc4cbaf56217e0749bd75947d311c493,
         type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2c1f534cf5b52e041827b96c7206767f,
-        type: 3}
+      propertyPath: m_Color.b
+      value: 0.11645173
+      objectReference: {fileID: 0}
     - target: {fileID: 3617010029422090417, guid: dc4cbaf56217e0749bd75947d311c493,
         type: 3}
-      propertyPath: m_WasSpriteAssigned
+      propertyPath: m_Color.g
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3617010029422090417, guid: dc4cbaf56217e0749bd75947d311c493,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.033018887
       objectReference: {fileID: 0}
     - target: {fileID: 3617010029422090418, guid: dc4cbaf56217e0749bd75947d311c493,
         type: 3}
@@ -782,55 +417,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3617010029495896517, guid: dc4cbaf56217e0749bd75947d311c493,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3617010029495896519, guid: dc4cbaf56217e0749bd75947d311c493,
-        type: 3}
-      propertyPath: BulletConfig.prefab
-      value: 
-      objectReference: {fileID: 1519511878272348693, guid: cf803af3fb1b7d64dbf193f8f6b31709,
-        type: 3}
-    - target: {fileID: 3617010029495896519, guid: dc4cbaf56217e0749bd75947d311c493,
-        type: 3}
-      propertyPath: EmitterConfig.autoEmit
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3617010029495896519, guid: dc4cbaf56217e0749bd75947d311c493,
-        type: 3}
-      propertyPath: EmitterConfig.emitInterval
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 3617010029495896519, guid: dc4cbaf56217e0749bd75947d311c493,
-        type: 3}
-      propertyPath: PatternConfig.count.m_Value
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3617010029495896519, guid: dc4cbaf56217e0749bd75947d311c493,
-        type: 3}
-      propertyPath: BulletConfig.acceleration.m_Value
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3617010029495896519, guid: dc4cbaf56217e0749bd75947d311c493,
-        type: 3}
-      propertyPath: PatternConfig.rotateSpeed.m_Value
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 3617010029495896519, guid: dc4cbaf56217e0749bd75947d311c493,
-        type: 3}
-      propertyPath: PatternConfig.spreadAngleTotal.m_Value
-      value: 60
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
---- !u!4 &3617010029173671389 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3617010029422090418, guid: dc4cbaf56217e0749bd75947d311c493,
-    type: 3}
-  m_PrefabInstance: {fileID: 3617010029173671388}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5388543339183176391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -838,6 +426,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5388543339882547196, guid: 211a31ce61153c945b429952bcbf8f58,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5388543339882547196, guid: 211a31ce61153c945b429952bcbf8f58,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -895,3 +488,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}
+--- !u!1001 &8164679049561511439
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 662138073790428751, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_Name
+      value: ProfileEmitter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003464001016261329, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003464001016261329, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003464001016261329, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003464001016261329, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003464001016261329, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003464001016261329, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003464001016261329, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003464001016261329, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003464001016261329, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003464001016261329, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003464001016261329, guid: 2d8648eede7dfde4a9e26ebb73189dac,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2d8648eede7dfde4a9e26ebb73189dac, type: 3}

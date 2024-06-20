@@ -38,13 +38,25 @@ namespace BH_Engine
 
             foreach (var item in activeBullets)
             {
-                UpdateSingleBulletBehaviour(item);
+                if (item.bullet != null && item.bullet.gameObject.activeSelf)
+                {
+                    UpdateSingleBulletBehaviour(item);
+                }
+                else
+                {
+                    bulletToRemove.Add(item);
+                    continue;
+                }
             }
 
             for (int i = 0; i < bulletToRemove.Count; i++)
             {
-                activeBullets.Remove(bulletToRemove[i]);
-                BulletPoolManager.instance.RecycleBullet(bulletToRemove[i].bullet);
+                var activeBullet = bulletToRemove[i];
+                activeBullets.Remove(activeBullet);
+                if (activeBullet.bullet != null && activeBullet.bullet.gameObject.activeSelf)
+                {
+                    BulletPoolManager.pool.Release(bulletToRemove[i].bullet);
+                }
             }
             bulletToRemove.Clear();
         }

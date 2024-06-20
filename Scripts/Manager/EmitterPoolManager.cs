@@ -4,5 +4,5 @@ using UnityEngine.Pool;
 
 namespace BH_Engine
 {
-    public class BulletPoolManager : PoolManager { }
+    public class EmitterPoolManager : PoolManager { }
 }

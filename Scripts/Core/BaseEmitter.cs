@@ -93,8 +93,8 @@ namespace BH_Engine
                 totalAngle += realSpreadAnglePerbullet[i];
             }
 
-            var bullets = BulletPoolManager.instance.GetBullet(patternCount);
             var prefabSprite = BulletConfig.prefab.GetComponent<SpriteRenderer>()?.sprite;
+            var bullets = BulletPoolManager.Instance.Get(patternCount);
             // 当前子弹xspacing的位置, 只有一个子弹时从正中发射即可
             float currentBulletXpacing = patternCount == 1 ? 0 : -xSpacingTotalFinal / 2;
             // 当前子弹的角度，只有一个子弹时从正中发射即可

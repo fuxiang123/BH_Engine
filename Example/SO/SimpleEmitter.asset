@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a8d7133c81627e40b6c3eed8d5c025f, type: 3}
-  m_Name: EmitterProfile
+  m_Name: SimpleEmitter
   m_EditorClassIdentifier: 
   emitterConfig:
     emitInterval:
       mValueType: 0
-      m_Value: 0.1
+      m_Value: 0.5
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -28,7 +28,7 @@ MonoBehaviour:
   bulletConfig:
     speed:
       mValueType: 0
-      m_Value: -5
+      m_Value: 5
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -63,7 +63,7 @@ MonoBehaviour:
         rid: -2
     acceleration:
       mValueType: 0
-      m_Value: 2
+      m_Value: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -86,7 +86,7 @@ MonoBehaviour:
   patternConfig:
     count:
       mValueType: 0
-      m_Value: 3
+      m_Value: 1
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -108,7 +108,7 @@ MonoBehaviour:
         rid: -2
     spreadAngleTotal:
       mValueType: 0
-      m_Value: 30
+      m_Value: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -141,7 +141,7 @@ MonoBehaviour:
         rid: -2
     rotateSpeed:
       mValueType: 0
-      m_Value: 90
+      m_Value: 0
       curve:
         serializedVersion: 2
         m_Curve: []

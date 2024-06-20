@@ -11,7 +11,8 @@ namespace BH_Engine
         {
             if (other.tag == "Enemy")
             {
-                BulletPoolManager.instance.RecycleBullet(this.gameObject);
+                // this.gameObject.SetActive(false);
+                Destroy(this.gameObject);
                 other.gameObject.SetActive(false);
             }
         }

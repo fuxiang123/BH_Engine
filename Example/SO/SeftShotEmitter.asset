@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a8d7133c81627e40b6c3eed8d5c025f, type: 3}
-  m_Name: SleftShotEmitter
+  m_Name: SeftShotEmitter
   m_EditorClassIdentifier: 
   emitterConfig:
     emitInterval:
@@ -24,11 +24,51 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
+    emitterAngle:
+      mValueType: 1
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 180
+          outSlope: 180
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 2
+          value: 360
+          inSlope: 180
+          outSlope: 180
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 1
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
     autoEmit: 1
+    autoEmitDelay:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
   bulletConfig:
     speed:
       mValueType: 0
-      m_Value: 2
+      m_Value: 10
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -133,17 +173,6 @@ MonoBehaviour:
     xSpacingTotal:
       mValueType: 0
       m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    rotateSpeed:
-      mValueType: 0
-      m_Value: 90
       curve:
         serializedVersion: 2
         m_Curve: []

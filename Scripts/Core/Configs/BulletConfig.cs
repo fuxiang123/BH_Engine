@@ -37,7 +37,7 @@ namespace BH_Engine
         [LabelText("子弹移动时自转速度")]
         public DynamicIntValue bulletRotate;
 
-        [InfoBox("给子弹附加一个emitter profile，用于实现移动时发射额外子弹的效果")]
+        [LabelText("给子弹附加一个emitter profile，用于实现移动时发射额外子弹的效果")]
         public EmitterProfileSO[] emitterProfile;
 
         public static BulletFinalConfig GetFinalConfig(BulletConfig bulletConfig)

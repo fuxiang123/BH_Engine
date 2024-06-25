@@ -1,34 +1,55 @@
 using System;
+using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BH_Engine
 {
+    // 发射器状态
+    public enum EmitterState
+    {
+        Delay,
+        Shooting,
+        Stop
+    }
+
     // 发射器，负责弹幕
     public class BaseEmitter : MonoBehaviour
     {
+        [LabelText("发射器配置")]
         public EmitterConfig EmitterConfig;
+        [LabelText("子弹配置")]
         public BulletConfig BulletConfig;
+        [LabelText("弹幕配置")]
         public PatternConfig PatternConfig;
-        [HideInInspector]
-        public bool IsStop { get; private set; } = false;
+        [LabelText("发射器状态"), HideInInspector]
+        public EmitterState EmitterState = EmitterState.Delay;
         private float mTimer = 0;
-        // 记录emitter的初始旋转角度
-        private Quaternion mOriginRotate;
         private Vector3 mOriginTransform;
+        private float mDelayTimer = 0;
 
         protected void Awake()
         {
-            mOriginRotate = transform.localRotation;
             mOriginTransform = transform.localPosition;
         }
 
         protected void Update()
         {
-            mTimer += Time.deltaTime;
-            if (EmitterConfig.autoEmit && !IsStop)
+            if (EmitterConfig.autoEmit && EmitterState != EmitterState.Stop)
             {
+                if (mDelayTimer < EmitterConfig.autoEmitDelay.value)
+                {
+                    mDelayTimer += Time.deltaTime;
+                    return;
+                }
+                else if (EmitterState == EmitterState.Delay)
+                {
+                    EmitterState = EmitterState.Shooting;
+                    Emit();
+                }
+
+                mTimer += Time.deltaTime;
                 if (mTimer >= EmitterConfig.emitInterval.value)
                 {
                     Emit();
@@ -40,23 +61,22 @@ namespace BH_Engine
         // 开始或继续射击
         public void StartShoot()
         {
-            IsStop = false;
+            EmitterState = EmitterState.Shooting;
         }
 
         // 暂停自动射击, 恢复后悔继承之前的属性，如射击角度的变化等
         public void PauseShoot()
         {
-            IsStop = true;
+            EmitterState = EmitterState.Stop;
         }
 
         // 停止自动射击，会恢复到初始状态
         public void StopShoot()
         {
-            IsStop = true;
+            EmitterState = EmitterState.Stop;
             mTimer = 0;
             BulletConfig.ResetConfig(BulletConfig);
             PatternConfig.ResetConfig(PatternConfig);
-            transform.localRotation = mOriginRotate;
         }
 
         // 发射单行子弹
@@ -64,11 +84,7 @@ namespace BH_Engine
         {
             BulletFinalConfig bulletFinalConfig = BulletConfig.GetFinalConfig(BulletConfig);
             PatternFinalConfig patternFinalConfig = PatternConfig.GetPatternFinalConfig(PatternConfig);
-            if (patternFinalConfig.rotateSpeed != 0)
-            {
-                var currentAngle = patternFinalConfig.rotateSpeed * (mTimer / Time.deltaTime) * Time.deltaTime;
-                transform.Rotate(0, 0, currentAngle);
-            }
+            transform.rotation = Quaternion.Euler(0, 0, EmitterConfig.emitterAngle.value);
             transform.localPosition = mOriginTransform + new Vector3(patternFinalConfig.spwanXTanslate, patternFinalConfig.spwanYTanslate, transform.position.z);
 
             var patternCount = patternFinalConfig.count;

@@ -13,15 +13,20 @@ namespace BH_Engine
         // 发射间隔
         [LabelText("发射间隔")]
         public DynamicFloatValue emitInterval = new DynamicFloatValue() { value = 0.1f };
+        [LabelText("发射器角度")]
+        public DynamicFloatValue emitterAngle;
         // 自动射击
         [LabelText("自动射击")]
         public bool autoEmit;
+        [LabelText("自动射击延迟")]
+        public DynamicFloatValue autoEmitDelay = new DynamicFloatValue() { value = 0f };
 
         public static EmitterConfig CopyConfig(EmitterConfig config)
         {
             return new EmitterConfig
             {
                 emitInterval = config.emitInterval.Copy(),
+                emitterAngle = config.emitterAngle.Copy(),
                 autoEmit = config.autoEmit
             };
         }

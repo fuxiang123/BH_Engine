@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32034fad7fe82d40a52e6b5beab088a, type: 3}
+  m_Name: BossPatternScheduler
+  m_EditorClassIdentifier: 
+  SchedulerItems:
+  - Delay: 0
+    Duration: 10
+    PatternConfigType: 0
+    PatternPrefab: {fileID: 1009335864699654967, guid: e02a92169f14fc147abf5403d71546ac,
+      type: 3}
+    EmitterProfileSO: {fileID: 11400000, guid: d30282fa4482df34fb9f866119bb53ce, type: 2}
+  - Delay: 0
+    Duration: 10
+    PatternConfigType: 1
+    PatternPrefab: {fileID: 0}
+    EmitterProfileSO: {fileID: 11400000, guid: b2ed8dcc669cd4447b0e3844e8826f7e, type: 2}

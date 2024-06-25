@@ -11,7 +11,6 @@ namespace BH_Engine
         public int spreadAngleTotal;
         public float[] xSpacingPerbullet;
         public float xSpacingTotal;
-        public float rotateSpeed;
         public float spwanXTanslate;
         public float spwanYTanslate;
     }
@@ -38,8 +37,6 @@ namespace BH_Engine
         [LabelText("总间距")]
         [InfoBox("总间距会和每个子弹间距叠加")]
         public DynamicFloatValue xSpacingTotal;
-        [LabelText("发射器自转角速度")]
-        public DynamicFloatValue rotateSpeed;
 
         [LabelText("发射器X轴位移")]
         public DynamicFloatValue spwanXTanslate;
@@ -66,7 +63,6 @@ namespace BH_Engine
                 spreadAngleTotal = spreadAngleTotal,
                 xSpacingPerbullet = xSpacingPerBullet,
                 xSpacingTotal = xSpacingTotal,
-                rotateSpeed = patternConfig.rotateSpeed.value,
                 spwanXTanslate = patternConfig.spwanXTanslate.value,
                 spwanYTanslate = patternConfig.spwanYTanslate.value
             };
@@ -79,7 +75,6 @@ namespace BH_Engine
             patternConfig.spreadAngleTotal.Reset();
             patternConfig.xSpacingPerBullet.Reset();
             patternConfig.xSpacingTotal.Reset();
-            patternConfig.rotateSpeed.Reset();
             patternConfig.spwanXTanslate.Reset();
             patternConfig.spwanYTanslate.Reset();
         }
@@ -93,7 +88,6 @@ namespace BH_Engine
                 spreadAngleTotal = patternConfig.spreadAngleTotal.Copy(),
                 xSpacingPerBullet = patternConfig.xSpacingPerBullet.Copy(),
                 xSpacingTotal = patternConfig.xSpacingTotal.Copy(),
-                rotateSpeed = patternConfig.rotateSpeed.Copy(),
                 spwanXTanslate = patternConfig.spwanXTanslate.Copy(),
                 spwanYTanslate = patternConfig.spwanYTanslate.Copy()
             };

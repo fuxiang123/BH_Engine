@@ -473,6 +473,58 @@ PrefabInstance:
       propertyPath: EmitterConfig.autoEmit
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.mValueType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_PostInfinity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.data[1].time
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.data[1].value
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.data[0].inSlope
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.data[1].inSlope
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.data[0].outSlope
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.data[1].outSlope
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
     - target: {fileID: 3617010029422090413, guid: dc4cbaf56217e0749bd75947d311c493,
         type: 3}
       propertyPath: emitters.Array.size

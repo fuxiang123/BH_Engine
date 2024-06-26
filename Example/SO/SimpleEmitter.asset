@@ -15,7 +15,7 @@ MonoBehaviour:
   emitterConfig:
     emitInterval:
       mValueType: 0
-      m_Value: 2
+      m_Value: 0.1
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -25,16 +25,34 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
     emitterAngle:
-      mValueType: 0
-      m_Value: 0
+      mValueType: 1
+      m_Value: 90
       curve:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 90
+          outSlope: 90
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 4
+          value: 360
+          inSlope: 90
+          outSlope: 90
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
-        m_PostInfinity: 2
+        m_PostInfinity: 1
         m_RotationOrder: 4
       CustomValueHandler:
-        rid: -2
+        rid: 5668783482046251010
     autoEmitDelay:
       mValueType: 0
       m_Value: 0
@@ -188,3 +206,9 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 5668783482046251010
+      type: {class: PingpongFloat, ns: BH_Engine, asm: Assembly-CSharp}
+      data:
+        min: 1
+        max: 5
+        speed: 1

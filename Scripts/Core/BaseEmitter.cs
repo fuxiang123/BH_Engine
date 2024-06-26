@@ -25,10 +25,8 @@ namespace BH_Engine
         public PatternConfig PatternConfig;
         [LabelText("发射器状态"), HideInInspector]
         public EmitterState EmitterState = EmitterState.Delay;
-        [LabelText("是否跟随父物体")]
-        public bool FollowParent = true;
+        [SerializeField, LabelText("是否自动射击")]
         private bool mIsAutoEmit = false;
-        [LabelText("是否自动射击"), ShowInInspector]
         public bool IsAutoEmit
         {
             set
@@ -42,13 +40,11 @@ namespace BH_Engine
             }
         }
         private float mTimer = 0;
-        private Vector3 mOriginTransform;
         private float mDelayTimer = 0;
 
         protected void Awake()
         {
-            mOriginTransform = transform.localPosition;
-            if (!mIsAutoEmit) EmitterState = EmitterState.Stop;
+            if (!IsAutoEmit) EmitterState = EmitterState.Stop;
         }
 
         protected void OnDisable()
@@ -60,7 +56,7 @@ namespace BH_Engine
         {
             if (EmitterState == EmitterState.Stop) return;
 
-            if (mIsAutoEmit)
+            if (IsAutoEmit)
             {
                 // 自动射击处理delay
                 if (mDelayTimer < EmitterConfig.autoEmitDelay.value)
@@ -109,11 +105,8 @@ namespace BH_Engine
         {
             BulletFinalConfig bulletFinalConfig = BulletConfig.GetFinalConfig(BulletConfig);
             PatternFinalConfig patternFinalConfig = PatternConfig.GetPatternFinalConfig(PatternConfig);
-            if (FollowParent)
-            {
-                transform.localRotation = Quaternion.Euler(0, 0, EmitterConfig.emitterAngle.value);
-                transform.localPosition = mOriginTransform + new Vector3(patternFinalConfig.spwanXTanslate, patternFinalConfig.spwanYTanslate, transform.position.z);
-            }
+            transform.localRotation = Quaternion.Euler(0, 0, EmitterConfig.emitterAngle.value);
+            transform.localPosition = new Vector3(patternFinalConfig.spwanXTanslate, patternFinalConfig.spwanYTanslate, transform.position.z);
 
             var patternCount = patternFinalConfig.count;
 

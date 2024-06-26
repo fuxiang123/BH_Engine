@@ -88,16 +88,6 @@ namespace BH_Engine
             {
                 bulletToRemove.Add(activeBullet);
             }
-
-            if (activeBullet.emitters != null && activeBullet.emitters.Length > 0)
-            {
-                // 更新当前发射器位置
-                activeBullet.emitters.ForEach(e =>
-                {
-                    e.transform.position = activeBullet.bullet.transform.position;
-                    e.transform.rotation = activeBullet.bullet.transform.rotation;
-                });
-            }
         }
 
         // 更新子弹的emitter行为
@@ -136,9 +126,9 @@ namespace BH_Engine
                     ProfileEmitter profileEmitter = emitters[i].GetComponent<ProfileEmitter>();
                     profileEmitter.SetEmitterProfile(configEmitterProfiles[i]);
                     profileEmitter.IsAutoEmit = true;
-                    profileEmitter.FollowParent = false;
-                    profileEmitter.transform.position = activeBullet.bullet.transform.position;
-                    profileEmitter.transform.rotation = activeBullet.bullet.transform.rotation;
+                    profileEmitter.transform.SetParent(bullet.transform);
+                    profileEmitter.transform.localPosition = Vector3.zero;
+                    profileEmitter.transform.localRotation = Quaternion.identity;
                 }
                 activeBullet.emitters = emitters;
             }

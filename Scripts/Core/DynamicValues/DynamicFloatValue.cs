@@ -37,6 +37,9 @@ namespace BH_Engine
         private float initValue;
 
         [HideInInspector]
+        public float lastValue { get; private set; }
+
+        [HideInInspector]
         public float value
         {
             get
@@ -60,6 +63,7 @@ namespace BH_Engine
                 isFirst = false;
                 initValue = m_Value;
             }
+            lastValue = m_Value;
 
             switch (valueType)
             {

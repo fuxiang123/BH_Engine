@@ -12,6 +12,7 @@ namespace BH_Engine
         public float acceleration;
         public float lifeTime;
         public float bulletRotate;
+        public EmitterProfileSO[] emitterProfile;
     }
 
     // 子弹接口, 负责子弹的外观，速度，大小, 生命周期等
@@ -49,6 +50,7 @@ namespace BH_Engine
                 acceleration = bulletConfig.acceleration.value,
                 lifeTime = bulletConfig.lifeTime.value,
                 bulletRotate = bulletConfig.bulletRotate.value,
+                emitterProfile = bulletConfig.emitterProfile,
             };
         }
 
@@ -70,7 +72,8 @@ namespace BH_Engine
                 lifeTime = bulletConfig.lifeTime.Copy(),
                 maxDistance = bulletConfig.maxDistance.Copy(),
                 acceleration = bulletConfig.acceleration.Copy(),
-                bulletRotate = bulletConfig.bulletRotate.Copy()
+                bulletRotate = bulletConfig.bulletRotate.Copy(),
+                emitterProfile = bulletConfig.emitterProfile
             };
         }
     }

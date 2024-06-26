@@ -56,7 +56,29 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
+    emitterAngle:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
     autoEmit: 1
+    autoEmitDelay:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
   BulletConfig:
     speed:
       mValueType: 0
@@ -115,6 +137,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
+    emitterProfile: []
   PatternConfig:
     count:
       mValueType: 0
@@ -171,17 +194,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    rotateSpeed:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
     spwanXTanslate:
       mValueType: 0
       m_Value: 0
@@ -204,6 +216,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
+  EmitterState: 0
   EmitterProfileSO: {fileID: 11400000, guid: d30282fa4482df34fb9f866119bb53ce, type: 2}
   EmitterProfile: {fileID: 0}
   references:
@@ -221,7 +234,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1519511878272348699}
   - component: {fileID: 1519511878272348692}
-  - component: {fileID: 409493081026887998}
   - component: {fileID: 8430659214321165879}
   - component: {fileID: 301094642303776926}
   m_Layer: 6
@@ -299,18 +311,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &409493081026887998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1519511878272348693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee970d47145adb74b9e4b5eb08c3df63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &8430659214321165879
 BoxCollider2D:
   m_ObjectHideFlags: 0

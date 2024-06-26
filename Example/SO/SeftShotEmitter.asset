@@ -53,7 +53,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    autoEmit: 1
+    autoEmit: 0
     autoEmitDelay:
       mValueType: 0
       m_Value: 0
@@ -123,8 +123,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    emitterProfile:
-    - {fileID: 11400000, guid: d30282fa4482df34fb9f866119bb53ce, type: 2}
+    emitterProfile: []
   patternConfig:
     count:
       mValueType: 0

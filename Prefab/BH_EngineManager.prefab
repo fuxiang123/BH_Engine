@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1851006640}
-  - component: {fileID: 1851006641}
+  - component: {fileID: 1329687296}
   m_Layer: 0
   m_Name: EmitterPoolManager
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 5388543339882547196}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1851006641
+--- !u!114 &1329687296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1851006639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00ead95e1d5618f4f8f312e7c0cac98a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7427984b5acaf964da6983962178b757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 662138073790428751, guid: 2d8648eede7dfde4a9e26ebb73189dac, type: 3}
+  Prefab: {fileID: 0}
   defaultCapacity: 200
   maxSize: 10000
   collectionCheck: 1

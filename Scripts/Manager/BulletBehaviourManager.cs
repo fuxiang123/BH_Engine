@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using QFramework;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,6 +12,7 @@ namespace BH_Engine
         public Vector3 spwanPosition;
         public float currentTime;
         public BulletFinalConfig bulletFinalConfig;
+        public GameObject[] emitters;
     }
 
     // 统一更新所有子弹的移动逻辑
@@ -55,7 +57,8 @@ namespace BH_Engine
                 activeBullets.Remove(activeBullet);
                 if (activeBullet.bullet != null && activeBullet.bullet.gameObject.activeSelf)
                 {
-                    BulletPoolManager.pool.Release(bulletToRemove[i].bullet);
+                    BulletPoolManager.Instance.Release(bulletToRemove[i].bullet);
+                    EmitterPoolManager.Instance.Release(activeBullet.emitters);
                 }
             }
             bulletToRemove.Clear();
@@ -82,7 +85,16 @@ namespace BH_Engine
             {
                 bulletToRemove.Add(activeBullet);
             }
+
+            // 更新当前发射器位置
+            activeBullet.emitters.ForEach(e =>
+            {
+                e.transform.position = activeBullet.bullet.transform.position;
+                e.transform.rotation = activeBullet.bullet.transform.rotation;
+            });
         }
+
+        // 更新子弹的emitter行为
 
         // 计算当前总移动距离
         public float CalculateTotalDistance(
@@ -102,12 +114,20 @@ namespace BH_Engine
 
         public void AddActiveBullet(GameObject bullet, BulletFinalConfig bulletFinalConfig)
         {
+            var emitterProfiles = bulletFinalConfig.emitterProfile;
+            GameObject[] emitters = EmitterPoolManager.Instance.Get(emitterProfiles.Length);
+            for (int i = 0; i < emitterProfiles.Length; i++)
+            {
+                ProfileEmitter profileEmitter = emitters[i].GetComponent<ProfileEmitter>();
+                profileEmitter.SetEmitterProfile(emitterProfiles[i]);
+            }
             activeBullets.Add(new ActiveBullet
             {
                 bullet = bullet,
                 currentTime = 0,
                 spwanPosition = bullet.transform.position,
                 bulletFinalConfig = bulletFinalConfig,
+                emitters = emitters,
             });
         }
     }

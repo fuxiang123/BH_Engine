@@ -4,7 +4,6 @@ using UnityEngine.Pool;
 
 namespace BH_Engine
 {
-    // 子弹池管理器
     public abstract class PoolManager : MonoBehaviour
     {
         // 初始化子弹prefab
@@ -15,11 +14,9 @@ namespace BH_Engine
         public int maxSize = 10000;
 
         public bool collectionCheck = true;
-        public static PoolManager Instance { get; private set; }
-        public static ObjectPool<GameObject> pool;
-        private void Awake()
+        public ObjectPool<GameObject> pool;
+        protected void Awake()
         {
-            Instance = this;
             pool = new ObjectPool<GameObject>(createFunc, actionOnGet, actionOnRelease, actionOnDestroy, collectionCheck, defaultCapacity, maxSize);
         }
 
@@ -46,6 +43,10 @@ namespace BH_Engine
             Destroy(obj);
         }
 
+        public GameObject Get()
+        {
+            return pool.Get();
+        }
 
         public GameObject[] Get(int count)
         {
@@ -55,6 +56,11 @@ namespace BH_Engine
                 objs[i] = pool.Get();
             }
             return objs;
+        }
+
+        public void Release(GameObject obj)
+        {
+            pool.Release(obj);
         }
 
         public void Release(GameObject[] obj)

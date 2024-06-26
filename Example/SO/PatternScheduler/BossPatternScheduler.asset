@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BossPatternScheduler
   m_EditorClassIdentifier: 
   SchedulerItems:
-  - Delay: 0
-    Duration: 10
+  - Delay: 5
+    Duration: 2
     PatternConfigType: 0
     PatternPrefab: {fileID: 1009335864699654967, guid: e02a92169f14fc147abf5403d71546ac,
       type: 3}

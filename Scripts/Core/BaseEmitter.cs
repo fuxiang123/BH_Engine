@@ -25,6 +25,20 @@ namespace BH_Engine
         public PatternConfig PatternConfig;
         [LabelText("发射器状态"), HideInInspector]
         public EmitterState EmitterState = EmitterState.Delay;
+        private bool mIsAutoEmit = false;
+        [LabelText("是否自动射击"), ShowInInspector]
+        public bool IsAutoEmit
+        {
+            set
+            {
+                EmitterState = value ? EmitterState.Delay : EmitterState.Stop;
+                mIsAutoEmit = value;
+            }
+            get
+            {
+                return mIsAutoEmit;
+            }
+        }
         private float mTimer = 0;
         private Vector3 mOriginTransform;
         private float mDelayTimer = 0;
@@ -32,12 +46,16 @@ namespace BH_Engine
         protected void Awake()
         {
             mOriginTransform = transform.localPosition;
+            if (!mIsAutoEmit) EmitterState = EmitterState.Stop;
         }
 
         protected void Update()
         {
-            if (EmitterConfig.autoEmit && EmitterState != EmitterState.Stop)
+            if (EmitterState == EmitterState.Stop) return;
+
+            if (mIsAutoEmit)
             {
+                // 自动射击处理delay
                 if (mDelayTimer < EmitterConfig.autoEmitDelay.value)
                 {
                     mDelayTimer += Time.deltaTime;
@@ -48,13 +66,13 @@ namespace BH_Engine
                     EmitterState = EmitterState.Shooting;
                     Emit();
                 }
+            }
 
-                mTimer += Time.deltaTime;
-                if (mTimer >= EmitterConfig.emitInterval.value)
-                {
-                    Emit();
-                    mTimer = 0;
-                }
+            mTimer += Time.deltaTime;
+            if (mTimer >= EmitterConfig.emitInterval.value)
+            {
+                Emit();
+                mTimer = 0;
             }
         }
 
@@ -109,7 +127,7 @@ namespace BH_Engine
                 totalAngle += realSpreadAnglePerbullet[i];
             }
 
-            var prefabSprite = BulletConfig.prefab.GetComponent<SpriteRenderer>()?.sprite;
+            var prefabSprite = BulletConfig.prefab.GetComponent<SpriteRenderer>();
             var bullets = BulletPoolManager.Instance.Get(patternCount);
             // 当前子弹xspacing的位置, 只有一个子弹时从正中发射即可
             float currentBulletXpacing = patternCount == 1 ? 0 : -xSpacingTotalFinal / 2;
@@ -121,7 +139,16 @@ namespace BH_Engine
                 var spriteRenderer = bullets[i].GetComponent<SpriteRenderer>();
                 if (spriteRenderer != null && prefabSprite != null)
                 {
-                    spriteRenderer.sprite = prefabSprite;
+                    spriteRenderer.sprite = prefabSprite.sprite;
+                    spriteRenderer.color = prefabSprite.color;
+                    spriteRenderer.flipX = prefabSprite.flipX;
+                    spriteRenderer.flipY = prefabSprite.flipY;
+                    spriteRenderer.drawMode = prefabSprite.drawMode;
+                    spriteRenderer.maskInteraction = prefabSprite.maskInteraction;
+                    spriteRenderer.spriteSortPoint = prefabSprite.spriteSortPoint;
+                    spriteRenderer.sortingLayerID = prefabSprite.sortingLayerID;
+                    spriteRenderer.sortingLayerName = prefabSprite.sortingLayerName;
+                    spriteRenderer.sortingOrder = prefabSprite.sortingOrder;
                 }
 
                 // 计算子弹的位置

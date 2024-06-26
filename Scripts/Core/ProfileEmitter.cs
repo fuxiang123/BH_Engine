@@ -19,5 +19,10 @@ namespace BH_Engine
             PatternConfig = EmitterProfile.patternConfig;
             base.Awake();
         }
+
+        public void SetEmitterProfile(EmitterProfileSO profile)
+        {
+            EmitterProfile = profile;
+        }
     }
 }

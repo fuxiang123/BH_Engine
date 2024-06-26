@@ -15,7 +15,7 @@ MonoBehaviour:
   emitterConfig:
     emitInterval:
       mValueType: 0
-      m_Value: 0.2
+      m_Value: 2
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -35,11 +35,21 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    autoEmit: 1
+    autoEmitDelay:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
   bulletConfig:
     speed:
       mValueType: 0
-      m_Value: 5
+      m_Value: 10
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -98,7 +108,7 @@ MonoBehaviour:
   patternConfig:
     count:
       mValueType: 0
-      m_Value: 1
+      m_Value: 3
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -120,7 +130,7 @@ MonoBehaviour:
         rid: -2
     spreadAngleTotal:
       mValueType: 0
-      m_Value: 0
+      m_Value: 60
       curve:
         serializedVersion: 2
         m_Curve: []

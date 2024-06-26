@@ -56,7 +56,29 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    autoEmit: 0
+    emitterAngle:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    emitterAngleType: 1
+    autoEmitDelay:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
   BulletConfig:
     speed:
       mValueType: 0
@@ -171,17 +193,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    rotateSpeed:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
     spwanXTanslate:
       mValueType: 0
       m_Value: 0
@@ -204,6 +215,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
+  EmitterState: 0
   EmitterProfileSO: {fileID: 11400000, guid: b2ed8dcc669cd4447b0e3844e8826f7e, type: 2}
   EmitterProfile: {fileID: 0}
   references:

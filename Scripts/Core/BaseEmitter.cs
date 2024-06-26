@@ -25,6 +25,8 @@ namespace BH_Engine
         public PatternConfig PatternConfig;
         [LabelText("发射器状态"), HideInInspector]
         public EmitterState EmitterState = EmitterState.Delay;
+        [LabelText("是否跟随父物体")]
+        public bool FollowParent = true;
         private bool mIsAutoEmit = false;
         [LabelText("是否自动射击"), ShowInInspector]
         public bool IsAutoEmit
@@ -47,6 +49,11 @@ namespace BH_Engine
         {
             mOriginTransform = transform.localPosition;
             if (!mIsAutoEmit) EmitterState = EmitterState.Stop;
+        }
+
+        protected void OnDisable()
+        {
+            StopShoot();
         }
 
         protected void Update()
@@ -102,8 +109,11 @@ namespace BH_Engine
         {
             BulletFinalConfig bulletFinalConfig = BulletConfig.GetFinalConfig(BulletConfig);
             PatternFinalConfig patternFinalConfig = PatternConfig.GetPatternFinalConfig(PatternConfig);
-            transform.rotation = Quaternion.Euler(0, 0, EmitterConfig.emitterAngle.value);
-            transform.localPosition = mOriginTransform + new Vector3(patternFinalConfig.spwanXTanslate, patternFinalConfig.spwanYTanslate, transform.position.z);
+            if (FollowParent)
+            {
+                transform.localRotation = Quaternion.Euler(0, 0, EmitterConfig.emitterAngle.value);
+                transform.localPosition = mOriginTransform + new Vector3(patternFinalConfig.spwanXTanslate, patternFinalConfig.spwanYTanslate, transform.position.z);
+            }
 
             var patternCount = patternFinalConfig.count;
 
@@ -160,7 +170,6 @@ namespace BH_Engine
                 // 计算子弹的角度
                 currentBulletSpreadAngle += i == 0 ? 0 : realSpreadAnglePerbullet[i - 1];
                 bullets[i].transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
-                bullets[i].SetActive(true);
                 BulletBehaviourManager.instance.AddActiveBullet(bullets[i], bulletFinalConfig);
             }
         }

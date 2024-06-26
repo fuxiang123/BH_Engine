@@ -461,6 +461,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: mIsAutoEmit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterProfileSO
       value: 
       objectReference: {fileID: 11400000, guid: b2ed8dcc669cd4447b0e3844e8826f7e,

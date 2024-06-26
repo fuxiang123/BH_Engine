@@ -43,7 +43,6 @@ namespace BH_Engine
         [LabelText("发射器Y轴位移")]
         public DynamicFloatValue spwanYTanslate;
 
-
         public static PatternFinalConfig GetPatternFinalConfig(PatternConfig patternConfig)
         {
             var count = patternConfig.count.value;

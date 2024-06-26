@@ -7,22 +7,33 @@ namespace BH_Engine
     public class ProfileEmitter : BaseEmitter
     {
         [SerializeField]
-        private EmitterProfileSO EmitterProfileSO;
+        public EmitterProfileSO EmitterProfileSO;
         [HideInInspector]
-        public EmitterProfileSO EmitterProfile;
+        private EmitterProfileSO mEmitterProfile;
 
         private void Awake()
         {
-            EmitterProfile = EmitterProfileSO.Copy(EmitterProfileSO);
-            EmitterConfig = EmitterProfile.emitterConfig;
-            BulletConfig = EmitterProfile.bulletConfig;
-            PatternConfig = EmitterProfile.patternConfig;
+            InitEmitterProfile();
             base.Awake();
+        }
+
+        private void InitEmitterProfile()
+        {
+            mEmitterProfile = EmitterProfileSO.Copy(EmitterProfileSO);
+            EmitterConfig = mEmitterProfile.emitterConfig;
+            BulletConfig = mEmitterProfile.bulletConfig;
+            PatternConfig = mEmitterProfile.patternConfig;
         }
 
         public void SetEmitterProfile(EmitterProfileSO profile)
         {
-            EmitterProfile = profile;
+            EmitterProfileSO = profile;
+            InitEmitterProfile();
+        }
+
+        public EmitterProfileSO GetEmitterProfile()
+        {
+            return mEmitterProfile;
         }
     }
 }

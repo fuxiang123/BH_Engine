@@ -5,6 +5,22 @@ using Sirenix.OdinInspector;
 namespace BH_Engine
 {
 
+    public enum EmitterTransformType
+    {
+        [LabelText("世界坐标")]
+        World,
+        [LabelText("本地坐标")]
+        Local
+    }
+
+    public class EmitterFinalConfig
+    {
+        public float emitInterval;
+        public float emitterAngle;
+        public EmitterTransformType emitterAngleType;
+        public float autoEmitDelay;
+    }
+
     // 发射器接口， 负责控制发射行为、如发射频率
     [Serializable]
     [LabelText("发射器配置")]
@@ -24,6 +40,7 @@ namespace BH_Engine
             {
                 emitInterval = config.emitInterval.Copy(),
                 emitterAngle = config.emitterAngle.Copy(),
+                autoEmitDelay = config.autoEmitDelay.Copy()
             };
         }
     }

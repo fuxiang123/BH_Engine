@@ -474,6 +474,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitInterval.m_Value
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterConfig.emitterAngle.mValueType
       value: 1
       objectReference: {fileID: 0}

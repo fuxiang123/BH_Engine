@@ -152,6 +152,7 @@ namespace BH_Engine
                     spriteRenderer.sortingLayerID = prefabSprite.sortingLayerID;
                     spriteRenderer.sortingLayerName = prefabSprite.sortingLayerName;
                     spriteRenderer.sortingOrder = prefabSprite.sortingOrder;
+                    spriteRenderer.gameObject.layer = prefabSprite.gameObject.layer;
                 }
 
                 // 计算子弹的位置

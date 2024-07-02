@@ -14,7 +14,6 @@ namespace BH_Engine
         private void Awake()
         {
             InitEmitterProfile();
-            base.Awake();
         }
 
         private void InitEmitterProfile()

@@ -23,6 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009335864699654967}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,7 +32,6 @@ Transform:
   - {fileID: 1009335864922083416}
   - {fileID: 1009335866537352163}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1009335864922083431
 GameObject:
@@ -57,13 +57,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009335864922083431}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1009335864699654952}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1009335864922083417
 MonoBehaviour:
@@ -100,18 +100,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    autoEmit: 1
-    autoEmitDelay:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
   BulletConfig:
     speed:
       mValueType: 0
@@ -249,7 +237,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-  EmitterState: 0
+  IsAutoEmit: 1
   references:
     version: 2
     RefIds:
@@ -279,13 +267,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009335866537352162}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1009335864699654952}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1009335866537352164
 MonoBehaviour:
@@ -322,18 +310,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    autoEmit: 1
-    autoEmitDelay:
-      mValueType: 0
-      m_Value: 0.375
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
   BulletConfig:
     speed:
       mValueType: 0
@@ -471,7 +447,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-  EmitterState: 0
+  IsAutoEmit: 1
   references:
     version: 2
     RefIds:

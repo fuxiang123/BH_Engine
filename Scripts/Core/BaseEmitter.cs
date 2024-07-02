@@ -6,14 +6,6 @@ using UnityEngine;
 
 namespace BH_Engine
 {
-    // 发射器状态
-    public enum EmitterState
-    {
-        Delay,
-        Shooting,
-        Stop
-    }
-
     // 发射器，负责弹幕
     public class BaseEmitter : MonoBehaviour
     {
@@ -23,29 +15,9 @@ namespace BH_Engine
         public BulletConfig BulletConfig;
         [LabelText("弹幕配置")]
         public PatternConfig PatternConfig;
-        [LabelText("发射器状态"), HideInInspector]
-        public EmitterState EmitterState = EmitterState.Delay;
-        [SerializeField, LabelText("是否自动射击")]
-        private bool mIsAutoEmit = false;
-        public bool IsAutoEmit
-        {
-            set
-            {
-                EmitterState = value ? EmitterState.Delay : EmitterState.Stop;
-                mIsAutoEmit = value;
-            }
-            get
-            {
-                return mIsAutoEmit;
-            }
-        }
+        [LabelText("是否自动射击")]
+        public bool IsAutoEmit = false;
         private float mTimer = 0;
-        private float mDelayTimer = 0;
-
-        protected void Awake()
-        {
-            if (!IsAutoEmit) EmitterState = EmitterState.Stop;
-        }
 
         protected void OnDisable()
         {
@@ -54,47 +26,33 @@ namespace BH_Engine
 
         protected void Update()
         {
-            if (EmitterState == EmitterState.Stop) return;
-
             if (IsAutoEmit)
             {
-                // 自动射击处理delay
-                if (mDelayTimer < EmitterConfig.autoEmitDelay.value)
+                mTimer += Time.deltaTime;
+                if (mTimer >= EmitterConfig.emitInterval.value)
                 {
-                    mDelayTimer += Time.deltaTime;
-                    return;
-                }
-                else if (EmitterState == EmitterState.Delay)
-                {
-                    EmitterState = EmitterState.Shooting;
                     Emit();
+                    mTimer = 0;
                 }
-            }
-
-            mTimer += Time.deltaTime;
-            if (mTimer >= EmitterConfig.emitInterval.value)
-            {
-                Emit();
-                mTimer = 0;
             }
         }
 
         // 开始或继续射击
         public void StartShoot()
         {
-            EmitterState = EmitterState.Shooting;
+            IsAutoEmit = true;
         }
 
         // 暂停自动射击, 恢复后悔继承之前的属性，如射击角度的变化等
         public void PauseShoot()
         {
-            EmitterState = EmitterState.Stop;
+            IsAutoEmit = false;
         }
 
         // 停止自动射击，会恢复到初始状态
         public void StopShoot()
         {
-            EmitterState = EmitterState.Stop;
+            IsAutoEmit = false;
             mTimer = 0;
             BulletConfig.ResetConfig(BulletConfig);
             PatternConfig.ResetConfig(PatternConfig);

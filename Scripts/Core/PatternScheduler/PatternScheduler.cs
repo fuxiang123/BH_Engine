@@ -75,6 +75,7 @@ namespace BH_Engine
                     if (currentPatternIndex >= PatternSchedulerSO.SchedulerItems.Length)
                     {
                         State = PatternSchedulerState.Finished;
+                        currentPatternPrefab.gameObject.SetActive(false);
                     }
                     else
                     {
@@ -82,7 +83,6 @@ namespace BH_Engine
                         State = PatternSchedulerState.Prepare;
                     }
                 }
-
             }
         }
 
@@ -104,7 +104,9 @@ namespace BH_Engine
                 {
                     // 通过ProfileEmitter实例化
                     currentPatternPrefab = Instantiate(ProfileEmitter.gameObject, Vector3.zero, Quaternion.identity);
-                    currentPatternPrefab.GetComponent<ProfileEmitter>().SetEmitterProfile(item.EmitterProfileSO);
+                    var profileEmitter = currentPatternPrefab.GetComponent<ProfileEmitter>();
+                    profileEmitter.SetEmitterProfile(item.EmitterProfileSO);
+                    profileEmitter.IsAutoEmit = true;
                 }
             }
             currentPatternPrefab.transform.position = Center.position;

@@ -1,7 +1,9 @@
 
+using System;
 using System.Collections.Generic;
 using QFramework;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UIElements;
 
 namespace BH_Engine
@@ -13,22 +15,67 @@ namespace BH_Engine
         public float currentTime;
         public BulletFinalConfig bulletFinalConfig;
         public GameObject[] emitters;
+        // 是否正在被使用
+        public bool enabled = true;
     }
+
 
     // 统一更新所有子弹的移动逻辑
     public class BulletBehaviourManager : MonoBehaviour
     {
+
+        private class ActiveBulletPoolManager
+        {
+            public ObjectPool<ActiveBullet> Pool;
+
+            public void init(int defaultCapacity = 100, int maxSize = 2000, bool collectionCheck = true)
+            {
+                Pool = new ObjectPool<ActiveBullet>(createFunc, actionOnGet, actionOnRelease, actionOnDestroy, collectionCheck, defaultCapacity, maxSize);
+            }
+
+            private ActiveBullet createFunc()
+            {
+                return new ActiveBullet();
+            }
+
+            private void actionOnGet(ActiveBullet activeBullet)
+            {
+                activeBullet.enabled = true;
+            }
+
+            public void actionOnRelease(ActiveBullet activeBullet)
+            {
+                if (activeBullet.bullet != null)
+                {
+                    BulletPoolManager.Instance.Release(activeBullet.bullet);
+                    activeBullet.bullet = null;
+                }
+                if (activeBullet.emitters != null)
+                {
+                    for (int i = 0; i < activeBullet.emitters.Length; i++)
+                    {
+                        var emitter = activeBullet.emitters[i];
+                        if (emitter != null) EmitterPoolManager.Instance.Release(emitter);
+                    }
+                    activeBullet.emitters = null;
+                }
+                activeBullet.enabled = false;
+            }
+
+            private void actionOnDestroy(ActiveBullet activeBullet) { }
+        }
+
         public static BulletBehaviourManager instance;
 
         // 正在移动的子弹
         public List<ActiveBullet> activeBullets = new List<ActiveBullet>();
-        // 需要移除的子弹
-        private List<ActiveBullet> bulletToRemove = new List<ActiveBullet>();
-
+        // ActiveBullet对象池
+        private ActiveBulletPoolManager activeBulletPoolManager = new ActiveBulletPoolManager();
 
         private void Awake()
         {
             instance = this;
+            activeBulletPoolManager.init();
         }
 
         private void FixedUpdate()
@@ -44,27 +91,8 @@ namespace BH_Engine
                 {
                     UpdateSingleBulletBehaviour(item);
                 }
-                else
-                {
-                    bulletToRemove.Add(item);
-                    continue;
-                }
             }
-
-            for (int i = 0; i < bulletToRemove.Count; i++)
-            {
-                var activeBullet = bulletToRemove[i];
-                activeBullets.Remove(activeBullet);
-                if (activeBullet.bullet != null && activeBullet.bullet.gameObject.activeSelf)
-                {
-                    BulletPoolManager.Instance.Release(bulletToRemove[i].bullet);
-                    if (activeBullet.emitters != null && activeBullet.emitters.Length > 0)
-                    {
-                        EmitterPoolManager.Instance.Release(activeBullet.emitters);
-                    }
-                }
-            }
-            bulletToRemove.Clear();
+            activeBullets.RemoveAll(item => item.bullet == null || !item.bullet.gameObject.activeSelf || !item.enabled);
         }
 
         // 更新单个子弹行为
@@ -86,11 +114,9 @@ namespace BH_Engine
             var distance = CalculateTotalDistance(speed, timer, acceleration);
             if (activeBullet.currentTime >= activeBullet.bulletFinalConfig.lifeTime || (maxDistance > 0 && distance >= maxDistance))
             {
-                bulletToRemove.Add(activeBullet);
+                activeBulletPoolManager.Pool.Release(activeBullet);
             }
         }
-
-        // 更新子弹的emitter行为
 
         // 计算当前总移动距离
         public float CalculateTotalDistance(
@@ -110,13 +136,12 @@ namespace BH_Engine
 
         public void AddActiveBullet(GameObject bullet, BulletFinalConfig bulletFinalConfig)
         {
-            var activeBullet = new ActiveBullet
-            {
-                bullet = bullet,
-                currentTime = 0,
-                spwanPosition = bullet.transform.position,
-                bulletFinalConfig = bulletFinalConfig,
-            };
+            var activeBullet = activeBulletPoolManager.Pool.Get();
+            activeBullet.bullet = bullet;
+            activeBullet.spwanPosition = bullet.transform.position;
+            activeBullet.currentTime = 0;
+            activeBullet.bulletFinalConfig = bulletFinalConfig;
+
             if (bulletFinalConfig.emitterProfile != null && bulletFinalConfig.emitterProfile.Length > 0)
             {
                 var configEmitterProfiles = bulletFinalConfig.emitterProfile;

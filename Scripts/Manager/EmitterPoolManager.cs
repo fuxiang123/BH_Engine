@@ -11,8 +11,8 @@ namespace BH_Engine
         public GameObject Prefab;
         // 初始化子弹池数量
         [Range(0, 2000)]
-        public int defaultCapacity = 200;
-        public int maxSize = 10000;
+        public int defaultCapacity = 100;
+        public int maxSize = 2000;
 
         public bool collectionCheck = true;
         public ObjectPool<GameObject> pool;

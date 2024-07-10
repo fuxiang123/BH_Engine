@@ -15,7 +15,7 @@ MonoBehaviour:
   emitterConfig:
     emitInterval:
       mValueType: 0
-      m_Value: 0.5
+      m_Value: 0.05
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -52,7 +52,7 @@ MonoBehaviour:
         m_PostInfinity: 1
         m_RotationOrder: 4
       CustomValueHandler:
-        rid: 4241813663117213986
+        rid: 4241813837872366424
   bulletConfig:
     speed:
       mValueType: 0
@@ -196,9 +196,8 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4241813663117213986
-      type: {class: ListValueFloat, ns: BH_Engine, asm: Assembly-CSharp}
+    - rid: 4241813837872366424
+      type: {class: RandomFloat, ns: BH_Engine, asm: Assembly-CSharp}
       data:
-        listValues:
-        - 90
-        - -90
+        min: 0
+        max: 360

@@ -53,17 +53,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: 5668783482046251010
-    autoEmitDelay:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
   bulletConfig:
     speed:
       mValueType: 0

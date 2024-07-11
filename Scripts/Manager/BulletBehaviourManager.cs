@@ -65,7 +65,7 @@ namespace BH_Engine
             private void actionOnDestroy(ActiveBullet activeBullet) { }
         }
 
-        public static BulletBehaviourManager instance;
+        public static BulletBehaviourManager Instance;
 
         // 正在移动的子弹
         public List<ActiveBullet> activeBullets = new List<ActiveBullet>();
@@ -74,7 +74,7 @@ namespace BH_Engine
 
         private void Awake()
         {
-            instance = this;
+            Instance = this;
             activeBulletPoolManager.init();
         }
 
@@ -158,6 +158,16 @@ namespace BH_Engine
                 activeBullet.emitters = emitters;
             }
             activeBullets.Add(activeBullet);
+        }
+
+        // 释放所有子弹
+        public void ReleaseAllBullets()
+        {
+            foreach (var item in activeBullets)
+            {
+                activeBulletPoolManager.Pool.Release(item);
+            }
+            activeBullets.Clear();
         }
     }
 }

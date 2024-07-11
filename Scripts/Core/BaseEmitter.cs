@@ -122,7 +122,7 @@ namespace BH_Engine
                 // 计算子弹的角度
                 currentBulletSpreadAngle += i == 0 ? 0 : realSpreadAnglePerbullet[i - 1];
                 bullets[i].transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
-                BulletBehaviourManager.instance.AddActiveBullet(bullets[i], bulletFinalConfig);
+                BulletBehaviourManager.Instance.AddActiveBullet(bullets[i], bulletFinalConfig);
             }
         }
 

@@ -47,7 +47,7 @@ namespace BH_Engine
                 float y = Screen.height - height - 50;
 
                 var fpsStr = showFPS ? fps.ToString("F2") + " FPS" : "";
-                var bulletCountStr = showBulletCount ? "Bullet Count: " + (BulletBehaviourManager.instance?.activeBullets?.Count ?? 0) : "";
+                var bulletCountStr = showBulletCount ? "Bullet Count: " + (BulletBehaviourManager.Instance?.activeBullets?.Count ?? 0) : "";
                 var guiStr = fpsStr + "\n" + bulletCountStr;
                 GUI.Label(new Rect(x, y, width, height), guiStr, style);
             }

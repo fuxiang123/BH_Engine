@@ -491,7 +491,7 @@ PrefabInstance:
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterProfileSO
       value: 
-      objectReference: {fileID: 11400000, guid: b2ed8dcc669cd4447b0e3844e8826f7e,
+      objectReference: {fileID: 11400000, guid: d30282fa4482df34fb9f866119bb53ce,
         type: 2}
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterConfig.autoEmit
@@ -502,8 +502,12 @@ PrefabInstance:
       value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: EmitterConfig.emitterAngle.m_Value
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterConfig.emitterAngle.mValueType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterConfig.autoEmitDelay.mValueType

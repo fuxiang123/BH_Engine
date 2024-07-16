@@ -8,11 +8,12 @@ namespace BH_Engine
     public class BulletFinalConfig
     {
         public float speed;
+        public GameObject prefab;
         public float maxDistance;
         public float acceleration;
         public float lifeTime;
-        public float bulletRotate;
         public EmitterProfileSO[] emitterProfile;
+        public IBulletBehaviourHandler[] bulletBehaviourHandler;
     }
 
     // 子弹接口, 负责子弹的外观，速度，大小, 生命周期等
@@ -34,12 +35,10 @@ namespace BH_Engine
         [LabelText("子弹加速度")]
         public DynamicFloatValue acceleration;
 
-        [InfoBox("子弹移动时每秒变化的角度值")]
-        [LabelText("子弹移动时自转速度")]
-        public DynamicIntValue bulletRotate;
-
         [LabelText("给子弹附加一个emitter profile，用于实现移动时发射额外子弹的效果")]
         public EmitterProfileSO[] emitterProfile;
+        [LabelText("子弹飞行过程中的行为脚本"), SerializeReference]
+        public IBulletBehaviourHandler[] bulletBehaviourHandler;
 
         public static BulletFinalConfig GetFinalConfig(BulletConfig bulletConfig)
         {
@@ -49,18 +48,16 @@ namespace BH_Engine
                 maxDistance = bulletConfig.maxDistance.value,
                 acceleration = bulletConfig.acceleration.value,
                 lifeTime = bulletConfig.lifeTime.value,
-                bulletRotate = bulletConfig.bulletRotate.value,
-                emitterProfile = bulletConfig.emitterProfile,
             };
         }
 
+        // 重置状态，将因为DynamicFloatValue改变的值初始化
         public static void ResetConfig(BulletConfig bulletConfig)
         {
             bulletConfig.speed.Reset();
             bulletConfig.lifeTime.Reset();
             bulletConfig.maxDistance.Reset();
             bulletConfig.acceleration.Reset();
-            bulletConfig.bulletRotate.Reset();
         }
 
         public static BulletConfig CopyConfig(BulletConfig bulletConfig)
@@ -72,8 +69,8 @@ namespace BH_Engine
                 lifeTime = bulletConfig.lifeTime.Copy(),
                 maxDistance = bulletConfig.maxDistance.Copy(),
                 acceleration = bulletConfig.acceleration.Copy(),
-                bulletRotate = bulletConfig.bulletRotate.Copy(),
-                emitterProfile = bulletConfig.emitterProfile
+                emitterProfile = bulletConfig.emitterProfile,
+                bulletBehaviourHandler = bulletConfig.bulletBehaviourHandler
             };
         }
     }

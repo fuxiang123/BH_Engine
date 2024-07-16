@@ -1,7 +1,4 @@
-using System;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace BH_Engine
@@ -61,7 +58,6 @@ namespace BH_Engine
         // 发射单行子弹
         public void Emit()
         {
-            BulletFinalConfig bulletFinalConfig = BulletConfig.GetFinalConfig(BulletConfig);
             PatternFinalConfig patternFinalConfig = PatternConfig.GetPatternFinalConfig(PatternConfig);
             transform.localRotation = Quaternion.Euler(0, 0, EmitterConfig.emitterAngle.value);
             transform.localPosition = new Vector3(patternFinalConfig.spwanXTanslate, patternFinalConfig.spwanYTanslate, transform.position.z);
@@ -122,7 +118,7 @@ namespace BH_Engine
                 // 计算子弹的角度
                 currentBulletSpreadAngle += i == 0 ? 0 : realSpreadAnglePerbullet[i - 1];
                 bullets[i].transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
-                BulletBehaviourManager.Instance.AddActiveBullet(bullets[i], bulletFinalConfig);
+                BulletBehaviourManager.Instance.AddActiveBullet(bullets[i], BulletConfig.CopyConfig(BulletConfig));
             }
         }
 

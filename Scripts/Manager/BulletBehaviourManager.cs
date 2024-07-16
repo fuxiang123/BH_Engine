@@ -10,11 +10,18 @@ namespace BH_Engine
 {
     public class ActiveBullet
     {
+        // 子弹的GameObject
         public GameObject bullet;
+        // 子弹的初始位置
         public Vector3 spwanPosition;
+        // 当前子弹飞行时间
         public float currentTime;
-        public BulletFinalConfig bulletFinalConfig;
+        // 子弹的配置
+        public BulletConfig bulletConfig;
+        // 子弹上附加的发射器
         public GameObject[] emitters;
+        // 子弹行为脚本
+        public IBulletBehaviourHandler[] bulletBehaviourHandlers;
         // 是否正在被使用
         public bool enabled = true;
     }
@@ -98,21 +105,24 @@ namespace BH_Engine
         // 更新单个子弹行为
         private void UpdateSingleBulletBehaviour(ActiveBullet activeBullet)
         {
+            var bulletFinalConfig = BulletConfig.GetFinalConfig(activeBullet.bulletConfig);
             activeBullet.currentTime += Time.deltaTime;
-            float timer = activeBullet.currentTime;
-            float speed = activeBullet.bulletFinalConfig.speed;
-            float maxDistance = activeBullet.bulletFinalConfig.maxDistance;
-            // 加速度
-            float acceleration = activeBullet.bulletFinalConfig.acceleration;
-            float bulletRotateSpeed = activeBullet.bulletFinalConfig.bulletRotate;
-            Vector2 spawn = activeBullet.spwanPosition;
-            Vector2 dir = activeBullet.bullet.transform.up;
-            activeBullet.bullet.transform.position = CalculateNextPosition(spawn, dir, speed, timer, acceleration);
-            activeBullet.bullet.transform.rotation = Quaternion.Euler(0, 0, activeBullet.bullet.transform.rotation.eulerAngles.z + bulletRotateSpeed * Time.deltaTime);
+            if (activeBullet.bulletBehaviourHandlers?.Length > 0)
+            {
+                for (int i = 0; i < activeBullet.bulletBehaviourHandlers.Length; i++)
+                {
+                    activeBullet.bulletBehaviourHandlers[i].HandleBulletBehaviour(bulletFinalConfig, activeBullet, activeBullet.currentTime);
+                }
+            }
+            else
+            {
+                float speed = bulletFinalConfig.speed;
+                activeBullet.bullet.transform.position = CalculateNextPosition(activeBullet.spwanPosition, activeBullet.bullet.transform.up, speed, activeBullet.currentTime, bulletFinalConfig.acceleration);
+            }
 
             // 当前移动距离
-            var distance = CalculateTotalDistance(speed, timer, acceleration);
-            if (activeBullet.currentTime >= activeBullet.bulletFinalConfig.lifeTime || (maxDistance > 0 && distance >= maxDistance))
+            var distance = CalculateTotalDistance(activeBullet.spwanPosition, activeBullet.bullet.transform.position);
+            if (activeBullet.currentTime >= bulletFinalConfig.lifeTime || (bulletFinalConfig.maxDistance > 0 && distance >= bulletFinalConfig.maxDistance))
             {
                 activeBulletPoolManager.Pool.Release(activeBullet);
             }
@@ -120,12 +130,11 @@ namespace BH_Engine
 
         // 计算当前总移动距离
         public float CalculateTotalDistance(
-            float speed,
-            float lifeTime,
-            float acceleration = 0
+            Vector3 spwanPosition,
+            Vector3 currentPosition
         )
         {
-            return speed * lifeTime + acceleration * lifeTime * lifeTime / 2;
+            return Vector3.Distance(spwanPosition, currentPosition);
         }
 
         // 计算下一个位置
@@ -134,17 +143,22 @@ namespace BH_Engine
             return position + direction * speed * time + direction * acceleration * time * time / 2;
         }
 
-        public void AddActiveBullet(GameObject bullet, BulletFinalConfig bulletFinalConfig)
+        public void AddActiveBullet(GameObject bullet, BulletConfig bulletConfig)
         {
-            var activeBullet = activeBulletPoolManager.Pool.Get();
+            ActiveBullet activeBullet = activeBulletPoolManager.Pool.Get();
             activeBullet.bullet = bullet;
             activeBullet.spwanPosition = bullet.transform.position;
             activeBullet.currentTime = 0;
-            activeBullet.bulletFinalConfig = bulletFinalConfig;
-
-            if (bulletFinalConfig.emitterProfile != null && bulletFinalConfig.emitterProfile.Length > 0)
+            activeBullet.bulletConfig = bulletConfig;
+            if (bulletConfig.bulletBehaviourHandler != null && bulletConfig.bulletBehaviourHandler.Length > 0)
             {
-                var configEmitterProfiles = bulletFinalConfig.emitterProfile;
+                activeBullet.bulletBehaviourHandlers = bulletConfig.bulletBehaviourHandler;
+            }
+
+
+            if (bulletConfig.emitterProfile != null && bulletConfig.emitterProfile.Length > 0)
+            {
+                var configEmitterProfiles = bulletConfig.emitterProfile;
                 GameObject[] emitters = EmitterPoolManager.Instance.Get(configEmitterProfiles.Length);
                 for (int i = 0; i < configEmitterProfiles.Length; i++)
                 {
@@ -157,6 +171,7 @@ namespace BH_Engine
                 }
                 activeBullet.emitters = emitters;
             }
+
             activeBullets.Add(activeBullet);
         }
 

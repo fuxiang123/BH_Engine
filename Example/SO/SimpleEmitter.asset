@@ -15,7 +15,7 @@ MonoBehaviour:
   emitterConfig:
     emitInterval:
       mValueType: 0
-      m_Value: 0.1
+      m_Value: 0.2
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -25,8 +25,8 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
     emitterAngle:
-      mValueType: 1
-      m_Value: 90
+      mValueType: 0
+      m_Value: 0
       curve:
         serializedVersion: 2
         m_Curve:
@@ -59,9 +59,27 @@ MonoBehaviour:
       m_Value: 10
       curve:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 5
+          inSlope: 5
+          outSlope: 5
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 10
+          inSlope: 5
+          outSlope: 5
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
-        m_PostInfinity: 2
+        m_PostInfinity: 1
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
@@ -100,22 +118,13 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    bulletRotate:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
     emitterProfile: []
+    bulletBehaviourHandler:
+    - rid: 4241813989008867328
   patternConfig:
     count:
       mValueType: 0
-      m_Value: 3
+      m_Value: 1
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -195,6 +204,9 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 4241813989008867328
+      type: {class: Linear, ns: BH_Engine, asm: Assembly-CSharp}
+      data: 
     - rid: 5668783482046251010
       type: {class: PingpongFloat, ns: BH_Engine, asm: Assembly-CSharp}
       data:

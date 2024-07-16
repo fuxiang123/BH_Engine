@@ -45,7 +45,7 @@ namespace BH_Engine
 
         public static PatternFinalConfig GetPatternFinalConfig(PatternConfig patternConfig)
         {
-            var count = patternConfig.count.value;
+            var count = patternConfig.count.value < 1 ? 1 : patternConfig.count.value;
             var spreadAnglePerBullet = new int[count - 1];
             var spreadAngleTotal = patternConfig.spreadAngleTotal.value;
             var xSpacingPerBullet = new float[count - 1];

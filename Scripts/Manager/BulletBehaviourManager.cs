@@ -16,6 +16,8 @@ namespace BH_Engine
         public Vector3 spwanPosition;
         // 当前子弹飞行时间
         public float currentTime;
+        // 子弹移动的距离
+        public float distance;
         // 子弹的配置
         public BulletConfig bulletConfig;
         // 子弹上附加的发射器
@@ -67,6 +69,8 @@ namespace BH_Engine
                     activeBullet.emitters = null;
                 }
                 activeBullet.enabled = false;
+                activeBullet.distance = 0;
+                activeBullet.currentTime = 0;
             }
 
             private void actionOnDestroy(ActiveBullet activeBullet) { }
@@ -107,6 +111,7 @@ namespace BH_Engine
         {
             var bulletFinalConfig = BulletConfig.GetFinalConfig(activeBullet.bulletConfig);
             activeBullet.currentTime += Time.deltaTime;
+            var prePosition = activeBullet.bullet.transform.position;
             if (activeBullet.bulletBehaviourHandlers?.Length > 0)
             {
                 for (int i = 0; i < activeBullet.bulletBehaviourHandlers.Length; i++)
@@ -121,20 +126,12 @@ namespace BH_Engine
             }
 
             // 当前移动距离
-            var distance = CalculateTotalDistance(activeBullet.spwanPosition, activeBullet.bullet.transform.position);
-            if (activeBullet.currentTime >= bulletFinalConfig.lifeTime || (bulletFinalConfig.maxDistance > 0 && distance >= bulletFinalConfig.maxDistance))
+            activeBullet.distance += Vector3.Distance(prePosition, activeBullet.bullet.transform.position);
+            var realDistance = Vector3.Distance(activeBullet.spwanPosition, activeBullet.bullet.transform.position);
+            if (activeBullet.currentTime >= bulletFinalConfig.lifeTime || (bulletFinalConfig.maxDistance > 0 && realDistance >= bulletFinalConfig.maxDistance))
             {
                 activeBulletPoolManager.Pool.Release(activeBullet);
             }
-        }
-
-        // 计算当前总移动距离
-        public float CalculateTotalDistance(
-            Vector3 spwanPosition,
-            Vector3 currentPosition
-        )
-        {
-            return Vector3.Distance(spwanPosition, currentPosition);
         }
 
         public void AddActiveBullet(GameObject bullet, BulletConfig bulletConfig)
@@ -142,7 +139,6 @@ namespace BH_Engine
             ActiveBullet activeBullet = activeBulletPoolManager.Pool.Get();
             activeBullet.bullet = bullet;
             activeBullet.spwanPosition = bullet.transform.position;
-            activeBullet.currentTime = 0;
             activeBullet.bulletConfig = bulletConfig;
             if (bulletConfig.bulletBehaviourHandler != null && bulletConfig.bulletBehaviourHandler.Length > 0)
             {

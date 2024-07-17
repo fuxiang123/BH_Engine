@@ -514,12 +514,32 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: managedReferences[4241814003621036044]
+      value: Assembly-CSharp BH_Engine.Linear
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: managedReferences[4241813989008867330].range
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: BulletConfig.bulletBehaviourHandler.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterConfig.emitterAngle.curve.m_PostInfinity
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: BulletConfig.bulletBehaviourHandler.Array.data[0]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: managedReferences[4241813989008867330].LayerMask.m_Bits
+      value: 8192
       objectReference: {fileID: 0}
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterConfig.emitterAngle.curve.m_Curve.Array.data[1].time

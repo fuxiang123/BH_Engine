@@ -111,13 +111,13 @@ namespace BH_Engine
             {
                 for (int i = 0; i < activeBullet.bulletBehaviourHandlers.Length; i++)
                 {
-                    activeBullet.bulletBehaviourHandlers[i].HandleBulletBehaviour(bulletFinalConfig, activeBullet, activeBullet.currentTime);
+                    activeBullet.bulletBehaviourHandlers[i].HandleBulletBehaviour(bulletFinalConfig, activeBullet);
                 }
             }
             else
             {
-                float speed = bulletFinalConfig.speed;
-                activeBullet.bullet.transform.position = CalculateNextPosition(activeBullet.spwanPosition, activeBullet.bullet.transform.up, speed, activeBullet.currentTime, bulletFinalConfig.acceleration);
+                var speed = bulletFinalConfig.speed + bulletFinalConfig.acceleration * activeBullet.currentTime;
+                activeBullet.bullet.transform.position = activeBullet.bullet.transform.position + activeBullet.bullet.transform.up * speed * Time.deltaTime;
             }
 
             // 当前移动距离
@@ -135,12 +135,6 @@ namespace BH_Engine
         )
         {
             return Vector3.Distance(spwanPosition, currentPosition);
-        }
-
-        // 计算下一个位置
-        public Vector3 CalculateNextPosition(Vector3 position, Vector3 direction, float speed, float time, float acceleration = 0)
-        {
-            return position + direction * speed * time + direction * acceleration * time * time / 2;
         }
 
         public void AddActiveBullet(GameObject bullet, BulletConfig bulletConfig)

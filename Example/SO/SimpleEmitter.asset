@@ -120,7 +120,7 @@ MonoBehaviour:
         rid: -2
     emitterProfile: []
     bulletBehaviourHandler:
-    - rid: 4241813989008867328
+    - rid: 4241814004723089415
   patternConfig:
     count:
       mValueType: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4241813989008867328
+    - rid: 4241814004723089415
       type: {class: Linear, ns: BH_Engine, asm: Assembly-CSharp}
       data: 
     - rid: 5668783482046251010

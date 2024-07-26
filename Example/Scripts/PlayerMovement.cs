@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace BH_Engine
+namespace BH_Engine.Example
 {
     public class PlayerMovement : MonoBehaviour
     {

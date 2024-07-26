@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHurt : MonoBehaviour
+namespace BH_Engine.Example
 {
-
-    // 处理碰撞
-    private void OnTriggerEnter2D(Collider2D other)
+    public class EnemyHurt : MonoBehaviour
     {
-        Debug.Log("Enemy Hurt" + other.gameObject.name);
-        gameObject.SetActive(false);
+
+        // 处理碰撞
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            Debug.Log("Enemy Hurt" + other.gameObject.name);
+            gameObject.SetActive(false);
+        }
     }
 }

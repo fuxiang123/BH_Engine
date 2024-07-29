@@ -1,3 +1,4 @@
+using QFramework;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -54,6 +55,43 @@ namespace BH_Engine
             BulletConfig.ResetConfig(BulletConfig);
             PatternConfig.ResetConfig(PatternConfig);
         }
+        /// <summary>
+        /// 获取子弹实例。可以通过子类覆写，以从不同对象池获取子弹实例
+        /// </summary>
+        protected virtual GameObject GetBullet(GameObject prefab)
+        {
+            var bullet = BulletPoolManager.Instance.Get();
+
+            // 修改layer
+            bullet.layer = prefab.layer;
+            // 修改对象池子弹的sprite
+            var spriteRenderer = bullet.GetComponent<SpriteRenderer>();
+            var prefabSprite = prefab.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null && prefabSprite != null)
+            {
+                spriteRenderer.sprite = prefabSprite.sprite;
+                spriteRenderer.color = prefabSprite.color;
+                spriteRenderer.flipX = prefabSprite.flipX;
+                spriteRenderer.flipY = prefabSprite.flipY;
+                spriteRenderer.drawMode = prefabSprite.drawMode;
+                spriteRenderer.maskInteraction = prefabSprite.maskInteraction;
+                spriteRenderer.spriteSortPoint = prefabSprite.spriteSortPoint;
+                spriteRenderer.sortingLayerID = prefabSprite.sortingLayerID;
+                spriteRenderer.sortingLayerName = prefabSprite.sortingLayerName;
+                spriteRenderer.sortingOrder = prefabSprite.sortingOrder;
+                spriteRenderer.gameObject.layer = prefabSprite.gameObject.layer;
+            }
+            return bullet;
+        }
+
+        /// <summary>
+        /// 释放子弹实例
+        /// </summary>
+        protected virtual void ReaseBullet(GameObject bullet)
+        {
+            BulletPoolManager.Instance.Release(bullet);
+        }
+
 
         // 发射单行子弹
         public void Emit()
@@ -84,41 +122,25 @@ namespace BH_Engine
                 totalAngle += realSpreadAnglePerbullet[i];
             }
 
-            var prefabSprite = BulletConfig.prefab.GetComponent<SpriteRenderer>();
-            var bullets = BulletPoolManager.Instance.Get(patternCount);
+            var prefab = BulletConfig.prefab;
             // 当前子弹xspacing的位置, 只有一个子弹时从正中发射即可
             float currentBulletXpacing = patternCount == 1 ? 0 : -xSpacingTotalFinal / 2;
             // 当前子弹的角度，只有一个子弹时从正中发射即可
             float currentBulletSpreadAngle = patternCount == 1 ? 0 : -totalAngle / 2;
             for (int i = 0; i < patternCount; i++)
             {
-                // 修改对象池子弹的sprite
-                var spriteRenderer = bullets[i].GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null && prefabSprite != null)
-                {
-                    spriteRenderer.sprite = prefabSprite.sprite;
-                    spriteRenderer.color = prefabSprite.color;
-                    spriteRenderer.flipX = prefabSprite.flipX;
-                    spriteRenderer.flipY = prefabSprite.flipY;
-                    spriteRenderer.drawMode = prefabSprite.drawMode;
-                    spriteRenderer.maskInteraction = prefabSprite.maskInteraction;
-                    spriteRenderer.spriteSortPoint = prefabSprite.spriteSortPoint;
-                    spriteRenderer.sortingLayerID = prefabSprite.sortingLayerID;
-                    spriteRenderer.sortingLayerName = prefabSprite.sortingLayerName;
-                    spriteRenderer.sortingOrder = prefabSprite.sortingOrder;
-                    spriteRenderer.gameObject.layer = prefabSprite.gameObject.layer;
-                }
+                var bullet = GetBullet(prefab);
 
                 // 计算子弹的位置
                 currentBulletXpacing += i == 0 ? 0 : realXSpacingPerbullet[i - 1];
                 // 当前子弹的实际生成位置
                 Vector3 spawnPosition = transform.position + (transform.right * currentBulletXpacing);
-                bullets[i].transform.position = spawnPosition;
+                bullet.transform.position = spawnPosition;
 
                 // 计算子弹的角度
                 currentBulletSpreadAngle += i == 0 ? 0 : realSpreadAnglePerbullet[i - 1];
-                bullets[i].transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
-                BulletBehaviourManager.Instance.AddActiveBullet(bullets[i], BulletConfig.CopyConfig(BulletConfig));
+                bullet.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
+                BulletBehaviourManager.Instance.AddActiveBullet(bullet, BulletConfig.CopyConfig(BulletConfig), ReaseBullet);
             }
         }
 

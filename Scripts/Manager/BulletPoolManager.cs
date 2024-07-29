@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 
 namespace BH_Engine
 {
-    public class BulletPoolManager : MonoBehaviour
+    internal class BulletPoolManager : MonoBehaviour
     {
         public static BulletPoolManager Instance { get; private set; }
         public GameObject Prefab;

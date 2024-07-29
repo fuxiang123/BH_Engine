@@ -26,6 +26,9 @@ namespace BH_Engine
         public IBulletBehaviourHandler[] bulletBehaviourHandlers;
         // 是否正在被使用
         public bool enabled = true;
+
+        // 释放子弹
+        internal Action<GameObject> OnReleaseBullet;
     }
 
 
@@ -54,11 +57,6 @@ namespace BH_Engine
 
             public void actionOnRelease(ActiveBullet activeBullet)
             {
-                if (activeBullet.bullet != null)
-                {
-                    BulletPoolManager.Instance.Release(activeBullet.bullet);
-                    activeBullet.bullet = null;
-                }
                 if (activeBullet.emitters != null)
                 {
                     for (int i = 0; i < activeBullet.emitters.Length; i++)
@@ -67,6 +65,11 @@ namespace BH_Engine
                         if (emitter != null) EmitterPoolManager.Instance.Release(emitter);
                     }
                     activeBullet.emitters = null;
+                }
+                if (activeBullet.bullet != null)
+                {
+                    activeBullet.OnReleaseBullet?.Invoke(activeBullet.bullet);
+                    activeBullet.bullet = null;
                 }
                 activeBullet.enabled = false;
                 activeBullet.distance = 0;
@@ -134,12 +137,13 @@ namespace BH_Engine
             }
         }
 
-        public void AddActiveBullet(GameObject bullet, BulletConfig bulletConfig)
+        public void AddActiveBullet(GameObject bullet, BulletConfig bulletConfig, Action<GameObject> OnReleaseBullet)
         {
             ActiveBullet activeBullet = activeBulletPoolManager.Pool.Get();
             activeBullet.bullet = bullet;
             activeBullet.spwanPosition = bullet.transform.position;
             activeBullet.bulletConfig = bulletConfig;
+            activeBullet.OnReleaseBullet = OnReleaseBullet;
             if (bulletConfig.bulletBehaviourHandler != null && bulletConfig.bulletBehaviourHandler.Length > 0)
             {
                 activeBullet.bulletBehaviourHandlers = bulletConfig.bulletBehaviourHandler;

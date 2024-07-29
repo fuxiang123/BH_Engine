@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 
 namespace BH_Engine
 {
-    public class EmitterPoolManager : MonoBehaviour
+    internal class EmitterPoolManager : MonoBehaviour
     {
 
         public static EmitterPoolManager Instance { get; private set; }

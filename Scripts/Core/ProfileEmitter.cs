@@ -13,7 +13,7 @@ namespace BH_Engine
 
         private void Awake()
         {
-            InitEmitterProfile();
+            if (EmitterProfileSO != null) InitEmitterProfile();
         }
 
         private void InitEmitterProfile()

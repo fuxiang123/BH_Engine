@@ -168,26 +168,5 @@ namespace BH_Engine
 
             activeBullets.Add(activeBullet);
         }
-
-        // 释放所有子弹
-        public void ReleaseAllBullets()
-        {
-            foreach (var item in activeBullets)
-            {
-                activeBulletPoolManager.Pool.Release(item);
-            }
-            activeBullets.Clear();
-        }
-
-        // 释放单个子弹
-        public void ReleaseBullet(GameObject bullet)
-        {
-            var activeBullet = activeBullets.Find(item => item.bullet == bullet);
-            if (activeBullet != null)
-            {
-                activeBulletPoolManager.Pool.Release(activeBullet);
-                activeBullets.Remove(activeBullet);
-            }
-        }
     }
 }

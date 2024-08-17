@@ -7,6 +7,8 @@ namespace BH_Engine
     // 发射器，负责弹幕
     public class BaseEmitter : MonoBehaviour
     {
+        [LabelText("子弹配置")]
+        public GameObject bulletPrefab;
         [LabelText("发射器配置")]
         public EmitterConfig EmitterConfig;
         [LabelText("子弹配置")]
@@ -82,7 +84,7 @@ namespace BH_Engine
         /// <summary>
         /// 释放子弹实例
         /// </summary>
-        protected virtual void ReaseBullet(BulletBehaviour bullet)
+        protected virtual void ReleaseBullet(BulletBehaviour bullet)
         {
             if (bullet.emitters != null)
             {
@@ -127,14 +129,13 @@ namespace BH_Engine
                 totalAngle += realSpreadAnglePerbullet[i];
             }
 
-            var prefab = BulletConfig.prefab;
             // 当前子弹xspacing的位置, 只有一个子弹时从正中发射即可
             float currentBulletXpacing = patternCount == 1 ? 0 : -xSpacingTotalFinal / 2;
             // 当前子弹的角度，只有一个子弹时从正中发射即可
             float currentBulletSpreadAngle = patternCount == 1 ? 0 : -totalAngle / 2;
             for (int i = 0; i < patternCount; i++)
             {
-                var bullet = GetBullet(prefab);
+                var bullet = GetBullet(bulletPrefab);
 
                 // 计算子弹的位置
                 currentBulletXpacing += i == 0 ? 0 : realXSpacingPerbullet[i - 1];
@@ -145,7 +146,7 @@ namespace BH_Engine
                 // 计算子弹的角度
                 currentBulletSpreadAngle += i == 0 ? 0 : realSpreadAnglePerbullet[i - 1];
                 bullet.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
-                bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, ReaseBullet);
+                bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, ReleaseBullet);
             }
         }
 

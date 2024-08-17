@@ -695,34 +695,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1329687296, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}
-      propertyPath: Prefab
-      value: 
-      objectReference: {fileID: 662138073790428751, guid: 2d8648eede7dfde4a9e26ebb73189dac,
-        type: 3}
-    - target: {fileID: 1329687296, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}
-      propertyPath: maxSize
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1329687296, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}
-      propertyPath: collectionCheck
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4505428544007411822, guid: 211a31ce61153c945b429952bcbf8f58,
-        type: 3}
-      propertyPath: maxSize
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4505428544007411822, guid: 211a31ce61153c945b429952bcbf8f58,
-        type: 3}
-      propertyPath: collectionCheck
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5388543339882547196, guid: 211a31ce61153c945b429952bcbf8f58,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5388543339882547196, guid: 211a31ce61153c945b429952bcbf8f58,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -778,14 +750,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BH_EngineManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5388543340550418138, guid: 211a31ce61153c945b429952bcbf8f58,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5388543340550418138, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}

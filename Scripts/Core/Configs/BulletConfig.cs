@@ -23,8 +23,6 @@ namespace BH_Engine
     {
         [LabelText("子弹速度")]
         public DynamicFloatValue speed = new DynamicFloatValue() { value = 5f };
-        [LabelText("子弹预制体")]
-        public GameObject prefab;
         [LabelText("子弹生命周期")]
         public DynamicFloatValue lifeTime = new DynamicFloatValue() { value = 5f };
         [LabelText("子弹最大射程")]
@@ -65,7 +63,6 @@ namespace BH_Engine
             return new BulletConfig
             {
                 speed = bulletConfig.speed.Copy(),
-                prefab = bulletConfig.prefab,
                 lifeTime = bulletConfig.lifeTime.Copy(),
                 maxDistance = bulletConfig.maxDistance.Copy(),
                 acceleration = bulletConfig.acceleration.Copy(),

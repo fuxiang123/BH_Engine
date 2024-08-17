@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1519511878272348699}
   - component: {fileID: 1519511878272348692}
-  - component: {fileID: 8430659214321165879}
+  - component: {fileID: -3714234586170755063}
+  - component: {fileID: 1796807822390440419}
   m_Layer: 18
   m_Name: SimpleBullet
   m_TagString: Untagged
@@ -85,7 +86,76 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8430659214321165879
+--- !u!114 &-3714234586170755063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519511878272348693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f5dea3e6756264eaa5f858567dbcd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletConfig:
+    speed:
+      mValueType: 0
+      m_Value: 5
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    prefab: {fileID: 0}
+    lifeTime:
+      mValueType: 0
+      m_Value: 5
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    maxDistance:
+      mValueType: 0
+      m_Value: 10
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    acceleration:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    emitterProfile: []
+    bulletBehaviourHandler: []
+  spwanPosition: {x: 0, y: 0, z: 0}
+  currentTime: 0
+  distance: 0
+  emitters: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+--- !u!61 &1796807822390440419
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +187,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00042402744, y: 0.008435965}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,5 +198,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0031273, y: 1.0040228}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0

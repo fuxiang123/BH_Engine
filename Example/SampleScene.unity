@@ -491,7 +491,7 @@ PrefabInstance:
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterProfileSO
       value: 
-      objectReference: {fileID: 11400000, guid: d30282fa4482df34fb9f866119bb53ce,
+      objectReference: {fileID: 11400000, guid: b2ed8dcc669cd4447b0e3844e8826f7e,
         type: 2}
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterConfig.autoEmit
@@ -701,13 +701,22 @@ PrefabInstance:
       objectReference: {fileID: 662138073790428751, guid: 2d8648eede7dfde4a9e26ebb73189dac,
         type: 3}
     - target: {fileID: 1329687296, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}
+      propertyPath: maxSize
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329687296, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}
       propertyPath: collectionCheck
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505428544007411822, guid: 211a31ce61153c945b429952bcbf8f58,
+        type: 3}
+      propertyPath: maxSize
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4505428544007411822, guid: 211a31ce61153c945b429952bcbf8f58,
         type: 3}
       propertyPath: collectionCheck
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5388543339882547196, guid: 211a31ce61153c945b429952bcbf8f58,
         type: 3}
@@ -769,8 +778,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BH_EngineManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5388543340550418138, guid: 211a31ce61153c945b429952bcbf8f58,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5388543340550418138, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}

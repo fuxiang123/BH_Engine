@@ -26,7 +26,6 @@ namespace BH_Engine
         {
             var obj = Instantiate(Prefab);
             obj.SetActive(false);
-            obj.transform.SetParent(transform);
             return obj;
         }
 
@@ -63,6 +62,7 @@ namespace BH_Engine
         public void Release(GameObject obj)
         {
             pool.Release(obj);
+            obj.transform.SetParent(transform);
         }
 
         public void Release(GameObject[] obj)

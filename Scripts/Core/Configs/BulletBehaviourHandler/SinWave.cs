@@ -11,18 +11,18 @@ namespace BH_Engine
         public float amplitude = 2f; // 正弦波振幅
         [LabelText("频率，波的宽度")]
         public float frequency = 2f; // 正弦波频率
-        public void HandleBulletBehaviour(BulletFinalConfig bulletFinalConfig, ActiveBullet activeBullet)
+        public void HandleBulletBehaviour(BulletFinalConfig bulletFinalConfig, BulletBehaviour bulletBehaviour)
         {
-            float time = activeBullet.currentTime;
+            float time = bulletBehaviour.currentTime;
             float acceleration = bulletFinalConfig.acceleration;
             float speed = bulletFinalConfig.speed + acceleration * time;
 
             var sine = amplitude * Mathf.Sin(frequency * time * speed);
-            var direction = activeBullet.bullet.transform.up;
-            var spwanPosition = activeBullet.spwanPosition;
+            var direction = bulletBehaviour.transform.up;
+            var spwanPosition = bulletBehaviour.spwanPosition;
             // 定义一条垂直的轴，在垂直轴上施加正弦函数
             var crossDirection = new Vector3(direction.y, -direction.x);
-            activeBullet.bullet.transform.position = spwanPosition + (direction * speed * time) + (crossDirection * sine);
+            bulletBehaviour.transform.position = spwanPosition + (direction * speed * time) + (crossDirection * sine);
         }
     }
 }

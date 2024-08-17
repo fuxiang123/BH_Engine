@@ -55,6 +55,7 @@ namespace BH_Engine
             BulletConfig.ResetConfig(BulletConfig);
             PatternConfig.ResetConfig(PatternConfig);
         }
+
         /// <summary>
         /// 获取子弹实例。可以通过子类覆写，以从不同对象池获取子弹实例
         /// </summary>
@@ -87,9 +88,16 @@ namespace BH_Engine
         /// <summary>
         /// 释放子弹实例
         /// </summary>
-        protected virtual void ReaseBullet(GameObject bullet)
+        protected virtual void ReaseBullet(BulletBehaviour bullet)
         {
-            BulletPoolManager.Instance.Release(bullet);
+            if (bullet.emitters != null)
+            {
+                EmitterPoolManager.Instance.Release(bullet.emitters);
+                bullet.emitters = null;
+            }
+            bullet.distance = 0;
+            bullet.currentTime = 0;
+            BulletPoolManager.Instance.Release(bullet.gameObject);
         }
 
 
@@ -97,8 +105,11 @@ namespace BH_Engine
         public void Emit()
         {
             PatternFinalConfig patternFinalConfig = PatternConfig.GetPatternFinalConfig(PatternConfig);
-            transform.localRotation = Quaternion.Euler(0, 0, EmitterConfig.emitterAngle.value);
-            transform.localPosition = new Vector3(patternFinalConfig.spwanXTanslate, patternFinalConfig.spwanYTanslate, transform.position.z);
+            if (transform.parent != null)
+            {
+                transform.localRotation = Quaternion.Euler(0, 0, EmitterConfig.emitterAngle.value);
+                transform.localPosition = new Vector3(patternFinalConfig.spwanXTanslate, patternFinalConfig.spwanYTanslate, transform.position.z);
+            }
 
             var patternCount = patternFinalConfig.count;
 
@@ -140,7 +151,7 @@ namespace BH_Engine
                 // 计算子弹的角度
                 currentBulletSpreadAngle += i == 0 ? 0 : realSpreadAnglePerbullet[i - 1];
                 bullet.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
-                BulletBehaviourManager.Instance.AddActiveBullet(bullet, BulletConfig.CopyConfig(BulletConfig), ReaseBullet);
+                bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, ReaseBullet);
             }
         }
 

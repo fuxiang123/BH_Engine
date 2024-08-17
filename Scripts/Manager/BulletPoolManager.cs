@@ -25,7 +25,6 @@ namespace BH_Engine
         {
             var obj = Instantiate(Prefab);
             obj.SetActive(false);
-            obj.transform.SetParent(transform);
             return obj;
         }
 

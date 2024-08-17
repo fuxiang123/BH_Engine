@@ -72,15 +72,9 @@ namespace BH_Engine
             {
                 spriteRenderer.sprite = prefabSprite.sprite;
                 spriteRenderer.color = prefabSprite.color;
-                spriteRenderer.flipX = prefabSprite.flipX;
-                spriteRenderer.flipY = prefabSprite.flipY;
-                spriteRenderer.drawMode = prefabSprite.drawMode;
-                spriteRenderer.maskInteraction = prefabSprite.maskInteraction;
-                spriteRenderer.spriteSortPoint = prefabSprite.spriteSortPoint;
                 spriteRenderer.sortingLayerID = prefabSprite.sortingLayerID;
                 spriteRenderer.sortingLayerName = prefabSprite.sortingLayerName;
                 spriteRenderer.sortingOrder = prefabSprite.sortingOrder;
-                spriteRenderer.gameObject.layer = prefabSprite.gameObject.layer;
             }
             return bullet;
         }

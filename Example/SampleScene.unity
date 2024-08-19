@@ -489,6 +489,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 1519511878272348693, guid: 718779c2d5fd43345b214a6961ecdd3c,
+        type: 3}
+    - target: {fileID: 1840824708, guid: dc4cbaf56217e0749bd75947d311c493, type: 3}
       propertyPath: EmitterProfileSO
       value: 
       objectReference: {fileID: 11400000, guid: b2ed8dcc669cd4447b0e3844e8826f7e,

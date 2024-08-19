@@ -18,7 +18,7 @@ namespace BH_Engine
         // 子弹上附加的发射器
         public GameObject[] emitters;
         // 子弹行为脚本
-        public IBulletBehaviourHandler[] bulletBehaviourHandlers;
+        public IBulletMoveScript[] BulletMoveScript;
 
         public void Init(BulletConfig bulletConfig, Action<BulletBehaviour> OnReleaseBullet)
         {
@@ -27,9 +27,9 @@ namespace BH_Engine
 
             spwanPosition = transform.position;
             // 给子弹绑定行为脚本
-            if (bulletConfig.bulletBehaviourHandler != null && bulletConfig.bulletBehaviourHandler.Length > 0)
+            if (bulletConfig.BulletMoveScript != null && bulletConfig.BulletMoveScript.Length > 0)
             {
-                bulletBehaviourHandlers = bulletConfig.bulletBehaviourHandler;
+                BulletMoveScript = bulletConfig.BulletMoveScript;
             }
 
             // 给当前子弹绑定发射器
@@ -54,11 +54,11 @@ namespace BH_Engine
             var bulletFinalConfig = BulletConfig.GetFinalConfig(bulletConfig);
             currentTime += Time.deltaTime;
             var prePosition = transform.position;
-            if (bulletBehaviourHandlers?.Length > 0)
+            if (BulletMoveScript?.Length > 0)
             {
-                for (int i = 0; i < bulletBehaviourHandlers.Length; i++)
+                for (int i = 0; i < BulletMoveScript.Length; i++)
                 {
-                    bulletBehaviourHandlers[i].HandleBulletBehaviour(bulletFinalConfig, this);
+                    BulletMoveScript[i].UpdateBulletMove(bulletFinalConfig, this);
                 }
             }
             else
@@ -82,8 +82,17 @@ namespace BH_Engine
             var realDistance = Vector3.Distance(spwanPosition, transform.position);
             if (currentTime >= bulletFinalConfig.lifeTime || (bulletFinalConfig.maxDistance > 0 && realDistance >= bulletFinalConfig.maxDistance))
             {
-                OnReleaseBullet?.Invoke(this);
+                ReleaseSelf();
             }
+        }
+
+        public void ReleaseSelf()
+        {
+            OnReleaseBullet?.Invoke(this);
+            emitters = null;
+            BulletMoveScript = null;
+            currentTime = 0;
+            distance = 0;
         }
     }
 }

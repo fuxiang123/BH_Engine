@@ -13,7 +13,7 @@ namespace BH_Engine
         public float acceleration;
         public float lifeTime;
         public EmitterProfileSO[] emitterProfile;
-        public IBulletBehaviourHandler[] bulletBehaviourHandler;
+        public IBulletMoveScript[] BulletMoveScript;
     }
 
     // 子弹接口, 负责子弹的外观，速度，大小, 生命周期等
@@ -21,6 +21,8 @@ namespace BH_Engine
     [LabelText("子弹配置")]
     public class BulletConfig
     {
+        [LabelText("子弹预制体")]
+        public GameObject bulletPrefab;
         [LabelText("子弹速度")]
         public DynamicFloatValue speed = new DynamicFloatValue() { value = 5f };
         [LabelText("子弹生命周期")]
@@ -36,7 +38,7 @@ namespace BH_Engine
         [LabelText("给子弹附加一个emitter profile，用于实现移动时发射额外子弹的效果")]
         public EmitterProfileSO[] emitterProfile;
         [LabelText("子弹飞行过程中的行为脚本"), SerializeReference]
-        public IBulletBehaviourHandler[] bulletBehaviourHandler;
+        public IBulletMoveScript[] BulletMoveScript;
 
         public static BulletFinalConfig GetFinalConfig(BulletConfig bulletConfig)
         {
@@ -62,12 +64,13 @@ namespace BH_Engine
         {
             return new BulletConfig
             {
+                bulletPrefab = bulletConfig.bulletPrefab,
                 speed = bulletConfig.speed.Copy(),
                 lifeTime = bulletConfig.lifeTime.Copy(),
                 maxDistance = bulletConfig.maxDistance.Copy(),
                 acceleration = bulletConfig.acceleration.Copy(),
                 emitterProfile = bulletConfig.emitterProfile,
-                bulletBehaviourHandler = bulletConfig.bulletBehaviourHandler
+                BulletMoveScript = bulletConfig.BulletMoveScript
             };
         }
     }

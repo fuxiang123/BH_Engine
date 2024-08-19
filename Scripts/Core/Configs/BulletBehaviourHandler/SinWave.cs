@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace BH_Engine
 {
-    [LabelText("直线移动")]
-    public class SinWave : IBulletBehaviourHandler
+    [LabelText("正弦波移动")]
+    public class SinWave : IBulletMoveScript
     {
         [LabelText("振幅，波的高度")]
         public float amplitude = 2f; // 正弦波振幅
         [LabelText("频率，波的宽度")]
         public float frequency = 2f; // 正弦波频率
-        public void HandleBulletBehaviour(BulletFinalConfig bulletFinalConfig, BulletBehaviour bulletBehaviour)
+        public void UpdateBulletMove(BulletFinalConfig bulletFinalConfig, BulletBehaviour bulletBehaviour)
         {
             float time = bulletBehaviour.currentTime;
             float acceleration = bulletFinalConfig.acceleration;

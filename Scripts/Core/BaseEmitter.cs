@@ -7,8 +7,6 @@ namespace BH_Engine
     // 发射器，负责弹幕
     public class BaseEmitter : MonoBehaviour
     {
-        [LabelText("子弹配置")]
-        public GameObject bulletPrefab;
         [LabelText("发射器配置")]
         public EmitterConfig EmitterConfig;
         [LabelText("子弹配置")]
@@ -91,8 +89,6 @@ namespace BH_Engine
                 EmitterPoolManager.Instance.Release(bullet.emitters);
                 bullet.emitters = null;
             }
-            bullet.distance = 0;
-            bullet.currentTime = 0;
             BulletPoolManager.Instance.Release(bullet.gameObject);
         }
 
@@ -135,7 +131,7 @@ namespace BH_Engine
             float currentBulletSpreadAngle = patternCount == 1 ? 0 : -totalAngle / 2;
             for (int i = 0; i < patternCount; i++)
             {
-                var bullet = GetBullet(bulletPrefab);
+                var bullet = GetBullet(BulletConfig.bulletPrefab);
 
                 // 计算子弹的位置
                 currentBulletXpacing += i == 0 ? 0 : realXSpacingPerbullet[i - 1];

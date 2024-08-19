@@ -54,6 +54,8 @@ MonoBehaviour:
       CustomValueHandler:
         rid: 4574980304645129206
   bulletConfig:
+    bulletPrefab: {fileID: 1519511878272348693, guid: 718779c2d5fd43345b214a6961ecdd3c,
+      type: 3}
     speed:
       mValueType: 0
       m_Value: 1
@@ -65,8 +67,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    prefab: {fileID: 1519511878272348693, guid: 718779c2d5fd43345b214a6961ecdd3c,
-      type: 3}
     lifeTime:
       mValueType: 0
       m_Value: 5
@@ -102,8 +102,8 @@ MonoBehaviour:
         rid: -2
     emitterProfile:
     - {fileID: 11400000, guid: d30282fa4482df34fb9f866119bb53ce, type: 2}
-    bulletBehaviourHandler:
-    - rid: 4241813989008867329
+    BulletMoveScript:
+    - rid: 4574980358143475725
   patternConfig:
     count:
       mValueType: 0
@@ -187,12 +187,14 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4241813989008867329
-      type: {class: Linear, ns: BH_Engine, asm: Assembly-CSharp}
-      data: 
     - rid: 4574980304645129206
       type: {class: PingpongFloat, ns: BH_Engine, asm: Assembly-CSharp}
       data:
         min: -90
         max: 90
         speed: 180
+    - rid: 4574980358143475725
+      type: {class: SinWave, ns: BH_Engine, asm: Assembly-CSharp}
+      data:
+        amplitude: 2
+        frequency: 2

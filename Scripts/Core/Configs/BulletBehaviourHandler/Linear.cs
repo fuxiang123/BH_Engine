@@ -5,9 +5,9 @@ using UnityEngine;
 namespace BH_Engine
 {
     [LabelText("直线移动")]
-    public class Linear : IBulletBehaviourHandler
+    public class Linear : IBulletMoveScript
     {
-        public void HandleBulletBehaviour(BulletFinalConfig bulletFinalConfig, BulletBehaviour bulletBehaviour)
+        public void UpdateBulletMove(BulletFinalConfig bulletFinalConfig, BulletBehaviour bulletBehaviour)
         {
             // 经过的总时间
             float time = bulletBehaviour.currentTime;

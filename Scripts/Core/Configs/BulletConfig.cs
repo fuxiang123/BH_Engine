@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -36,9 +37,9 @@ namespace BH_Engine
         public DynamicFloatValue acceleration;
 
         [LabelText("给子弹附加一个emitter profile，用于实现移动时发射额外子弹的效果")]
-        public EmitterProfileSO[] emitterProfile;
+        public List<EmitterProfileSO> emitterProfile;
         [LabelText("子弹飞行过程中的行为脚本"), SerializeReference]
-        public IBulletMoveScript[] BulletMoveScript;
+        public List<IBulletMoveScript> BulletMoveScript;
 
         public static BulletFinalConfig GetFinalConfig(BulletConfig bulletConfig)
         {

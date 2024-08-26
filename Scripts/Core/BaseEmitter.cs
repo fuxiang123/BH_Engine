@@ -86,7 +86,7 @@ namespace BH_Engine
         {
             if (bullet.emitters != null)
             {
-                EmitterPoolManager.Instance.Release(bullet.emitters);
+                EmitterPoolManager.Instance.Release(bullet.emitters.ToArray());
                 bullet.emitters = null;
             }
             BulletPoolManager.Instance.Release(bullet.gameObject);

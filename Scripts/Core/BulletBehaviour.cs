@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BH_Engine
@@ -16,9 +17,9 @@ namespace BH_Engine
         // 子弹移动的距离
         public float distance;
         // 子弹上附加的发射器
-        public GameObject[] emitters;
+        public List<GameObject> emitters;
         // 子弹行为脚本
-        public IBulletMoveScript[] BulletMoveScript;
+        public List<IBulletMoveScript> BulletMoveScript;
 
         public void Init(BulletConfig bulletConfig, Action<BulletBehaviour> OnReleaseBullet)
         {
@@ -27,17 +28,17 @@ namespace BH_Engine
 
             spwanPosition = transform.position;
             // 给子弹绑定行为脚本
-            if (bulletConfig.BulletMoveScript != null && bulletConfig.BulletMoveScript.Length > 0)
+            if (bulletConfig.BulletMoveScript != null && bulletConfig.BulletMoveScript.Count > 0)
             {
                 BulletMoveScript = bulletConfig.BulletMoveScript;
             }
 
             // 给当前子弹绑定发射器
-            if (bulletConfig.emitterProfile != null && bulletConfig.emitterProfile.Length > 0)
+            if (bulletConfig.emitterProfile != null && bulletConfig.emitterProfile.Count > 0)
             {
                 var configEmitterProfiles = bulletConfig.emitterProfile;
-                GameObject[] emitters = EmitterPoolManager.Instance.Get(configEmitterProfiles.Length);
-                for (int i = 0; i < configEmitterProfiles.Length; i++)
+                List<GameObject> emitters = new List<GameObject>(EmitterPoolManager.Instance.Get(configEmitterProfiles.Count));
+                for (int i = 0; i < configEmitterProfiles.Count; i++)
                 {
                     ProfileEmitter profileEmitter = emitters[i].GetComponent<ProfileEmitter>();
                     profileEmitter.SetEmitterProfile(configEmitterProfiles[i]);
@@ -54,9 +55,9 @@ namespace BH_Engine
             var bulletFinalConfig = BulletConfig.GetFinalConfig(bulletConfig);
             currentTime += Time.deltaTime;
             var prePosition = transform.position;
-            if (BulletMoveScript?.Length > 0)
+            if (BulletMoveScript?.Count > 0)
             {
-                for (int i = 0; i < BulletMoveScript.Length; i++)
+                for (int i = 0; i < BulletMoveScript.Count; i++)
                 {
                     BulletMoveScript[i].UpdateBulletMove(bulletFinalConfig, this);
                 }
@@ -70,7 +71,7 @@ namespace BH_Engine
             // 更新emitter位置
             if (emitters != null)
             {
-                for (int i = 0; i < emitters.Length; i++)
+                for (int i = 0; i < emitters.Count; i++)
                 {
                     emitters[i].transform.position = transform.position;
                     emitters[i].transform.rotation = transform.rotation;

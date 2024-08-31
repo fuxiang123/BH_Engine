@@ -22,7 +22,7 @@ namespace BH_Engine
             StopShoot();
         }
 
-        protected void Update()
+        protected void FixedUpdate()
         {
             if (IsAutoEmit)
             {

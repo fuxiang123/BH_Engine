@@ -50,7 +50,7 @@ namespace BH_Engine
             }
         }
 
-        void Update()
+        void FixedUpdate()
         {
             var bulletFinalConfig = BulletConfig.GetFinalConfig(bulletConfig);
             currentTime += Time.deltaTime;

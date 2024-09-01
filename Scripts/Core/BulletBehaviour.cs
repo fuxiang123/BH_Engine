@@ -53,7 +53,7 @@ namespace BH_Engine
         void FixedUpdate()
         {
             var bulletFinalConfig = BulletConfig.GetFinalConfig(bulletConfig);
-            currentTime += Time.deltaTime;
+            currentTime += Time.fixedDeltaTime;
             var prePosition = transform.position;
             if (BulletMoveScript?.Count > 0)
             {
@@ -65,7 +65,7 @@ namespace BH_Engine
             else
             {
                 var speed = bulletFinalConfig.speed + bulletFinalConfig.acceleration * currentTime;
-                transform.position = transform.position + transform.up * speed * Time.deltaTime;
+                transform.position = transform.position + transform.up * speed * Time.fixedDeltaTime;
             }
 
             // 更新emitter位置

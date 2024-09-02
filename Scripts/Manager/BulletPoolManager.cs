@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -18,51 +19,60 @@ namespace BH_Engine
         public ObjectPool<GameObject> playerPool;
         public ObjectPool<GameObject> enemyPool;
 
+        public HashSet<GameObject> ActivePlayerBullets = new HashSet<GameObject>();
+        public HashSet<GameObject> ActiveEnemyBullets = new HashSet<GameObject>();
+
         protected void Awake()
         {
-            playerPool = new ObjectPool<GameObject>(createPlayerFunc, actionOnGet, actionOnRelease, actionOnDestroy, collectionCheck, defaultCapacity, maxSize);
-            enemyPool = new ObjectPool<GameObject>(createEnemyFunc, actionOnGet, actionOnRelease, actionOnDestroy, collectionCheck, defaultCapacity, maxSize);
+            playerPool = new ObjectPool<GameObject>(createPlayerFunc, actionOnPlayerBulletGet, actionOnPlayerBulletRelease, actionOnDestroy, collectionCheck, defaultCapacity, maxSize);
+            enemyPool = new ObjectPool<GameObject>(createEnemyFunc, actionOnEnemyBulletGet, actionOnEnemyBulletRelease, actionOnDestroy, collectionCheck, defaultCapacity, maxSize);
             Instance = this;
         }
 
         protected void OnDisable()
         {
-            playerPool.Dispose();
-            enemyPool.Dispose();
+            ClearAllPool();
         }
 
-        public void ClearAll()
+        // 清空所有对象迟
+        public void ClearAllPool()
         {
             playerPool.Clear();
             enemyPool.Clear();
         }
 
-        private GameObject createPlayerFunc()
+        // 释放所有子弹
+        public void ReleaseAllBullets()
         {
-            var obj = Instantiate(PlayerPrefab);
-            return obj;
-        }
-
-        private GameObject createEnemyFunc()
-        {
-            var obj = Instantiate(EnemyPrefab);
-            return obj;
-        }
-
-        private void actionOnGet(GameObject obj)
-        {
-            obj.SetActive(true);
-        }
-
-        private void actionOnRelease(GameObject obj)
-        {
-            obj.SetActive(false);
+            ReleaseAllPlayerBullets();
+            ReleaseAllEnemyBullets();
         }
 
         private void actionOnDestroy(GameObject obj)
         {
             Destroy(obj);
         }
+
+        #region 玩家对象池初始化
+        private GameObject createPlayerFunc()
+        {
+            var obj = Instantiate(PlayerPrefab);
+            return obj;
+        }
+
+        private void actionOnPlayerBulletGet(GameObject obj)
+        {
+            obj.SetActive(true);
+            ActivePlayerBullets.Add(obj);
+        }
+
+        private void actionOnPlayerBulletRelease(GameObject obj)
+        {
+            obj.SetActive(false);
+            ActivePlayerBullets.Remove(obj);
+        }
+        #endregion
+
         #region 玩家对象池操作
         public GameObject GetPlayerBullet()
         {
@@ -90,6 +100,37 @@ namespace BH_Engine
             {
                 playerPool.Release(obj[i]);
             }
+        }
+
+        public void ReleaseAllPlayerBullets()
+        {
+            var bullets = ActivePlayerBullets.ToArray();
+            foreach (var bullet in bullets)
+            {
+                playerPool.Release(bullet);
+            }
+            ActivePlayerBullets.Clear();
+        }
+        #endregion
+
+        #region 敌人对象池初始化
+
+        private GameObject createEnemyFunc()
+        {
+            var obj = Instantiate(EnemyPrefab);
+            return obj;
+        }
+
+        private void actionOnEnemyBulletGet(GameObject obj)
+        {
+            obj.SetActive(true);
+            ActiveEnemyBullets.Add(obj);
+        }
+
+        private void actionOnEnemyBulletRelease(GameObject obj)
+        {
+            obj.SetActive(false);
+            ActiveEnemyBullets.Remove(obj);
         }
         #endregion
 
@@ -120,6 +161,16 @@ namespace BH_Engine
             {
                 enemyPool.Release(obj[i]);
             }
+        }
+
+        public void ReleaseAllEnemyBullets()
+        {
+            var bullets = ActivePlayerBullets.ToArray();
+            foreach (var bullet in bullets)
+            {
+                enemyPool.Release(bullet);
+            }
+            ActivePlayerBullets.Clear();
         }
         #endregion
     }

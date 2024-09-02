@@ -7,24 +7,45 @@ namespace BH_Engine
     internal class BulletPoolManager : MonoBehaviour
     {
         public static BulletPoolManager Instance { get; private set; }
-        public GameObject Prefab;
+        public GameObject PlayerPrefab;
+        public GameObject EnemyPrefab;
         // 初始化子弹池数量
         [Range(0, 2000)]
         public int defaultCapacity = 100;
         public int maxSize = 2000;
 
         public bool collectionCheck = true;
-        public ObjectPool<GameObject> pool;
+        public ObjectPool<GameObject> playerPool;
+        public ObjectPool<GameObject> enemyPool;
+
         protected void Awake()
         {
-            pool = new ObjectPool<GameObject>(createFunc, actionOnGet, actionOnRelease, actionOnDestroy, collectionCheck, defaultCapacity, maxSize);
+            playerPool = new ObjectPool<GameObject>(createPlayerFunc, actionOnGet, actionOnRelease, actionOnDestroy, collectionCheck, defaultCapacity, maxSize);
+            enemyPool = new ObjectPool<GameObject>(createEnemyFunc, actionOnGet, actionOnRelease, actionOnDestroy, collectionCheck, defaultCapacity, maxSize);
             Instance = this;
         }
 
-        private GameObject createFunc()
+        protected void OnDisable()
         {
-            var obj = Instantiate(Prefab);
-            obj.SetActive(false);
+            playerPool.Dispose();
+            enemyPool.Dispose();
+        }
+
+        public void ClearAll()
+        {
+            playerPool.Clear();
+            enemyPool.Clear();
+        }
+
+        private GameObject createPlayerFunc()
+        {
+            var obj = Instantiate(PlayerPrefab);
+            return obj;
+        }
+
+        private GameObject createEnemyFunc()
+        {
+            var obj = Instantiate(EnemyPrefab);
             return obj;
         }
 
@@ -42,33 +63,64 @@ namespace BH_Engine
         {
             Destroy(obj);
         }
-
-        public GameObject Get()
+        #region 玩家对象池操作
+        public GameObject GetPlayerBullet()
         {
-            return pool.Get();
+            return playerPool.Get();
         }
 
-        public GameObject[] Get(int count)
+        public GameObject[] GetPlayerBullets(int count)
         {
             GameObject[] objs = new GameObject[count];
             for (int i = 0; i < count; i++)
             {
-                objs[i] = pool.Get();
+                objs[i] = playerPool.Get();
             }
             return objs;
         }
 
-        public void Release(GameObject obj)
+        public void ReleasePlayerBullet(GameObject obj)
         {
-            pool.Release(obj);
+            playerPool.Release(obj);
         }
 
-        public void Release(GameObject[] obj)
+        public void ReleasePlayerBullets(GameObject[] obj)
         {
             for (int i = 0; i < obj.Length; i++)
             {
-                pool.Release(obj[i]);
+                playerPool.Release(obj[i]);
             }
         }
+        #endregion
+
+        #region 敌人对象池操作
+        public GameObject GetEnemyBullet()
+        {
+            return enemyPool.Get();
+        }
+
+        public GameObject[] GetEnemyBullets(int count)
+        {
+            GameObject[] objs = new GameObject[count];
+            for (int i = 0; i < count; i++)
+            {
+                objs[i] = enemyPool.Get();
+            }
+            return objs;
+        }
+
+        public void ReleaseEnemyBullet(GameObject obj)
+        {
+            enemyPool.Release(obj);
+        }
+
+        public void ReleaseEnemyBullets(GameObject[] obj)
+        {
+            for (int i = 0; i < obj.Length; i++)
+            {
+                enemyPool.Release(obj[i]);
+            }
+        }
+        #endregion
     }
 }

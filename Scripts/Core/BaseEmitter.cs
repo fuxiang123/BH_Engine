@@ -61,7 +61,7 @@ namespace BH_Engine
         /// </summary>
         protected virtual GameObject GetBullet(GameObject prefab)
         {
-            var bullet = BulletPoolManager.Instance.Get();
+            var bullet = BulletPoolManager.Instance.GetPlayerBullet();
 
             // 修改layer
             bullet.layer = prefab.layer;
@@ -89,7 +89,7 @@ namespace BH_Engine
                 EmitterPoolManager.Instance.Release(bullet.emitters.ToArray());
                 bullet.emitters = null;
             }
-            BulletPoolManager.Instance.Release(bullet.gameObject);
+            BulletPoolManager.Instance.ReleasePlayerBullet(bullet.gameObject);
         }
 
 

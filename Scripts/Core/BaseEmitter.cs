@@ -68,8 +68,8 @@ namespace BH_Engine
 
         protected void CopyBulletVisual(GameObject bullet, GameObject prefab)
         {
-            var bulletSprite = bullet.GetComponent<SpriteRenderer>();
-            var prefabSprite = prefab.GetComponent<SpriteRenderer>();
+            var bulletSprite = bullet.GetComponentInChildren<SpriteRenderer>();
+            var prefabSprite = prefab.GetComponentInChildren<SpriteRenderer>();
             bulletSprite.sprite = prefabSprite.sprite;
             bulletSprite.color = prefabSprite.color;
             bullet.transform.localScale = prefab.transform.localScale;

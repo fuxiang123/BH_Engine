@@ -62,21 +62,17 @@ namespace BH_Engine
         protected virtual GameObject GetBullet(GameObject prefab)
         {
             var bullet = BulletPoolManager.Instance.GetPlayerBullet();
-
-            // 修改layer
-            bullet.layer = prefab.layer;
-            // 修改对象池子弹的sprite
-            var spriteRenderer = bullet.GetComponent<SpriteRenderer>();
-            var prefabSprite = prefab.GetComponent<SpriteRenderer>();
-            if (spriteRenderer != null && prefabSprite != null)
-            {
-                spriteRenderer.sprite = prefabSprite.sprite;
-                spriteRenderer.color = prefabSprite.color;
-                spriteRenderer.sortingLayerID = prefabSprite.sortingLayerID;
-                spriteRenderer.sortingLayerName = prefabSprite.sortingLayerName;
-                spriteRenderer.sortingOrder = prefabSprite.sortingOrder;
-            }
+            CopyBulletVisual(bullet, prefab);
             return bullet;
+        }
+
+        protected void CopyBulletVisual(GameObject bullet, GameObject prefab)
+        {
+            var bulletSprite = bullet.GetComponent<SpriteRenderer>();
+            var prefabSprite = prefab.GetComponent<SpriteRenderer>();
+            bulletSprite.sprite = prefabSprite.sprite;
+            bulletSprite.color = prefabSprite.color;
+            bullet.transform.localScale = prefab.transform.localScale;
         }
 
         /// <summary>
@@ -141,8 +137,11 @@ namespace BH_Engine
 
                 // 计算子弹的角度
                 currentBulletSpreadAngle += i == 0 ? 0 : realSpreadAnglePerbullet[i - 1];
-                bullet.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
-                bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, ReleaseBullet);
+                var baseRotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
+                var direction = baseRotation * Vector3.up;
+                // 旋转角度减少90
+                bullet.transform.rotation = baseRotation * Quaternion.Euler(0, 0, 90);
+                bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, direction, ReleaseBullet);
             }
         }
 

@@ -13,7 +13,7 @@ namespace BH_Engine
             float time = bulletBehaviour.currentTime;
             float acceleration = bulletFinalConfig.acceleration;
             float speed = bulletFinalConfig.speed + acceleration * time;
-            var direction = bulletBehaviour.transform.up;
+            var direction = bulletBehaviour.direction;
             bulletBehaviour.transform.position = bulletBehaviour.transform.position + direction * speed * Time.deltaTime;
         }
     }

@@ -9,11 +9,12 @@ namespace BH_Engine
     {
         public BulletConfig bulletConfig;
         public Action<BulletBehaviour> OnReleaseBullet;
-
         // 子弹的初始位置
         public Vector3 spwanPosition;
         // 当前子弹飞行时间
         public float currentTime;
+        // 子弹的飞行方向
+        public Vector3 direction;
         // 子弹移动的距离
         public float distance;
         // 子弹上附加的发射器
@@ -21,10 +22,11 @@ namespace BH_Engine
         // 子弹行为脚本
         public List<IBulletMoveScript> BulletMoveScript;
 
-        public void Init(BulletConfig bulletConfig, Action<BulletBehaviour> OnReleaseBullet)
+        public void Init(BulletConfig bulletConfig, Vector3 direction, Action<BulletBehaviour> OnReleaseBullet)
         {
             this.bulletConfig = bulletConfig;
             this.OnReleaseBullet = OnReleaseBullet;
+            this.direction = direction;
 
             spwanPosition = transform.position;
             // 给子弹绑定行为脚本
@@ -65,7 +67,7 @@ namespace BH_Engine
             else
             {
                 var speed = bulletFinalConfig.speed + bulletFinalConfig.acceleration * currentTime;
-                transform.position = transform.position + transform.up * speed * Time.fixedDeltaTime;
+                transform.position = transform.position + direction * speed * Time.fixedDeltaTime;
             }
 
             // 更新emitter位置

@@ -102,6 +102,7 @@ namespace BH_Engine
             }
         }
 
+        // 回收所有玩家子弹
         public void ReleaseAllPlayerBullets()
         {
             var bullets = ActivePlayerBullets.ToArray();
@@ -110,6 +111,18 @@ namespace BH_Engine
                 playerPool.Release(bullet);
             }
             ActivePlayerBullets.Clear();
+        }
+
+        // 清除所有玩家子弹并销毁
+        public void ClearAllPlayerBullets()
+        {
+            var bullets = ActivePlayerBullets.ToArray();
+            foreach (var bullet in bullets)
+            {
+                Destroy(bullet);
+            }
+            ActivePlayerBullets.Clear();
+            playerPool.Clear();
         }
         #endregion
 
@@ -163,6 +176,7 @@ namespace BH_Engine
             }
         }
 
+        // 回收所有敌人子弹
         public void ReleaseAllEnemyBullets()
         {
             var bullets = ActivePlayerBullets.ToArray();
@@ -171,6 +185,18 @@ namespace BH_Engine
                 enemyPool.Release(bullet);
             }
             ActivePlayerBullets.Clear();
+        }
+
+        // 清除所有敌人子弹并销毁
+        public void ClearAllEnemyBullets()
+        {
+            var bullets = ActiveEnemyBullets.ToArray();
+            foreach (var bullet in bullets)
+            {
+                Destroy(bullet);
+            }
+            ActiveEnemyBullets.Clear();
+            enemyPool.Clear();
         }
         #endregion
     }

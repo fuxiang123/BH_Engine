@@ -700,6 +700,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4505428544007411822, guid: 211a31ce61153c945b429952bcbf8f58,
+        type: 3}
+      propertyPath: EnemyPrefab
+      value: 
+      objectReference: {fileID: 1519511878272348693, guid: 482b1f3cbf5e5544e8c63b9b920b8855,
+        type: 3}
+    - target: {fileID: 4505428544007411822, guid: 211a31ce61153c945b429952bcbf8f58,
+        type: 3}
+      propertyPath: PlayerPrefab
+      value: 
+      objectReference: {fileID: 1519511878272348693, guid: 482b1f3cbf5e5544e8c63b9b920b8855,
+        type: 3}
     - target: {fileID: 5388543339882547196, guid: 211a31ce61153c945b429952bcbf8f58,
         type: 3}
       propertyPath: m_LocalPosition.x

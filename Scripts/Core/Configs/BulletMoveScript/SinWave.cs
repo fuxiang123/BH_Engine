@@ -18,7 +18,7 @@ namespace BH_Engine
             float speed = bulletFinalConfig.speed + acceleration * time;
 
             var sine = amplitude * Mathf.Sin(frequency * time * speed);
-            var direction = bulletBehaviour.transform.up;
+            var direction = bulletBehaviour.direction;
             var spwanPosition = bulletBehaviour.spwanPosition;
             // 定义一条垂直的轴，在垂直轴上施加正弦函数
             var crossDirection = new Vector3(direction.y, -direction.x);

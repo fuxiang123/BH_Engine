@@ -24,6 +24,7 @@ namespace BH_Engine
 
         public void Init(BulletConfig bulletConfig, Vector3 direction, Action<BulletBehaviour> OnReleaseBullet)
         {
+            InitSettings();
             this.bulletConfig = bulletConfig;
             this.OnReleaseBullet = OnReleaseBullet;
             this.direction = direction;
@@ -92,6 +93,9 @@ namespace BH_Engine
         public void ReleaseSelf()
         {
             OnReleaseBullet?.Invoke(this);
+        }
+        public void InitSettings()
+        {
             emitters = null;
             BulletMoveScript = null;
             currentTime = 0;

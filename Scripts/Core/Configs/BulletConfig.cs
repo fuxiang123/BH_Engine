@@ -6,7 +6,7 @@ using UnityEngine;
 namespace BH_Engine
 {
     // 子弹生成后遵循的属性
-    public class BulletFinalConfig
+    public struct BulletFinalConfig
     {
         public float speed;
         public GameObject prefab;

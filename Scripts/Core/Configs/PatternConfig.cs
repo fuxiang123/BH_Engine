@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BH_Engine
 {
-    public class PatternFinalConfig
+    public struct PatternFinalConfig
     {
         public int count;
         public int[] spreadAnglePerbullet;

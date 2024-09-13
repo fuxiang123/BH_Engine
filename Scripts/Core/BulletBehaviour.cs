@@ -47,7 +47,9 @@ namespace BH_Engine
                     profileEmitter.SetEmitterProfile(configEmitterProfiles[i]);
                     profileEmitter.IsAutoEmit = true;
                     profileEmitter.transform.position = transform.position;
-                    profileEmitter.transform.rotation = transform.rotation;
+                    float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    var emitterConfigAngle = profileEmitter.EmitterConfig.emitterAngle.value;
+                    profileEmitter.transform.rotation = Quaternion.Euler(0, 0, rotationZ - 90 + emitterConfigAngle);
                 }
                 this.emitters = emitters;
             }
@@ -77,7 +79,9 @@ namespace BH_Engine
                 for (int i = 0; i < emitters.Count; i++)
                 {
                     emitters[i].transform.position = transform.position;
-                    emitters[i].transform.rotation = transform.rotation;
+                    float rotationZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    var emitterConfigAngle = emitters[i].GetComponent<BaseEmitter>()?.EmitterConfig?.emitterAngle?.value ?? 0;
+                    emitters[i].transform.rotation = Quaternion.Euler(0, 0, rotationZ - 90 + emitterConfigAngle);
                 }
             }
 

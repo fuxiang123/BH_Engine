@@ -2,15 +2,45 @@
 
 # BH_Engine
 
-## 因为unity自身对SerializeReference的支持不够，BH_Engine运行时必须依赖[Odin Inspector](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041)。
+- [BH\_Engine](#bh_engine)
+- [效果展示](#效果展示)
+- [简介](#简介)
+- [快速开始](#快速开始)
+- [核心概念](#核心概念)
+  - [动态值 DynamicValue](#动态值-dynamicvalue)
+    - [自定义值](#自定义值)
+  - [发射器 Emitter](#发射器-emitter)
+  - [基础发射器 BaseEmitter](#基础发射器-baseemitter)
+    - [发射器配置](#发射器配置)
+    - [弹幕配置](#弹幕配置)
+    - [子弹配置](#子弹配置)
+      - [嵌套弹幕](#嵌套弹幕)
+      - [子弹行为脚本 BulletMoveScript](#子弹行为脚本-bulletmovescript)
+  - [可配置发射器 ProfileEmitter](#可配置发射器-profileemitter)
+- [其他功能](#其他功能)
+  - [主动射击](#主动射击)
+  - [使用对象池管理子弹](#使用对象池管理子弹)
+
+# 效果展示
+
+![BHGIF1](./Images/BHGIF1.gif)
+
+![BHGIF2](./Images/BHGIF2.gif)
+
+![BHGIF3](./Images/BHGIF3.gif)
+
+# 简介
+
+
+> 因为unity自身对SerializeReference的支持不够，BH_Engine运行时必须依赖[Odin Inspector](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041)。
 
 BH_Engine是一个2d弹幕游戏引擎，它的出现主要是为了解决其他大多数弹幕引擎无法在游戏运行后实时更改弹幕样式的问题（如以撒的结合中，获得多个道具后可以叠加它们对弹幕的影响）。
 
 除此之外BH_Engine可以高度自定义弹幕效果，甚至自己使用脚本控制发射器参数。同时还具有发射衍生弹幕/通过脚本自定义弹幕形状/自定义子弹运行轨迹等功能。
 
-## 如果你的游戏因为大量碰撞导致卡顿，可以参考下我开发的高性能2d碰撞引擎[WorldUnitCollision2DSystem](https://github.com/fuxiang123/WorldUnitCollision2DSystem)。
+> 如果你的游戏因为大量碰撞导致卡顿，可以参考下我开发的高性能2d碰撞引擎[WorldUnitCollision2DSystem](https://github.com/fuxiang123/WorldUnitCollision2DSystem)。
 
-## 快速开始
+# 快速开始
 
 参考Example文件中的例子，或遵循以下步骤。
 

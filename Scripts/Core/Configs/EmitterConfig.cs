@@ -31,8 +31,7 @@ namespace BH_Engine
         [LabelText("发射间隔")]
         public DynamicFloatValue emitInterval = new DynamicFloatValue() { value = 0.1f };
         [LabelText("发射器角度")]
-        public DynamicFloatValue emitterAngle;
-
+        public DynamicFloatValue emitterAngle = new DynamicFloatValue() { value = 0 };
         public static EmitterConfig CopyConfig(EmitterConfig config)
         {
             return new EmitterConfig

@@ -25,7 +25,7 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
     emitterAngle:
-      mValueType: 1
+      mValueType: 2
       m_Value: 0
       curve:
         serializedVersion: 2

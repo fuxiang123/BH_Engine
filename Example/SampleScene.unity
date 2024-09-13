@@ -123,6 +123,207 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &45505045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 45505046}
+  - component: {fileID: 45505047}
+  m_Layer: 0
+  m_Name: ProfileEmitter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &45505046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45505045}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1570029703}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!114 &45505047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45505045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf7804dfc104a0418b6c024f1a3523b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EmitterConfig:
+    emitInterval:
+      mValueType: 0
+      m_Value: 0.1
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    emitterAngle:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+  BulletConfig:
+    bulletPrefab: {fileID: 0}
+    speed:
+      mValueType: 0
+      m_Value: 5
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    lifeTime:
+      mValueType: 0
+      m_Value: 5
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    maxDistance:
+      mValueType: 0
+      m_Value: 10
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    acceleration:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    emitterProfile: []
+    BulletMoveScript: []
+  PatternConfig:
+    count:
+      mValueType: 0
+      m_Value: 1
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    spreadAnglePerBullet:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    spreadAngleTotal:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    xSpacingPerBullet:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    xSpacingTotal:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    spwanXTanslate:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    spwanYTanslate:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+  IsAutoEmit: 0
+  AutoEmitDelay: 0
+  EmitterProfileSO: {fileID: 11400000, guid: d30282fa4482df34fb9f866119bb53ce, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &882887263
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1570029702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,8 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PatternSchedulerSO: {fileID: 11400000, guid: b6b98383fac90af4e918b8ea25981e63, type: 2}
   Center: {fileID: 1570029703}
-  ProfileEmitter: {fileID: 6598251801283186302, guid: 2d8648eede7dfde4a9e26ebb73189dac,
-    type: 3}
+  ProfileEmitter: {fileID: 45505047}
   State: 0
 --- !u!4 &1570029703
 Transform:
@@ -319,7 +519,8 @@ Transform:
   m_LocalPosition: {x: 0.2, y: 3.74, z: 0.056713384}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 45505046}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1570029704
@@ -390,7 +591,7 @@ PrefabInstance:
     - target: {fileID: 5056957289909104499, guid: a5a3caa785a2e6243a7f8fa62f5f2f39,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5056957289909104500, guid: a5a3caa785a2e6243a7f8fa62f5f2f39,
         type: 3}

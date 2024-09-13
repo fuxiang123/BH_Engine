@@ -15,6 +15,9 @@ namespace BH_Engine
         public PatternConfig PatternConfig;
         [LabelText("是否自动射击")]
         public bool IsAutoEmit = false;
+        [LabelText("自动射击延迟")]
+        public float AutoEmitDelay = 0;
+        private bool isAutoEmitDelay = false;
         private float mTimer = 0;
 
         protected void OnDisable()
@@ -26,11 +29,23 @@ namespace BH_Engine
         {
             if (IsAutoEmit)
             {
-                mTimer += Time.deltaTime;
-                if (mTimer >= EmitterConfig.emitInterval.value)
+                if (!isAutoEmitDelay)
                 {
-                    Emit();
-                    mTimer = 0;
+                    mTimer += Time.deltaTime;
+                    if (mTimer >= AutoEmitDelay)
+                    {
+                        isAutoEmitDelay = true;
+                        mTimer = 0;
+                    }
+                }
+                else
+                {
+                    mTimer += Time.deltaTime;
+                    if (mTimer >= EmitterConfig.emitInterval.value)
+                    {
+                        Emit();
+                        mTimer = 0;
+                    }
                 }
             }
         }

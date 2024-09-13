@@ -102,11 +102,10 @@ namespace BH_Engine
             {
                 if (item.EmitterProfileSO != null)
                 {
+                    currentPatternPrefab = ProfileEmitter.gameObject;
                     // 通过ProfileEmitter实例化
-                    currentPatternPrefab = Instantiate(ProfileEmitter.gameObject, Vector3.zero, Quaternion.identity);
-                    var profileEmitter = currentPatternPrefab.GetComponent<ProfileEmitter>();
-                    profileEmitter.SetEmitterProfile(item.EmitterProfileSO);
-                    profileEmitter.IsAutoEmit = true;
+                    ProfileEmitter.SetEmitterProfile(item.EmitterProfileSO);
+                    ProfileEmitter.IsAutoEmit = true;
                 }
             }
             currentPatternPrefab.transform.position = Center.position;

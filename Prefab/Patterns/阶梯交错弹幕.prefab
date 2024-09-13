@@ -101,6 +101,8 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
   BulletConfig:
+    bulletPrefab: {fileID: 1519511878272348693, guid: 482b1f3cbf5e5544e8c63b9b920b8855,
+      type: 3}
     speed:
       mValueType: 0
       m_Value: 5
@@ -112,8 +114,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    prefab: {fileID: 1519511878272348693, guid: 482b1f3cbf5e5544e8c63b9b920b8855,
-      type: 3}
     lifeTime:
       mValueType: 0
       m_Value: 20
@@ -147,18 +147,8 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    bulletRotate:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
     emitterProfile: []
+    BulletMoveScript: []
   PatternConfig:
     count:
       mValueType: 0
@@ -238,6 +228,7 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
   IsAutoEmit: 1
+  AutoEmitDelay: 0
   references:
     version: 2
     RefIds:
@@ -311,6 +302,8 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
   BulletConfig:
+    bulletPrefab: {fileID: 1519511878272348693, guid: 482b1f3cbf5e5544e8c63b9b920b8855,
+      type: 3}
     speed:
       mValueType: 0
       m_Value: 5
@@ -322,8 +315,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    prefab: {fileID: 1519511878272348693, guid: 482b1f3cbf5e5544e8c63b9b920b8855,
-      type: 3}
     lifeTime:
       mValueType: 0
       m_Value: 20
@@ -357,18 +348,8 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    bulletRotate:
-      mValueType: 0
-      m_Value: 0
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
     emitterProfile: []
+    BulletMoveScript: []
   PatternConfig:
     count:
       mValueType: 0
@@ -448,6 +429,7 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
   IsAutoEmit: 1
+  AutoEmitDelay: 0.375
   references:
     version: 2
     RefIds:

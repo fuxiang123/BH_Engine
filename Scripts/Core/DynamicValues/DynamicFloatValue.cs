@@ -49,6 +49,14 @@ namespace BH_Engine
             set => m_Value = value;
         }
 
+        // 原始值，获取时不会影响动态值的计算
+        [HideInInspector]
+        public float RawValue
+        {
+            get => m_Value;
+            set => m_Value = value;
+        }
+
         // 重置所有数据
         public void Reset()
         {

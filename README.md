@@ -8,6 +8,8 @@ BH_Engine是一个2d弹幕游戏引擎，它的出现主要是为了解决其他
 
 除此之外BH_Engine可以高度自定义弹幕效果，甚至自己使用脚本控制发射器参数。同时还具有发射衍生弹幕/通过脚本自定义弹幕形状/自定义子弹运行轨迹等功能。
 
+## 如果你的游戏因为大量碰撞导致卡顿，可以参考下我开发的高性能2d碰撞引擎[WorldUnitCollision2DSystem](https://github.com/fuxiang123/WorldUnitCollision2DSystem)。
+
 ## 快速开始
 
 参考Example文件中的例子，或遵循以下步骤。
@@ -119,9 +121,19 @@ BH_Engine提供了两种发射器，BaseEmitter（基础发射器）和ProfileEm
 
 子弹配置主要控制单个子弹的参数。如子弹速度、子弹射程、加速度等。它需要传入一个prefab，来控制生成的子弹实例。
 
-同时子弹配置里面还可以再传入一份emitter profile，这样子弹还会被视为一个发射器，在飞行的同时进行射击。
+#### 嵌套弹幕
 
-子弹配置还支持传入一个行为脚本，来控制子弹的飞行轨迹。该脚本需要实现`IBulletMoveScript`脚本，同时它会在每个`FixedUpdate`调用一次。一个让子弹以正弦波移动的例子如下(你可以在`Scripts\Core\Configs\BulletMoveScript`文件夹下找到)：
+你还可以给子弹附加一个emitter profile，这样子弹在飞行时，其本身也会被视为一个发射器，从而衍生出更复杂的弹幕效果。
+
+但注意不要将当前正在配置的emitter profile拖入到子弹配置中，否则会因为递归导致无止境地发射。
+
+嵌套弹幕产生的子弹数量是极为恐怖的，因此不建议嵌套太多层的emitter profile，除非你想折磨自己电脑的CPU。
+
+#### 子弹行为脚本 BulletMoveScript
+
+发射的子弹默认直线行驶，你可以传入一个脚本来控制子弹的飞行轨迹。该脚本会覆盖子弹的默认飞行逻辑。
+
+该脚本需要实现`IBulletMoveScript`脚本，同时它会在每个`FixedUpdate`调用一次。一个让子弹以正弦波移动的例子如下(你可以在`Scripts\Core\Configs\BulletMoveScript`文件夹下找到它)：
 
 ```c#
 [LabelText("正弦波移动")]

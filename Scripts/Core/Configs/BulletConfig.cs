@@ -36,9 +36,9 @@ namespace BH_Engine
         [LabelText("子弹加速度")]
         public DynamicFloatValue acceleration;
 
-        [LabelText("给子弹附加一个emitter profile，用于实现移动时发射额外子弹的效果")]
+        [InfoBox("给子弹附加一个emitter profile，用于实现移动时发射额外子弹的效果")]
         public List<EmitterProfileSO> emitterProfile;
-        [LabelText("子弹飞行过程中的行为脚本"), SerializeReference]
+        [InfoBox("子弹飞行过程中的行为脚本"), SerializeReference]
         public List<IBulletMoveScript> BulletMoveScript;
 
         public static BulletFinalConfig GetFinalConfig(BulletConfig bulletConfig)

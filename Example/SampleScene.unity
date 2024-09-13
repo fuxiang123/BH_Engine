@@ -390,7 +390,7 @@ PrefabInstance:
     - target: {fileID: 5056957289909104499, guid: a5a3caa785a2e6243a7f8fa62f5f2f39,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5056957289909104500, guid: a5a3caa785a2e6243a7f8fa62f5f2f39,
         type: 3}
@@ -768,7 +768,9 @@ PrefabInstance:
       value: BH_EngineManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5388543341184114672, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}
+    - {fileID: 5388543341186818747, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 211a31ce61153c945b429952bcbf8f58, type: 3}

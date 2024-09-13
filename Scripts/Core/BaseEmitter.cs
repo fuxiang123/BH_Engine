@@ -61,18 +61,7 @@ namespace BH_Engine
         /// </summary>
         protected virtual GameObject GetBullet(GameObject prefab)
         {
-            var bullet = BulletPoolManager.Instance.GetPlayerBullet();
-            CopyBulletVisual(bullet, prefab);
-            return bullet;
-        }
-
-        protected void CopyBulletVisual(GameObject bullet, GameObject prefab)
-        {
-            var bulletSprite = bullet.GetComponentInChildren<SpriteRenderer>();
-            var prefabSprite = prefab.GetComponentInChildren<SpriteRenderer>();
-            bulletSprite.sprite = prefabSprite.sprite;
-            bulletSprite.color = prefabSprite.color;
-            bullet.transform.localScale = prefab.transform.localScale;
+            return prefab.Instantiate();
         }
 
         /// <summary>
@@ -80,14 +69,8 @@ namespace BH_Engine
         /// </summary>
         protected virtual void ReleaseBullet(BulletBehaviour bullet)
         {
-            if (bullet.emitters != null)
-            {
-                EmitterPoolManager.Instance.Release(bullet.emitters.ToArray());
-                bullet.emitters = null;
-            }
-            BulletPoolManager.Instance.ReleasePlayerBullet(bullet.gameObject);
+            Destroy(bullet.gameObject);
         }
-
 
         // 发射单行子弹
         public void Emit()

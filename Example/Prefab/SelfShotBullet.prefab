@@ -68,6 +68,7 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
   BulletConfig:
+    bulletPrefab: {fileID: 0}
     speed:
       mValueType: 0
       m_Value: 5
@@ -79,8 +80,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    prefab: {fileID: 1519511878272348693, guid: 2501b3a4fdf06b94da850da30e685133,
-      type: 3}
     lifeTime:
       mValueType: 0
       m_Value: 5
@@ -115,7 +114,7 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
     emitterProfile: []
-    bulletBehaviourHandler: []
+    BulletMoveScript: []
   PatternConfig:
     count:
       mValueType: 0
@@ -230,7 +229,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2956296006025523863}
@@ -301,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletConfig:
+    bulletPrefab: {fileID: 0}
     speed:
       mValueType: 0
       m_Value: 5
@@ -312,7 +312,6 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
-    prefab: {fileID: 0}
     lifeTime:
       mValueType: 0
       m_Value: 5
@@ -347,9 +346,10 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
     emitterProfile: []
-    bulletBehaviourHandler: []
+    BulletMoveScript: []
   spwanPosition: {x: 0, y: 0, z: 0}
   currentTime: 0
+  direction: {x: 0, y: 0, z: 0}
   distance: 0
   emitters: []
   references:
@@ -393,7 +393,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.8, y: 0.8}
     newSize: {x: 5.12, y: 5.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

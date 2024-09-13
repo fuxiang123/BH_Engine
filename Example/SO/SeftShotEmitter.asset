@@ -15,7 +15,7 @@ MonoBehaviour:
   emitterConfig:
     emitInterval:
       mValueType: 0
-      m_Value: 0.01
+      m_Value: 0.02
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -25,7 +25,7 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
     emitterAngle:
-      mValueType: 2
+      mValueType: 1
       m_Value: 0
       curve:
         serializedVersion: 2
@@ -33,23 +33,23 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 180
-          outSlope: 180
-          tangentMode: 34
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 2
-          value: 360
-          inSlope: 180
-          outSlope: 180
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
           outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 1
+        - serializedVersion: 3
+          time: 1
+          value: 360
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 0
+        m_PostInfinity: 0
         m_RotationOrder: 4
       CustomValueHandler:
         rid: 4574980304645129206
@@ -58,7 +58,7 @@ MonoBehaviour:
       type: 3}
     speed:
       mValueType: 0
-      m_Value: 1
+      m_Value: 3
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -69,7 +69,7 @@ MonoBehaviour:
         rid: -2
     lifeTime:
       mValueType: 0
-      m_Value: 5
+      m_Value: 3
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -102,8 +102,7 @@ MonoBehaviour:
         rid: -2
     emitterProfile:
     - {fileID: 11400000, guid: d30282fa4482df34fb9f866119bb53ce, type: 2}
-    BulletMoveScript:
-    - rid: 4574980358143475725
+    BulletMoveScript: []
   patternConfig:
     count:
       mValueType: 0
@@ -192,9 +191,4 @@ MonoBehaviour:
       data:
         min: -90
         max: 90
-        speed: 180
-    - rid: 4574980358143475725
-      type: {class: SinWave, ns: BH_Engine, asm: Assembly-CSharp}
-      data:
-        amplitude: 2
-        frequency: 2
+        speed: 360

@@ -58,7 +58,7 @@ MonoBehaviour:
       type: 3}
     speed:
       mValueType: 0
-      m_Value: 10
+      m_Value: 5
       curve:
         serializedVersion: 2
         m_Curve:

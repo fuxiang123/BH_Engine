@@ -62,7 +62,6 @@ namespace BH_Engine
         public void Release(GameObject obj)
         {
             pool.Release(obj);
-            obj.transform.SetParent(transform);
         }
 
         public void Release(GameObject[] obj)

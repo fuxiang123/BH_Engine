@@ -93,6 +93,10 @@ namespace BH_Engine
         public void ReleaseSelf()
         {
             OnReleaseBullet?.Invoke(this);
+            if (emitters != null) emitters.ForEach(e =>
+            {
+                EmitterPoolManager.Instance.Release(e);
+            });
         }
         public void InitSettings()
         {

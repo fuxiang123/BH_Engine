@@ -225,7 +225,7 @@ public class SinWave : IBulletMoveScript
 
 `BaseEmitter`内部有`GetBullet`和`ReleaseBullet`两个方法，分别对应创建和销毁子弹的过程。默认情况下，BH_Engine使用`Instantiate`创建子弹，使用`Destroy`销毁子弹。
 
-你可以通过继承`BaseEmitter`或`ProfileEmitter`，并重载（override）这两个方法，来自己控制子弹的创建和销毁。一个使用对象池的例子如下：
+你可以通过继承`BaseEmitter`或`ProfileEmitter`，并重写（override）这两个方法，来自己控制子弹的创建和销毁。一个使用对象池的例子如下：
 
 ```c#
 public class PlayerEmitter : ProfileEmitter

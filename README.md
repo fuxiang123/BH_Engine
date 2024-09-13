@@ -44,7 +44,7 @@ BH_Engine是一个2d弹幕游戏引擎，它的出现主要是为了解决其他
 
 参考Example文件中的例子，或遵循以下步骤。
 
-1. 在Prefab文件夹下，将预制体复制到你的场景中。
+1. 在`BH_Engine -> Prefab`文件夹下，将`BH_EngineManager`预制体复制到你的场景中。
 2. 创建一个游戏物体，并在它下面添加一个子物体作为发射器。在子物体上添加BaseEmitter组件，并勾选自动射击。
 3. 创建一个GameObject作为子弹，在该物体上添加BulletBehaviour组件。
 4. 将子弹拖入到`BaseEmitter -> 子弹配置 -> 子弹预制体`参数中。

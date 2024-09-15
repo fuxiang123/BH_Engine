@@ -19,9 +19,9 @@ namespace BH_Engine
         private void InitEmitterProfile()
         {
             mEmitterProfile = EmitterProfileSO.Copy(EmitterProfileSO);
-            EmitterConfig = mEmitterProfile.emitterConfig;
-            BulletConfig = mEmitterProfile.bulletConfig;
-            PatternConfig = mEmitterProfile.patternConfig;
+            EmitterConfig = mEmitterProfile.EmitterConfig;
+            BulletConfig = mEmitterProfile.BulletConfig;
+            PatternConfig = mEmitterProfile.PatternConfig;
         }
 
         public void SetEmitterProfile(EmitterProfileSO profile)

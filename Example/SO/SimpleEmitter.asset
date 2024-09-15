@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8d7133c81627e40b6c3eed8d5c025f, type: 3}
   m_Name: SimpleEmitter
   m_EditorClassIdentifier: 
-  emitterConfig:
+  EmitterConfig:
     emitInterval:
       mValueType: 0
-      m_Value: 0.2
+      m_Value: 0.1
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -29,59 +29,23 @@ MonoBehaviour:
       m_Value: 0
       curve:
         serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 90
-          outSlope: 90
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 4
-          value: 360
-          inSlope: 90
-          outSlope: 90
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
+        m_Curve: []
         m_PreInfinity: 2
-        m_PostInfinity: 1
+        m_PostInfinity: 2
         m_RotationOrder: 4
       CustomValueHandler:
-        rid: 5668783482046251010
-  bulletConfig:
+        rid: -2
+  BulletConfig:
     bulletPrefab: {fileID: 1519511878272348693, guid: 482b1f3cbf5e5544e8c63b9b920b8855,
       type: 3}
     speed:
       mValueType: 0
-      m_Value: 5
+      m_Value: 3
       curve:
         serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 5
-          inSlope: 5
-          outSlope: 5
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 10
-          inSlope: 5
-          outSlope: 5
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0
+        m_Curve: []
         m_PreInfinity: 2
-        m_PostInfinity: 1
+        m_PostInfinity: 2
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
@@ -120,7 +84,7 @@ MonoBehaviour:
         rid: -2
     emitterProfile: []
     BulletMoveScript: []
-  patternConfig:
+  PatternConfig:
     count:
       mValueType: 0
       m_Value: 1
@@ -145,7 +109,7 @@ MonoBehaviour:
         rid: -2
     spreadAngleTotal:
       mValueType: 0
-      m_Value: 60
+      m_Value: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -203,9 +167,3 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 5668783482046251010
-      type: {class: PingpongFloat, ns: BH_Engine, asm: Assembly-CSharp}
-      data:
-        min: 1
-        max: 5
-        speed: 1

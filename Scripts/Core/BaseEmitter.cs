@@ -110,7 +110,7 @@ namespace BH_Engine
             }
 
             // 每颗子弹的真实角度
-            int[] realSpreadAnglePerbullet = new int[patternCount - 1];
+            float[] realSpreadAnglePerbullet = new float[patternCount - 1];
             // 计算总角度
             float totalAngle = 0;
             for (int i = 0; i < patternCount - 1; i++)
@@ -125,6 +125,11 @@ namespace BH_Engine
             float currentBulletSpreadAngle = patternCount == 1 ? 0 : -totalAngle / 2;
             for (int i = 0; i < patternCount; i++)
             {
+                if (BulletConfig.bulletPrefab == null)
+                {
+                    Debug.LogError(gameObject.name + " 子弹预制体为空");
+                    continue;
+                }
                 var bullet = GetBullet(BulletConfig.bulletPrefab);
 
                 // 计算子弹的位置
@@ -147,17 +152,17 @@ namespace BH_Engine
 
         public void UpdateBullet(BulletConfig BulletConfig)
         {
-            this.BulletConfig = BulletConfig;
+            this.BulletConfig = BulletConfig.CopyConfig(BulletConfig);
         }
 
         public void UpdatePattern(PatternConfig PatternConfig)
         {
-            this.PatternConfig = PatternConfig;
+            this.PatternConfig = PatternConfig.CopyConfig(PatternConfig);
         }
 
         public void UpdateEmitter(EmitterConfig EmitterConfig)
         {
-            this.EmitterConfig = EmitterConfig;
+            this.EmitterConfig = EmitterConfig.CopyConfig(EmitterConfig);
         }
 
         // 发射方向

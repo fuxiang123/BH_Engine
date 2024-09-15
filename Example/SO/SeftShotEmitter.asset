@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8d7133c81627e40b6c3eed8d5c025f, type: 3}
   m_Name: SeftShotEmitter
   m_EditorClassIdentifier: 
-  emitterConfig:
+  EmitterConfig:
     emitInterval:
       mValueType: 0
-      m_Value: 0.02
+      m_Value: 0.05
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -25,14 +25,14 @@ MonoBehaviour:
       CustomValueHandler:
         rid: -2
     emitterAngle:
-      mValueType: 2
+      mValueType: 1
       m_Value: 0
       curve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
+          value: -90
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -41,44 +41,22 @@ MonoBehaviour:
           outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 360
+          value: 90
           inSlope: 0
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
           outWeight: 0
-        m_PreInfinity: 0
+        m_PreInfinity: 2
         m_PostInfinity: 0
         m_RotationOrder: 4
       CustomValueHandler:
-        rid: 4574980304645129206
-  bulletConfig:
+        rid: -2
+  BulletConfig:
     bulletPrefab: {fileID: 1519511878272348693, guid: 718779c2d5fd43345b214a6961ecdd3c,
       type: 3}
     speed:
-      mValueType: 0
-      m_Value: 3
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    lifeTime:
-      mValueType: 0
-      m_Value: 3
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      CustomValueHandler:
-        rid: -2
-    maxDistance:
       mValueType: 0
       m_Value: 10
       curve:
@@ -89,9 +67,31 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
+    lifeTime:
+      mValueType: 0
+      m_Value: 10
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
+    maxDistance:
+      mValueType: 0
+      m_Value: 20
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
     acceleration:
       mValueType: 0
-      m_Value: 1
+      m_Value: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -103,7 +103,7 @@ MonoBehaviour:
     emitterProfile:
     - {fileID: 11400000, guid: d30282fa4482df34fb9f866119bb53ce, type: 2}
     BulletMoveScript: []
-  patternConfig:
+  PatternConfig:
     count:
       mValueType: 0
       m_Value: 1
@@ -128,7 +128,7 @@ MonoBehaviour:
         rid: -2
     spreadAngleTotal:
       mValueType: 0
-      m_Value: 30
+      m_Value: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -186,9 +186,3 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4574980304645129206
-      type: {class: PingpongFloat, ns: BH_Engine, asm: Assembly-CSharp}
-      data:
-        min: -90
-        max: 90
-        speed: 360

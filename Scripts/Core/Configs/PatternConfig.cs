@@ -7,8 +7,8 @@ namespace BH_Engine
     public struct PatternFinalConfig
     {
         public int count;
-        public int[] spreadAnglePerbullet;
-        public int spreadAngleTotal;
+        public float[] spreadAnglePerbullet;
+        public float spreadAngleTotal;
         public float[] xSpacingPerbullet;
         public float xSpacingTotal;
         public float spwanXTanslate;
@@ -26,27 +26,27 @@ namespace BH_Engine
         [Space(20)]
         // 弹幕扩散角度
         [LabelText("每个子弹扩散角度")]
-        public DynamicIntValue spreadAnglePerBullet;
+        public DynamicFloatValue spreadAnglePerBullet = new DynamicFloatValue() { value = 0 };
         [LabelText("总扩散角度")]
         [InfoBox("总扩散角度会和每个子弹扩散角度叠加")]
-        public DynamicIntValue spreadAngleTotal;
+        public DynamicFloatValue spreadAngleTotal = new DynamicFloatValue() { value = 0 };
 
         [Space(20)]
         [LabelText("子弹间距")]
-        public DynamicFloatValue xSpacingPerBullet;
+        public DynamicFloatValue xSpacingPerBullet = new DynamicFloatValue() { value = 0f };
         [LabelText("总间距")]
         [InfoBox("总间距会和每个子弹间距叠加")]
-        public DynamicFloatValue xSpacingTotal;
+        public DynamicFloatValue xSpacingTotal = new DynamicFloatValue() { value = 0f };
 
         [LabelText("发射器X轴位移")]
-        public DynamicFloatValue spwanXTanslate;
+        public DynamicFloatValue spwanXTanslate = new DynamicFloatValue() { value = 0f };
         [LabelText("发射器Y轴位移")]
-        public DynamicFloatValue spwanYTanslate;
+        public DynamicFloatValue spwanYTanslate = new DynamicFloatValue() { value = 0f };
 
         public static PatternFinalConfig GetPatternFinalConfig(PatternConfig patternConfig)
         {
             var count = patternConfig.count.value < 1 ? 1 : patternConfig.count.value;
-            var spreadAnglePerBullet = new int[count - 1];
+            var spreadAnglePerBullet = new float[count - 1];
             var spreadAngleTotal = patternConfig.spreadAngleTotal.value;
             var xSpacingPerBullet = new float[count - 1];
             var xSpacingTotal = patternConfig.xSpacingTotal.value;

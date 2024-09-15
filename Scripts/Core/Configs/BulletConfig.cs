@@ -13,8 +13,6 @@ namespace BH_Engine
         public float maxDistance;
         public float acceleration;
         public float lifeTime;
-        public EmitterProfileSO[] emitterProfile;
-        public IBulletMoveScript[] BulletMoveScript;
     }
 
     // 子弹接口, 负责子弹的外观，速度，大小, 生命周期等
@@ -27,19 +25,19 @@ namespace BH_Engine
         [LabelText("子弹速度")]
         public DynamicFloatValue speed = new DynamicFloatValue() { value = 5f };
         [LabelText("子弹生命周期")]
-        public DynamicFloatValue lifeTime = new DynamicFloatValue() { value = 5f };
+        public DynamicFloatValue lifeTime = new DynamicFloatValue() { value = 10f };
         [LabelText("子弹最大射程")]
-        public DynamicFloatValue maxDistance = new DynamicFloatValue() { value = 10f };
+        public DynamicFloatValue maxDistance = new DynamicFloatValue() { value = 20f };
 
         // 移动时属性
         [Header("子弹移动时属性")]
         [LabelText("子弹加速度")]
-        public DynamicFloatValue acceleration;
+        public DynamicFloatValue acceleration = new DynamicFloatValue() { value = 0f };
 
         [InfoBox("给子弹附加一个emitter profile，用于实现移动时发射额外子弹的效果")]
-        public List<EmitterProfileSO> emitterProfile;
+        public List<EmitterProfileSO> emitterProfile = new List<EmitterProfileSO>();
         [InfoBox("子弹飞行过程中的行为脚本"), SerializeReference]
-        public List<IBulletMoveScript> BulletMoveScript;
+        public List<IBulletMoveScript> BulletMoveScript = new List<IBulletMoveScript>();
 
         public static BulletFinalConfig GetFinalConfig(BulletConfig bulletConfig)
         {

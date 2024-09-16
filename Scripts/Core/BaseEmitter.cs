@@ -82,9 +82,9 @@ namespace BH_Engine
         /// <summary>
         /// 释放子弹实例
         /// </summary>
-        protected virtual void ReleaseBullet(BulletBehaviour bullet)
+        protected virtual void ReleaseBullet(GameObject bullet)
         {
-            Destroy(bullet.gameObject);
+            Destroy(bullet);
         }
 
         // 发射单行子弹

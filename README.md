@@ -238,9 +238,9 @@ public class PlayerEmitter : ProfileEmitter
         return bullet;
     }
 
-    protected override void ReleaseBullet(BulletBehaviour bullet)
+    protected override void ReleaseBullet(GameObject bullet)
     {
-        BulletPoolManager.Instance.ReleasePlayerBullet(bullet.gameObject);
+        BulletPoolManager.Instance.ReleasePlayerBullet(gameObject);
     }
 }
 ```

@@ -8,7 +8,7 @@ namespace BH_Engine
     public class BulletBehaviour : MonoBehaviour
     {
         public BulletConfig bulletConfig;
-        public Action<BulletBehaviour> OnReleaseBullet;
+        public Action<GameObject> OnReleaseBullet;
         // 子弹的初始位置
         public Vector3 spwanPosition;
         // 当前子弹飞行时间
@@ -18,13 +18,17 @@ namespace BH_Engine
         // 子弹移动的距离
         public float distance;
         // 子弹上附加的发射器
-        public List<GameObject> emitters;
+        public List<GameObject> emitters = new List<GameObject>();
         // 子弹行为脚本
-        public List<IBulletMoveScript> BulletMoveScript;
+        public List<IBulletMoveScript> BulletMoveScript = new List<IBulletMoveScript>();
 
-        public void Init(BulletConfig bulletConfig, Vector3 direction, Action<BulletBehaviour> OnReleaseBullet)
+        private void OnDisable()
         {
             InitSettings();
+        }
+
+        public void Init(BulletConfig bulletConfig, Vector3 direction, Action<GameObject> OnReleaseBullet)
+        {
             this.bulletConfig = bulletConfig;
             this.OnReleaseBullet = OnReleaseBullet;
             this.direction = direction;
@@ -40,7 +44,7 @@ namespace BH_Engine
             if (bulletConfig.emitterProfile != null && bulletConfig.emitterProfile.Count > 0)
             {
                 var configEmitterProfiles = bulletConfig.emitterProfile;
-                List<GameObject> emitters = new List<GameObject>(EmitterPoolManager.Instance.Get(configEmitterProfiles.Count));
+                emitters.AddRange(EmitterPoolManager.Instance.Get(configEmitterProfiles.Count));
                 for (int i = 0; i < configEmitterProfiles.Count; i++)
                 {
                     ProfileEmitter profileEmitter = emitters[i].GetComponent<ProfileEmitter>();
@@ -51,7 +55,6 @@ namespace BH_Engine
                     var emitterConfigAngle = profileEmitter.EmitterConfig.emitterAngle.value;
                     profileEmitter.transform.rotation = Quaternion.Euler(0, 0, rotationZ - 90 + emitterConfigAngle);
                 }
-                this.emitters = emitters;
             }
         }
 
@@ -74,7 +77,7 @@ namespace BH_Engine
             }
 
             // 更新emitter位置
-            if (emitters != null)
+            if (emitters.Count > 0)
             {
                 for (int i = 0; i < emitters.Count; i++)
                 {
@@ -90,24 +93,24 @@ namespace BH_Engine
             var realDistance = Vector3.Distance(spwanPosition, transform.position);
             if (currentTime >= bulletFinalConfig.lifeTime || (bulletFinalConfig.maxDistance > 0 && realDistance >= bulletFinalConfig.maxDistance))
             {
-                ReleaseSelf();
+                OnReleaseBullet?.Invoke(gameObject);
             }
-        }
-
-        public void ReleaseSelf()
-        {
-            OnReleaseBullet?.Invoke(this);
-            if (emitters != null) emitters.ForEach(e =>
-            {
-                EmitterPoolManager.Instance.Release(e);
-            });
         }
         public void InitSettings()
         {
-            emitters = null;
-            BulletMoveScript = null;
+            if (emitters.Count > 0)
+            {
+                emitters.ForEach(e =>
+                {
+                    if (e != null) EmitterPoolManager.Instance.Release(e);
+                });
+                emitters.Clear();
+            }
+            BulletMoveScript.Clear();
             currentTime = 0;
             distance = 0;
+            OnReleaseBullet = null;
+            bulletConfig = null;
         }
     }
 }

@@ -591,12 +591,7 @@ PrefabInstance:
     - target: {fileID: 5056957289909104499, guid: a5a3caa785a2e6243a7f8fa62f5f2f39,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056957289909104500, guid: a5a3caa785a2e6243a7f8fa62f5f2f39,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5056957289909104500, guid: a5a3caa785a2e6243a7f8fa62f5f2f39,
         type: 3}
@@ -647,26 +642,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056957289909104501, guid: a5a3caa785a2e6243a7f8fa62f5f2f39,
-        type: 3}
-      propertyPath: spawnRadius
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056957289909104501, guid: a5a3caa785a2e6243a7f8fa62f5f2f39,
-        type: 3}
-      propertyPath: maxSpawnCount
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056957289909104501, guid: a5a3caa785a2e6243a7f8fa62f5f2f39,
-        type: 3}
-      propertyPath: spawnInterval
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5056957289909104501, guid: a5a3caa785a2e6243a7f8fa62f5f2f39,
-        type: 3}
-      propertyPath: spawnCountPerTime
-      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

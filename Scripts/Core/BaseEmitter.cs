@@ -66,6 +66,7 @@ namespace BH_Engine
         public void StopShoot()
         {
             IsAutoEmit = false;
+            isAutoEmitDelay = false;
             mTimer = 0;
             BulletConfig.ResetConfig(BulletConfig);
             PatternConfig.ResetConfig(PatternConfig);

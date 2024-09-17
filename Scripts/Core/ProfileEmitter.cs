@@ -24,6 +24,7 @@ namespace BH_Engine
             PatternConfig = mEmitterProfile.PatternConfig;
         }
 
+        [ShowInInspector]
         public void SetEmitterProfile(EmitterProfileSO profile)
         {
             EmitterProfileSO = profile;

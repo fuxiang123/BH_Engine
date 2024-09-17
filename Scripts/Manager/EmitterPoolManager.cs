@@ -6,7 +6,6 @@ namespace BH_Engine
 {
     internal class EmitterPoolManager : MonoBehaviour
     {
-
         public static EmitterPoolManager Instance { get; private set; }
         public GameObject Prefab;
         // 初始化子弹池数量

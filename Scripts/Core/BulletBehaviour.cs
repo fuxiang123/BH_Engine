@@ -10,7 +10,7 @@ namespace BH_Engine
         public BulletConfig bulletConfig;
         public Action<GameObject> OnReleaseBullet;
         // 子弹的初始位置
-        public Vector3 spwanPosition;
+        public Vector3 spawnPosition;
         // 当前子弹飞行时间
         public float currentTime;
         // 子弹的飞行方向
@@ -33,11 +33,11 @@ namespace BH_Engine
             this.OnReleaseBullet = OnReleaseBullet;
             this.direction = direction;
 
-            spwanPosition = transform.position;
+            spawnPosition = transform.position;
             // 给子弹绑定行为脚本
             if (bulletConfig.BulletMoveScript != null && bulletConfig.BulletMoveScript.Count > 0)
             {
-                BulletMoveScript = bulletConfig.BulletMoveScript;
+                BulletMoveScript.AddRange(bulletConfig.BulletMoveScript);
             }
 
             // 给当前子弹绑定发射器
@@ -90,7 +90,7 @@ namespace BH_Engine
 
             // 当前移动距离
             distance += Vector3.Distance(prePosition, transform.position);
-            var realDistance = Vector3.Distance(spwanPosition, transform.position);
+            var realDistance = Vector3.Distance(spawnPosition, transform.position);
             if (currentTime >= bulletFinalConfig.lifeTime || (bulletFinalConfig.maxDistance > 0 && realDistance >= bulletFinalConfig.maxDistance))
             {
                 OnReleaseBullet?.Invoke(gameObject);

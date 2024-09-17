@@ -17,12 +17,12 @@ namespace BH_Engine
             float acceleration = bulletFinalConfig.acceleration;
             float speed = bulletFinalConfig.speed + acceleration * time;
 
-            var sine = amplitude * Mathf.Sin(frequency * time * speed);
+            var sine = amplitude * Mathf.Sin(frequency * time * speed); // 只使用时间来计算正弦波
             var direction = bulletBehaviour.direction;
-            var spwanPosition = bulletBehaviour.spwanPosition;
+            var spawnPosition = bulletBehaviour.spawnPosition;
             // 定义一条垂直的轴，在垂直轴上施加正弦函数
             var crossDirection = new Vector3(direction.y, -direction.x);
-            bulletBehaviour.transform.position = spwanPosition + (direction * speed * time) + (crossDirection * sine);
+            bulletBehaviour.transform.position = spawnPosition + (direction * speed * time) + (crossDirection * sine);
         }
     }
 }

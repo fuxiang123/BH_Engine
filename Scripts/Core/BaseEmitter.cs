@@ -1,3 +1,4 @@
+using System;
 using QFramework;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace BH_Engine
         public bool IsAutoEmit = false;
         [LabelText("自动射击延迟")]
         public float AutoEmitDelay = 0;
+        [HideInInspector] public Action OnEmit; // 发射子弹时调用
         private bool isAutoEmitDelay = false;
         private float mTimer = 0;
 
@@ -147,6 +149,7 @@ namespace BH_Engine
                 bullet.transform.rotation = baseRotation * Quaternion.Euler(0, 0, 90);
                 bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, direction, ReleaseBullet);
             }
+            OnEmit?.Invoke();
         }
 
 

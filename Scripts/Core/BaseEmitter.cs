@@ -1,5 +1,4 @@
 using System;
-using QFramework;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -79,7 +78,7 @@ namespace BH_Engine
         /// </summary>
         protected virtual GameObject GetBullet(GameObject prefab)
         {
-            return prefab.Instantiate();
+            return Instantiate(prefab);
         }
 
         /// <summary>

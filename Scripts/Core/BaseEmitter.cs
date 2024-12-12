@@ -1,9 +1,17 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace BH_Engine
 {
+    public enum EmitterState
+    {
+        Ready, // 准备射击
+        Shooting, // 射击
+        Cooldown, // 冷却中
+    }
+
     // 发射器，负责弹幕
     public class BaseEmitter : MonoBehaviour
     {
@@ -15,10 +23,18 @@ namespace BH_Engine
         public PatternConfig PatternConfig;
         [LabelText("是否自动射击")]
         public bool IsAutoEmit = false;
-        [LabelText("自动射击延迟")]
-        public float AutoEmitDelay = 0;
-        [HideInInspector] public Action OnEmit; // 发射子弹时调用
-        private bool isAutoEmitDelay = false;
+        private EmitterState mEmitterState = EmitterState.Ready;
+        public EmitterState EmitterState // 发射器状态
+        {
+            get { return mEmitterState; }
+            set
+            {
+                mEmitterState = value;
+                OnEmitterStateChange.Invoke(mEmitterState);
+            }
+        }
+        [HideInInspector] public UnityEvent<EmitterState> OnEmitterStateChange = new UnityEvent<EmitterState>(); // 发射器状态改变事件
+
         private float mTimer = 0;
 
         protected void OnDisable()
@@ -28,30 +44,22 @@ namespace BH_Engine
 
         protected void FixedUpdate()
         {
-            if (IsAutoEmit)
+            if (EmitterState == EmitterState.Cooldown)
             {
-                if (!isAutoEmitDelay)
+                mTimer += Time.deltaTime;
+                if (mTimer >= EmitterConfig.emitInterval.value)
                 {
-                    mTimer += Time.deltaTime;
-                    if (mTimer >= AutoEmitDelay)
-                    {
-                        isAutoEmitDelay = true;
-                        mTimer = 0;
-                    }
+                    EmitterState = EmitterState.Ready;
+                    mTimer = 0;
                 }
-                else
-                {
-                    mTimer += Time.deltaTime;
-                    if (mTimer >= EmitterConfig.emitInterval.value)
-                    {
-                        Emit();
-                        mTimer = 0;
-                    }
-                }
+            }
+            else if (IsAutoEmit && EmitterState == EmitterState.Ready)
+            {
+                Emit();
             }
         }
 
-        // 开始或继续射击
+        // 开始或继续自动射击
         public void StartShoot()
         {
             IsAutoEmit = true;
@@ -67,7 +75,7 @@ namespace BH_Engine
         public void StopShoot()
         {
             IsAutoEmit = false;
-            isAutoEmitDelay = false;
+            EmitterState = EmitterState.Ready;
             mTimer = 0;
             BulletConfig.ResetConfig(BulletConfig);
             PatternConfig.ResetConfig(PatternConfig);
@@ -148,10 +156,10 @@ namespace BH_Engine
                 bullet.transform.rotation = baseRotation * Quaternion.Euler(0, 0, 90);
                 bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, direction, ReleaseBullet);
             }
-            OnEmit?.Invoke();
+
+            EmitterState = EmitterState.Shooting;
+            EmitterState = EmitterState.Cooldown;
         }
-
-
 
         public void UpdateBullet(BulletConfig BulletConfig)
         {

@@ -40,6 +40,7 @@ namespace BH_Engine
             {
                 emitInterval = config.emitInterval.Copy(),
                 emitterAngle = config.emitterAngle.Copy(),
+                emitBeforeDelay = config.emitBeforeDelay.Copy(),
             };
         }
     }

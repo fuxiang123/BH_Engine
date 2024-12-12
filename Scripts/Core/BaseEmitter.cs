@@ -8,7 +8,8 @@ namespace BH_Engine
     public enum EmitterState
     {
         Ready, // 准备射击
-        Shooting, // 射击
+        EmitBeforeDelay, // 发射前延迟
+        Emit, // 射击
         Cooldown, // 冷却中
     }
 
@@ -44,18 +45,22 @@ namespace BH_Engine
 
         protected void FixedUpdate()
         {
-            if (EmitterState == EmitterState.Cooldown)
+
+            if (EmitterState == EmitterState.Ready && IsAutoEmit)
             {
-                mTimer += Time.deltaTime;
-                if (mTimer >= EmitterConfig.emitInterval.value)
-                {
-                    EmitterState = EmitterState.Ready;
-                    mTimer = 0;
-                }
+                HandleReadyState();
             }
-            else if (IsAutoEmit && EmitterState == EmitterState.Ready)
+            else if (EmitterState == EmitterState.EmitBeforeDelay)
             {
-                Emit();
+                HandleEmitBeforeDelayState();
+            }
+            else if (EmitterState == EmitterState.Emit)
+            {
+                HandleEmitState();
+            }
+            else if (EmitterState == EmitterState.Cooldown)
+            {
+                HandleCooldownState();
             }
         }
 
@@ -81,6 +86,43 @@ namespace BH_Engine
             PatternConfig.ResetConfig(PatternConfig);
         }
 
+        #region 状态处理
+
+        private void HandleReadyState()
+        {
+            EmitterState = EmitterState.EmitBeforeDelay;
+            mTimer = 0;
+        }
+
+        private void HandleEmitBeforeDelayState()
+        {
+            mTimer += Time.deltaTime;
+            if (mTimer >= EmitterConfig.emitBeforeDelay.value)
+            {
+                EmitterState = EmitterState.Emit;
+                mTimer = 0;
+            }
+        }
+
+        private void HandleEmitState()
+        {
+            Emit();
+            EmitterState = EmitterState.Cooldown;
+            mTimer = 0;
+        }
+
+        private void HandleCooldownState()
+        {
+            mTimer += Time.deltaTime;
+            if (mTimer >= EmitterConfig.emitInterval.value)
+            {
+                EmitterState = EmitterState.Ready;
+                mTimer = 0;
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// 获取子弹实例。可以通过子类覆写，以从不同对象池获取子弹实例
         /// </summary>
@@ -97,7 +139,7 @@ namespace BH_Engine
             Destroy(bullet);
         }
 
-        // 发射单行子弹
+        // 发射单次子弹
         public void Emit()
         {
             PatternFinalConfig patternFinalConfig = PatternConfig.GetPatternFinalConfig(PatternConfig);
@@ -156,9 +198,6 @@ namespace BH_Engine
                 bullet.transform.rotation = baseRotation * Quaternion.Euler(0, 0, 90);
                 bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, direction, ReleaseBullet);
             }
-
-            EmitterState = EmitterState.Shooting;
-            EmitterState = EmitterState.Cooldown;
         }
 
         public void UpdateBullet(BulletConfig BulletConfig)

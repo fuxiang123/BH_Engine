@@ -30,6 +30,8 @@ namespace BH_Engine
         // 发射间隔
         [LabelText("发射间隔")]
         public DynamicFloatValue emitInterval = new DynamicFloatValue() { value = 0.1f };
+        [LabelText("发射前延迟"), InfoBox("每次发射之前的延迟时间，可以配合发射器事件调整攻击准备动画等")]
+        public DynamicFloatValue emitBeforeDelay = new DynamicFloatValue() { value = 0 };
         [LabelText("发射器角度")]
         public DynamicFloatValue emitterAngle = new DynamicFloatValue() { value = 0 };
         public static EmitterConfig CopyConfig(EmitterConfig config)

@@ -194,8 +194,17 @@ namespace BH_Engine
                 currentBulletSpreadAngle += i == 0 ? 0 : realSpreadAnglePerbullet[i - 1];
                 var baseRotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
                 var direction = baseRotation * Vector3.up;
-                // 旋转角度减少90
-                bullet.transform.rotation = baseRotation * Quaternion.Euler(0, 0, 90);
+                if (PatternConfig.bulletDirectionType == BulletDirectionType.EmitterDirection)
+                {
+                    // 旋转角度减少90
+                    bullet.transform.rotation = baseRotation * Quaternion.Euler(0, 0, 90);
+                }
+                else if (PatternConfig.bulletDirectionType == BulletDirectionType.FlipX)
+                {
+                    var originScale = bullet.transform.localScale;
+                    var isMoveLeft = direction.x < 0;
+                    bullet.transform.localScale = new Vector3(isMoveLeft ? -originScale.x : originScale.x, originScale.y, originScale.z);
+                }
                 bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, direction, ReleaseBullet);
             }
         }

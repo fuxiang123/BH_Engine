@@ -15,11 +15,24 @@ namespace BH_Engine
         public float spwanYTanslate;
     }
 
+    // 子弹朝向类型
+    public enum BulletDirectionType
+    {
+        [LabelText("不进行任何方向处理")]
+        None,
+        [LabelText("跟随发射器方向")]
+        EmitterDirection,
+        [LabelText("只进行左右翻转")]
+        FlipX,
+    }
+
     // 弹幕配置。配置在发射瞬间的各种属性
     [Serializable]
     [LabelText("弹幕配置")]
     public class PatternConfig
     {
+        [LabelText("子弹朝向")]
+        public BulletDirectionType bulletDirectionType = BulletDirectionType.EmitterDirection;
 
         [LabelText("子弹数量")]
         public DynamicIntValue count = new DynamicIntValue() { value = 1 };
@@ -82,6 +95,7 @@ namespace BH_Engine
         {
             return new PatternConfig
             {
+                bulletDirectionType = patternConfig.bulletDirectionType,
                 count = patternConfig.count.Copy(),
                 spreadAnglePerBullet = patternConfig.spreadAnglePerBullet.Copy(),
                 spreadAngleTotal = patternConfig.spreadAngleTotal.Copy(),

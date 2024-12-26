@@ -29,7 +29,7 @@ namespace BH_Engine
 
         public void Init(BulletConfig bulletConfig, Vector3 direction, Action<GameObject> OnReleaseBullet)
         {
-            this.bulletConfig = bulletConfig;
+            this.bulletConfig = BulletConfig.CopyConfig(bulletConfig);
             this.OnReleaseBullet = OnReleaseBullet;
             this.direction = direction;
 
@@ -100,10 +100,7 @@ namespace BH_Engine
         {
             if (emitters.Count > 0)
             {
-                emitters.ForEach(e =>
-                {
-                    if (e != null) EmitterPoolManager.Instance.Release(e);
-                });
+                EmitterPoolManager.Instance.Release(emitters);
                 emitters.Clear();
             }
             BulletMoveScript.Clear();

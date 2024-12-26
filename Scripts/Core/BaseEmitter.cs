@@ -163,6 +163,7 @@ namespace BH_Engine
             }
 
             // 每颗子弹的真实角度
+            // TODO: 从发射器向两端扩散
             float[] realSpreadAnglePerbullet = new float[patternCount - 1];
             // 计算总角度
             float totalAngle = 0;

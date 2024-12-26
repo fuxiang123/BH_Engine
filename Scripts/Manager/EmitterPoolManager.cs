@@ -63,11 +63,11 @@ namespace BH_Engine
             pool.Release(obj);
         }
 
-        public void Release(GameObject[] obj)
+        public void Release(List<GameObject> obj)
         {
-            for (int i = 0; i < obj.Length; i++)
+            foreach (var o in obj)
             {
-                pool.Release(obj[i]);
+                if (o != null) pool.Release(o);
             }
         }
     }

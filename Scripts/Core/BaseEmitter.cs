@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -140,7 +141,7 @@ namespace BH_Engine
         }
 
         // 发射单次子弹
-        public void Emit()
+        public virtual List<GameObject> Emit()
         {
             PatternFinalConfig patternFinalConfig = PatternConfig.GetPatternFinalConfig(PatternConfig);
             if (transform.parent != null)
@@ -175,6 +176,8 @@ namespace BH_Engine
             float currentBulletXpacing = patternCount == 1 ? 0 : -xSpacingTotalFinal / 2;
             // 当前子弹的角度，只有一个子弹时从正中发射即可
             float currentBulletSpreadAngle = patternCount == 1 ? 0 : -totalAngle / 2;
+
+            List<GameObject> bullets = new List<GameObject>();
             for (int i = 0; i < patternCount; i++)
             {
                 if (BulletConfig.bulletPrefab == null)
@@ -206,7 +209,9 @@ namespace BH_Engine
                     bullet.transform.localScale = new Vector3(isMoveLeft ? -originScale.x : originScale.x, originScale.y, originScale.z);
                 }
                 bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, direction, ReleaseBullet);
+                bullets.Add(bullet);
             }
+            return bullets;
         }
 
         public void UpdateBullet(BulletConfig BulletConfig)

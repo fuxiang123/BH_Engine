@@ -11,12 +11,12 @@ namespace BH_Engine
         [HideInInspector]
         private EmitterProfileSO mEmitterProfile;
 
-        private void Awake()
+        void Awake()
         {
             if (EmitterProfileSO != null) InitEmitterProfile();
         }
 
-        private void InitEmitterProfile()
+        void InitEmitterProfile()
         {
             mEmitterProfile = EmitterProfileSO.Copy(EmitterProfileSO);
             EmitterConfig = mEmitterProfile.EmitterConfig;

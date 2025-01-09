@@ -37,7 +37,18 @@ namespace BH_Engine
             // 给子弹绑定行为脚本
             if (bulletConfig.BulletMoveScript != null && bulletConfig.BulletMoveScript.Count > 0)
             {
-                BulletMoveScript.AddRange(bulletConfig.BulletMoveScript);
+                for (int i = 0; i < bulletConfig.BulletMoveScript.Count; i++)
+                {
+                    // 如果脚本实现了ICloneableBulletMoveScript接口，则克隆一个实例
+                    if (bulletConfig.BulletMoveScript[i] is ICloneableBulletMoveScript)
+                    {
+                        BulletMoveScript.Add((bulletConfig.BulletMoveScript[i] as ICloneableBulletMoveScript).Clone());
+                    }
+                    else
+                    {
+                        BulletMoveScript.Add(bulletConfig.BulletMoveScript[i]);
+                    }
+                }
             }
 
             // 给当前子弹绑定发射器

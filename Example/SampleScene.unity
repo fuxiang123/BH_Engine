@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -174,6 +175,17 @@ MonoBehaviour:
         m_RotationOrder: 4
       CustomValueHandler:
         rid: -2
+    emitBeforeDelay:
+      mValueType: 0
+      m_Value: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      CustomValueHandler:
+        rid: -2
     emitterAngle:
       mValueType: 0
       m_Value: 0
@@ -234,6 +246,7 @@ MonoBehaviour:
     emitterProfile: []
     BulletMoveScript: []
   PatternConfig:
+    bulletDirectionType: 1
     count:
       mValueType: 0
       m_Value: 1

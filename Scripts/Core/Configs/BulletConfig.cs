@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -61,6 +62,7 @@ namespace BH_Engine
 
         public static BulletConfig CopyConfig(BulletConfig bulletConfig)
         {
+            var emitterProfileListCopy = bulletConfig.emitterProfile.Select(x => EmitterProfileSO.Copy(x)).ToList();
             return new BulletConfig
             {
                 bulletPrefab = bulletConfig.bulletPrefab,
@@ -68,7 +70,7 @@ namespace BH_Engine
                 lifeTime = bulletConfig.lifeTime.Copy(),
                 maxDistance = bulletConfig.maxDistance.Copy(),
                 acceleration = bulletConfig.acceleration.Copy(),
-                emitterProfile = bulletConfig.emitterProfile,
+                emitterProfile = emitterProfileListCopy,
                 BulletMoveScript = bulletConfig.BulletMoveScript
             };
         }

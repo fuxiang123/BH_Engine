@@ -10,14 +10,18 @@ namespace BH_Engine
         public EmitterProfileSO EmitterProfileSO;
         [HideInInspector]
         private EmitterProfileSO mEmitterProfile;
+        private bool isInit = false;
 
         void Awake()
         {
-            if (EmitterProfileSO != null) InitEmitterProfile();
+            // 如果在Awake之前就调用过InitEmitterProfile，则不进行初始化
+            if (EmitterProfileSO != null && !isInit)
+                InitEmitterProfile();
         }
 
         void InitEmitterProfile()
         {
+            isInit = true;
             mEmitterProfile = EmitterProfileSO.Copy(EmitterProfileSO);
             EmitterConfig = mEmitterProfile.EmitterConfig;
             BulletConfig = mEmitterProfile.BulletConfig;

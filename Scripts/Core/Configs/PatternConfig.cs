@@ -18,12 +18,9 @@ namespace BH_Engine
     // 子弹朝向类型
     public enum BulletDirectionType
     {
-        [LabelText("不进行任何方向处理")]
-        None,
-        [LabelText("跟随发射器方向")]
-        EmitterDirection,
-        [LabelText("只进行左右翻转")]
-        FlipX,
+        [LabelText("不进行任何方向处理")] None,
+        [LabelText("跟随发射器方向")] EmitterDirection,
+        [LabelText("只进行左右翻转")] FlipX
     }
 
     // 弹幕配置。配置在发射瞬间的各种属性
@@ -31,43 +28,40 @@ namespace BH_Engine
     [LabelText("弹幕配置")]
     public class PatternConfig
     {
-        [LabelText("子弹朝向")]
-        public BulletDirectionType bulletDirectionType = BulletDirectionType.EmitterDirection;
+        [LabelText("子弹朝向")] public BulletDirectionType bulletDirectionType = BulletDirectionType.EmitterDirection;
 
-        [LabelText("子弹数量")]
-        public DynamicIntValue count = new DynamicIntValue() { value = 1 };
+        [LabelText("子弹数量")] public DynamicIntValue count = new() { value = 1 };
+
         [Space(20)]
         // 弹幕扩散角度
         [LabelText("每个子弹扩散角度")]
-        public DynamicFloatValue spreadAnglePerBullet = new DynamicFloatValue() { value = 0 };
-        [LabelText("总扩散角度")]
-        [InfoBox("总扩散角度会和每个子弹扩散角度叠加")]
-        public DynamicFloatValue spreadAngleTotal = new DynamicFloatValue() { value = 0 };
+        public DynamicFloatValue spreadAnglePerBullet = new() { value = 0 };
 
-        [Space(20)]
-        [LabelText("子弹间距")]
-        public DynamicFloatValue xSpacingPerBullet = new DynamicFloatValue() { value = 0f };
-        [LabelText("总间距")]
-        [InfoBox("总间距会和每个子弹间距叠加")]
-        public DynamicFloatValue xSpacingTotal = new DynamicFloatValue() { value = 0f };
+        [LabelText("总扩散角度")] [InfoBox("总扩散角度会和每个子弹扩散角度叠加")]
+        public DynamicFloatValue spreadAngleTotal = new() { value = 0 };
 
-        [LabelText("发射器X轴位移")]
-        public DynamicFloatValue spwanXTanslate = new DynamicFloatValue() { value = 0f };
-        [LabelText("发射器Y轴位移")]
-        public DynamicFloatValue spwanYTanslate = new DynamicFloatValue() { value = 0f };
+        [Space(20)] [LabelText("子弹间距")] public DynamicFloatValue xSpacingPerBullet = new() { value = 0f };
 
-        public static PatternFinalConfig GetPatternFinalConfig(PatternConfig patternConfig)
+        [LabelText("总间距")] [InfoBox("总间距会和每个子弹间距叠加")]
+        public DynamicFloatValue xSpacingTotal = new() { value = 0f };
+
+        [LabelText("发射器X轴位移")] public DynamicFloatValue spwanXTanslate = new() { value = 0f };
+
+        [LabelText("发射器Y轴位移")] public DynamicFloatValue spwanYTanslate = new() { value = 0f };
+
+        public PatternFinalConfig GetPatternFinalConfig(float time)
         {
-            var count = patternConfig.count.value < 1 ? 1 : patternConfig.count.value;
+            var count = this.count.GetValue(time) < 1 ? 1 : this.count.GetValue(time);
             var spreadAnglePerBullet = new float[count - 1];
-            var spreadAngleTotal = patternConfig.spreadAngleTotal.value;
+            var spreadAngleTotal = this.spreadAngleTotal.GetValue(time);
             var xSpacingPerBullet = new float[count - 1];
-            var xSpacingTotal = patternConfig.xSpacingTotal.value;
-            for (int i = 0; i < count - 1; i++)
+            var xSpacingTotal = this.xSpacingTotal.GetValue(time);
+            for (var i = 0; i < count - 1; i++)
             {
-                spreadAnglePerBullet[i] = patternConfig.spreadAnglePerBullet.value;
-                xSpacingPerBullet[i] = patternConfig.xSpacingPerBullet.value;
+                spreadAnglePerBullet[i] = this.spreadAnglePerBullet.GetValue(time);
+                xSpacingPerBullet[i] = this.xSpacingPerBullet.GetValue(time);
             }
+
             return new PatternFinalConfig
             {
                 count = count,
@@ -75,8 +69,8 @@ namespace BH_Engine
                 spreadAngleTotal = spreadAngleTotal,
                 xSpacingPerbullet = xSpacingPerBullet,
                 xSpacingTotal = xSpacingTotal,
-                spwanXTanslate = patternConfig.spwanXTanslate.value,
-                spwanYTanslate = patternConfig.spwanYTanslate.value
+                spwanXTanslate = spwanXTanslate.GetValue(time),
+                spwanYTanslate = spwanYTanslate.GetValue(time)
             };
         }
 

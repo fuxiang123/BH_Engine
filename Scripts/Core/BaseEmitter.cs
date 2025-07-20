@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -11,58 +10,58 @@ namespace BH_Engine
         Ready, // 准备射击
         EmitBeforeDelay, // 发射前延迟
         Emit, // 射击
-        Cooldown, // 冷却中
+        Cooldown // 冷却中
     }
 
     // 发射器，负责弹幕
     public class BaseEmitter : MonoBehaviour
     {
-        [LabelText("发射器配置")]
-        public EmitterConfig EmitterConfig;
-        [LabelText("子弹配置")]
-        public BulletConfig BulletConfig;
-        [LabelText("弹幕配置")]
-        public PatternConfig PatternConfig;
-        [LabelText("是否自动射击")]
-        public bool IsAutoEmit = false;
+        [LabelText("发射器配置")] public EmitterConfig EmitterConfig;
+
+        [LabelText("子弹配置")] public BulletConfig BulletConfig;
+
+        [LabelText("弹幕配置")] public PatternConfig PatternConfig;
+
+        [LabelText("是否自动射击")] public bool IsAutoEmit;
+
+        [HideInInspector] public UnityEvent<EmitterState> OnEmitterStateChange = new(); // 发射器状态改变事件
         private EmitterState mEmitterState = EmitterState.Ready;
+
+        private float mTimer;
+
         public EmitterState EmitterState // 发射器状态
         {
-            get { return mEmitterState; }
+            get => mEmitterState;
             set
             {
                 mEmitterState = value;
                 OnEmitterStateChange.Invoke(mEmitterState);
             }
         }
-        [HideInInspector] public UnityEvent<EmitterState> OnEmitterStateChange = new UnityEvent<EmitterState>(); // 发射器状态改变事件
 
-        private float mTimer = 0;
+        protected void FixedUpdate()
+        {
+            if (EmitterState == EmitterState.Ready && IsAutoEmit)
+                HandleReadyState();
+            else if (EmitterState == EmitterState.EmitBeforeDelay)
+                HandleEmitBeforeDelayState();
+            else if (EmitterState == EmitterState.Emit)
+                HandleEmitState();
+            else if (EmitterState == EmitterState.Cooldown) HandleCooldownState();
+
+            mTimer += Time.fixedDeltaTime;
+        }
 
         protected void OnDisable()
         {
             StopShoot();
         }
 
-        protected void FixedUpdate()
+        // 发射方向
+        private void OnDrawGizmos()
         {
-
-            if (EmitterState == EmitterState.Ready && IsAutoEmit)
-            {
-                HandleReadyState();
-            }
-            else if (EmitterState == EmitterState.EmitBeforeDelay)
-            {
-                HandleEmitBeforeDelayState();
-            }
-            else if (EmitterState == EmitterState.Emit)
-            {
-                HandleEmitState();
-            }
-            else if (EmitterState == EmitterState.Cooldown)
-            {
-                HandleCooldownState();
-            }
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(transform.position, transform.up * 1);
         }
 
         // 开始或继续自动射击
@@ -85,6 +84,118 @@ namespace BH_Engine
             mTimer = 0;
             BulletConfig.ResetConfig(BulletConfig);
             PatternConfig.ResetConfig(PatternConfig);
+        }
+
+        /// <summary>
+        ///     获取子弹实例。可以通过子类覆写，以从不同对象池获取子弹实例
+        /// </summary>
+        protected virtual GameObject GetBullet(GameObject prefab)
+        {
+            return Instantiate(prefab);
+        }
+
+        /// <summary>
+        ///     释放子弹实例
+        /// </summary>
+        protected virtual void ReleaseBullet(GameObject bullet)
+        {
+            Destroy(bullet);
+        }
+
+        // 发射单次子弹
+        public virtual List<GameObject> Emit()
+        {
+            var patternFinalConfig = PatternConfig.GetPatternFinalConfig(mTimer);
+            if (transform.parent != null)
+            {
+                transform.localRotation = Quaternion.Euler(0, 0, EmitterConfig.emitterAngle.GetValue(mTimer));
+                transform.localPosition = new Vector3(patternFinalConfig.spwanXTanslate,
+                    patternFinalConfig.spwanYTanslate, transform.position.z);
+            }
+
+            var patternCount = patternFinalConfig.count;
+
+            // 每颗子弹的真实间距
+            var realXSpacingPerbullet = new float[patternCount - 1];
+            // 综合xSpacingTotal和xSpacingPerbullet，计算最终的总宽度
+            float xSpacingTotalFinal = 0;
+            for (var i = 0; i < patternCount - 1; i++)
+            {
+                realXSpacingPerbullet[i] = patternFinalConfig.xSpacingPerbullet[i] +
+                                           patternFinalConfig.xSpacingTotal / (patternCount - 1);
+                xSpacingTotalFinal += realXSpacingPerbullet[i];
+            }
+
+            // 每颗子弹的真实角度
+            var realSpreadAnglePerbullet = new float[patternCount - 1];
+            // 计算总角度
+            float totalAngle = 0;
+            for (var i = 0; i < patternCount - 1; i++)
+            {
+                realSpreadAnglePerbullet[i] = patternFinalConfig.spreadAnglePerbullet[i] +
+                                              patternFinalConfig.spreadAngleTotal / (patternCount - 1);
+                totalAngle += realSpreadAnglePerbullet[i];
+            }
+
+            // 当前子弹xspacing的位置, 只有一个子弹时从正中发射即可
+            var currentBulletXpacing = patternCount == 1 ? 0 : -xSpacingTotalFinal / 2;
+            // 当前子弹的角度，只有一个子弹时从正中发射即可
+            var currentBulletSpreadAngle = patternCount == 1 ? 0 : -totalAngle / 2;
+
+            var bullets = new List<GameObject>();
+            for (var i = 0; i < patternCount; i++)
+            {
+                if (BulletConfig.bulletPrefab == null)
+                {
+                    Debug.LogError(gameObject.name + " 子弹预制体为空");
+                    continue;
+                }
+
+                var bullet = GetBullet(BulletConfig.bulletPrefab);
+
+                // 计算子弹的位置
+                currentBulletXpacing += i == 0 ? 0 : realXSpacingPerbullet[i - 1];
+                // 当前子弹的实际生成位置
+                var spawnPosition = transform.position + transform.right * currentBulletXpacing;
+                bullet.transform.position = spawnPosition;
+
+                // 计算子弹的角度
+                currentBulletSpreadAngle += i == 0 ? 0 : realSpreadAnglePerbullet[i - 1];
+                var baseRotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
+                var direction = baseRotation * Vector3.up;
+                if (PatternConfig.bulletDirectionType == BulletDirectionType.EmitterDirection)
+                {
+                    // 旋转角度减少90
+                    bullet.transform.rotation = baseRotation * Quaternion.Euler(0, 0, 90);
+                }
+                else if (PatternConfig.bulletDirectionType == BulletDirectionType.FlipX)
+                {
+                    var originScale = bullet.transform.localScale;
+                    var isMoveLeft = direction.x < 0;
+                    bullet.transform.localScale = new Vector3(isMoveLeft ? -originScale.x : originScale.x,
+                        originScale.y, originScale.z);
+                }
+
+                bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, direction, ReleaseBullet);
+                bullets.Add(bullet);
+            }
+
+            return bullets;
+        }
+
+        public void UpdateBullet(BulletConfig BulletConfig)
+        {
+            this.BulletConfig = BulletConfig.CopyConfig(BulletConfig);
+        }
+
+        public void UpdatePattern(PatternConfig PatternConfig)
+        {
+            this.PatternConfig = PatternConfig.CopyConfig(PatternConfig);
+        }
+
+        public void UpdateEmitter(EmitterConfig EmitterConfig)
+        {
+            this.EmitterConfig = EmitterConfig.CopyConfig(EmitterConfig);
         }
 
         #region 状态处理
@@ -123,117 +234,5 @@ namespace BH_Engine
         }
 
         #endregion
-
-        /// <summary>
-        /// 获取子弹实例。可以通过子类覆写，以从不同对象池获取子弹实例
-        /// </summary>
-        protected virtual GameObject GetBullet(GameObject prefab)
-        {
-            return Instantiate(prefab);
-        }
-
-        /// <summary>
-        /// 释放子弹实例
-        /// </summary>
-        protected virtual void ReleaseBullet(GameObject bullet)
-        {
-            Destroy(bullet);
-        }
-
-        // 发射单次子弹
-        public virtual List<GameObject> Emit()
-        {
-            PatternFinalConfig patternFinalConfig = PatternConfig.GetPatternFinalConfig(PatternConfig);
-            if (transform.parent != null)
-            {
-                transform.localRotation = Quaternion.Euler(0, 0, EmitterConfig.emitterAngle.value);
-                transform.localPosition = new Vector3(patternFinalConfig.spwanXTanslate, patternFinalConfig.spwanYTanslate, transform.position.z);
-            }
-
-            var patternCount = patternFinalConfig.count;
-
-            // 每颗子弹的真实间距
-            float[] realXSpacingPerbullet = new float[patternCount - 1];
-            // 综合xSpacingTotal和xSpacingPerbullet，计算最终的总宽度
-            float xSpacingTotalFinal = 0;
-            for (int i = 0; i < patternCount - 1; i++)
-            {
-                realXSpacingPerbullet[i] = patternFinalConfig.xSpacingPerbullet[i] + patternFinalConfig.xSpacingTotal / (patternCount - 1);
-                xSpacingTotalFinal += realXSpacingPerbullet[i];
-            }
-
-            // 每颗子弹的真实角度
-            float[] realSpreadAnglePerbullet = new float[patternCount - 1];
-            // 计算总角度
-            float totalAngle = 0;
-            for (int i = 0; i < patternCount - 1; i++)
-            {
-                realSpreadAnglePerbullet[i] = patternFinalConfig.spreadAnglePerbullet[i] + patternFinalConfig.spreadAngleTotal / (patternCount - 1);
-                totalAngle += realSpreadAnglePerbullet[i];
-            }
-
-            // 当前子弹xspacing的位置, 只有一个子弹时从正中发射即可
-            float currentBulletXpacing = patternCount == 1 ? 0 : -xSpacingTotalFinal / 2;
-            // 当前子弹的角度，只有一个子弹时从正中发射即可
-            float currentBulletSpreadAngle = patternCount == 1 ? 0 : -totalAngle / 2;
-
-            List<GameObject> bullets = new List<GameObject>();
-            for (int i = 0; i < patternCount; i++)
-            {
-                if (BulletConfig.bulletPrefab == null)
-                {
-                    Debug.LogError(gameObject.name + " 子弹预制体为空");
-                    continue;
-                }
-                var bullet = GetBullet(BulletConfig.bulletPrefab);
-
-                // 计算子弹的位置
-                currentBulletXpacing += i == 0 ? 0 : realXSpacingPerbullet[i - 1];
-                // 当前子弹的实际生成位置
-                Vector3 spawnPosition = transform.position + (transform.right * currentBulletXpacing);
-                bullet.transform.position = spawnPosition;
-
-                // 计算子弹的角度
-                currentBulletSpreadAngle += i == 0 ? 0 : realSpreadAnglePerbullet[i - 1];
-                var baseRotation = transform.rotation * Quaternion.Euler(0, 0, -currentBulletSpreadAngle);
-                var direction = baseRotation * Vector3.up;
-                if (PatternConfig.bulletDirectionType == BulletDirectionType.EmitterDirection)
-                {
-                    // 旋转角度减少90
-                    bullet.transform.rotation = baseRotation * Quaternion.Euler(0, 0, 90);
-                }
-                else if (PatternConfig.bulletDirectionType == BulletDirectionType.FlipX)
-                {
-                    var originScale = bullet.transform.localScale;
-                    var isMoveLeft = direction.x < 0;
-                    bullet.transform.localScale = new Vector3(isMoveLeft ? -originScale.x : originScale.x, originScale.y, originScale.z);
-                }
-                bullet.GetComponent<BulletBehaviour>().Init(BulletConfig, direction, ReleaseBullet);
-                bullets.Add(bullet);
-            }
-            return bullets;
-        }
-
-        public void UpdateBullet(BulletConfig BulletConfig)
-        {
-            this.BulletConfig = BulletConfig.CopyConfig(BulletConfig);
-        }
-
-        public void UpdatePattern(PatternConfig PatternConfig)
-        {
-            this.PatternConfig = PatternConfig.CopyConfig(PatternConfig);
-        }
-
-        public void UpdateEmitter(EmitterConfig EmitterConfig)
-        {
-            this.EmitterConfig = EmitterConfig.CopyConfig(EmitterConfig);
-        }
-
-        // 发射方向
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(transform.position, transform.up * 1);
-        }
     }
 }

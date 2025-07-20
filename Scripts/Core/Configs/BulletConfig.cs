@@ -21,33 +21,32 @@ namespace BH_Engine
     [LabelText("子弹配置")]
     public class BulletConfig
     {
-        [LabelText("子弹预制体")]
-        public GameObject bulletPrefab;
-        [LabelText("子弹速度")]
-        public DynamicFloatValue speed = new DynamicFloatValue() { value = 5f };
-        [LabelText("子弹生命周期")]
-        public DynamicFloatValue lifeTime = new DynamicFloatValue() { value = 10f };
-        [LabelText("子弹最大射程")]
-        public DynamicFloatValue maxDistance = new DynamicFloatValue() { value = 20f };
+        [LabelText("子弹预制体")] public GameObject bulletPrefab;
+
+        [LabelText("子弹速度")] public DynamicFloatValue speed = new() { value = 5f };
+
+        [LabelText("子弹生命周期")] public DynamicFloatValue lifeTime = new() { value = 10f };
+
+        [LabelText("子弹最大射程")] public DynamicFloatValue maxDistance = new() { value = 20f };
 
         // 移动时属性
-        [Header("子弹移动时属性")]
-        [LabelText("子弹加速度")]
-        public DynamicFloatValue acceleration = new DynamicFloatValue() { value = 0f };
+        [Header("子弹移动时属性")] [LabelText("子弹加速度")]
+        public DynamicFloatValue acceleration = new() { value = 0f };
 
         [InfoBox("给子弹附加一个emitter profile，用于实现移动时发射额外子弹的效果")]
-        public List<EmitterProfileSO> emitterProfile = new List<EmitterProfileSO>();
-        [InfoBox("子弹飞行过程中的行为脚本"), SerializeReference]
-        public List<IBulletMoveScript> BulletMoveScript = new List<IBulletMoveScript>();
+        public List<EmitterProfileSO> emitterProfile = new();
 
-        public static BulletFinalConfig GetFinalConfig(BulletConfig bulletConfig)
+        [InfoBox("子弹飞行过程中的行为脚本")] [SerializeReference]
+        public List<IBulletMoveScript> BulletMoveScript = new();
+
+        public BulletFinalConfig GetFinalConfig(float time)
         {
             return new BulletFinalConfig
             {
-                speed = bulletConfig.speed.value,
-                maxDistance = bulletConfig.maxDistance.value,
-                acceleration = bulletConfig.acceleration.value,
-                lifeTime = bulletConfig.lifeTime.value,
+                speed = speed.GetValue(time),
+                maxDistance = maxDistance.GetValue(time),
+                acceleration = acceleration.GetValue(time),
+                lifeTime = lifeTime.GetValue(time)
             };
         }
 

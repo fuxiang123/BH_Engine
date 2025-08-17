@@ -41,7 +41,9 @@ namespace BH_Engine
 
         protected void FixedUpdate()
         {
-            if (EmitterState == EmitterState.Ready && IsAutoEmit)
+            if (!IsAutoEmit) return;
+
+            if (EmitterState == EmitterState.Ready)
                 HandleReadyState();
             else if (EmitterState == EmitterState.EmitBeforeDelay)
                 HandleEmitBeforeDelayState();

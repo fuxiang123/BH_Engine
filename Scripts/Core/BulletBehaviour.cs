@@ -27,8 +27,14 @@ namespace BH_Engine
         public List<IBulletMoveScript> BulletMoveScript = new();
         public Action<GameObject> OnReleaseBullet;
 
+        // 只有通过 Init() 正式发射后才允许执行 FixedUpdate 逻辑
+        // 防止作为 bulletPrefab 配置的场景物体（非预制体）的 BulletBehaviour 自行运行
+        private bool isInitialized = false;
+
         private void FixedUpdate()
         {
+            if (!isInitialized) return;
+
             var bulletFinalConfig = bulletConfig.GetFinalConfig(currentTime);
             currentTime += Time.fixedDeltaTime;
             var prePosition = transform.position;
@@ -69,6 +75,7 @@ namespace BH_Engine
 
         public void Init(BulletConfig bulletConfig, Vector3 direction, Action<GameObject> OnReleaseBullet)
         {
+            isInitialized = true;
             this.bulletConfig = BulletConfig.CopyConfig(bulletConfig);
             this.OnReleaseBullet = OnReleaseBullet;
             this.direction = direction;
@@ -103,6 +110,7 @@ namespace BH_Engine
 
         public void InitSettings()
         {
+            isInitialized = false;
             if (emitters.Count > 0)
             {
                 EmitterPoolManager.Instance.Release(emitters);
